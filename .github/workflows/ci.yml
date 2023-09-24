@@ -1,0 +1,85 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+  schedule:
+    # Run at 3pm on Friday.
+    # REF: https://crontab.guru/#0_3_*_*_5
+    - cron: "0 3 * * 5"
+
+jobs:
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install yamllint
+
+      - name: Lint code.
+        run: |
+          yamllint .
+
+  integration:
+    name: Integration
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - debian11 # Bullseye
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install ansible
+
+      # - name: Set up the test environment.
+      #   run: |
+      #     cp tests/ansible.cfg ./ansible.cfg
+      #     cp tests/inventory.yml ./inventory.yml
+      #     ansible-galaxy install -r requirements.yml
+
+      # - name: Test the bootstrap playbook's syntax.
+      #   run: ansible-playbook bootstrap.yml --syntax-check
+
+      # - name: Test the bootstrap playbook.
+      #   run: ansible-playbook bootstrap.yml --skip-tags "hostname,hosts"
+
+      # - name: Idempotence check for bootstrap.
+      #   run: |
+      #     idempotence=$(mktemp)
+      #     ansible-playbook bootstrap.yml | tee -a ${idempotence}
+      #     tail ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+
+      # - name: Test the main playbook's syntax.
+      #   run: ansible-playbook main.yml --syntax-check
+
+      # - name: Test the main playbook.
+      #   run: ansible-playbook main.yml
+
+      # - name: Idempotence check for main.
+      #   run: |
+      #     idempotence=$(mktemp)
+      #     ansible-playbook main.yml | tee -a ${idempotence}
+      #     tail ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
