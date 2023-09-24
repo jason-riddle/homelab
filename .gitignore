@@ -2,4 +2,5 @@
 
 .devenv
 .devenv.flake.nix
+.esphome
 .venv
