@@ -4,5 +4,10 @@
 # REF: https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#running-on-macos-as-a-controller
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
+## Ansible
+
+main:
+	ansible-playbook main.yml
+
 ping:
 	ansible all --module-name ansible.builtin.ping --args="data=pong"
