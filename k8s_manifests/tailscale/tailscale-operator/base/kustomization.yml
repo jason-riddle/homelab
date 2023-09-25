@@ -4,6 +4,14 @@ kind: Kustomization
 
 namespace: tailscale
 
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: operator-oauth
+    envs:
+      - .env
+
 resources:
   - proxies-service-account.yml
   - proxies-role.yml
