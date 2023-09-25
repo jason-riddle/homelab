@@ -86,3 +86,28 @@ prometheus:
 web_server:
   port: 80
   version: 1
+
+
+switch:
+  # https://esphome.io/components/switch/safe_mode
+  # Create a switch for safe_mode in order to flash the device
+  # Solution from this thread:
+  # https://community.home-assistant.io/t/esphome-flashing-over-wifi-does-not-work/357352/1
+  - platform: safe_mode
+    name: "Flash Mode (Safe Mode) ON/OFF Switch"
+    icon: "mdi:cellphone-arrow-down"
+
+  # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
+  # Source: https://github.com/airgradienthq/arduino/blob/master/AirGradient.cpp#L123
+  - platform: template
+    name: "PMS5003 (PM Sensor) ON/OFF Switch"
+    id: pms_switch
+    optimistic: true
+    turn_on_action:
+      - uart.write:
+          id: pms5003_uart
+          data: [0x42, 0x4D, 0xE4, 0x00, 0x01, 0x01, 0x74]
+    turn_off_action:
+      - uart.write:
+          id: pms5003_uart
+          data: [0x42, 0x4D, 0xE4, 0x00, 0x00, 0x01, 0x73]
