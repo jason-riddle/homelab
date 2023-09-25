@@ -1,10 +1,10 @@
 .DEFAULT_GOAL := build
 
 apply: build
-	kubectl apply -f manifest.yml
+	kubectl apply --filename manifest.yml
 
 build:
 	kustomize build --enable-helm base > manifest.yml
 
 delete:
-	kubectl apply --prune --all -f manifest.yml
+	kubectl apply --prune --all --filename manifest.yml
