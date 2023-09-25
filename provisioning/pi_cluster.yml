@@ -1,5 +1,5 @@
 ---
-- name: Set pi hostname to raspberry_pi_hostname.
+- name: Configure hostname for pi_cluster.
   hosts: pi_cluster
   gather_facts: false
   become: true

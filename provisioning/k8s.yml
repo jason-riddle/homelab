@@ -1,5 +1,5 @@
 ---
-- name: Deploy manifests in k8s_manifests to k8s_control_plane.
+- name: Deploy manifests to k8s_control_plane.
   hosts: k8s_control_plane
   gather_facts: false
 
