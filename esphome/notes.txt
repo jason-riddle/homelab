@@ -1,0 +1,13 @@
+# Examples for References:
+
+https://github.com/MallocArray/airgradient_esphome/blob/8cca8f12a09e74cccf7df01e736ec1cb092703f6/airgradient_pro.yaml
+
+https://github.com/corvis/esphome/blob/acbb8e9fd028339ac143a9dd9df1a7060a79a4b1/tests/test1.yaml
+
+https://github.com/ajfriesen/ESPHome-AirGradient/blob/main/air-gradient-pro-presoldered.yaml
+
+https://github.com/m-reiner/airgradient-esphome-prometheus
+
+https://github.com/trainman419/homeassistant_config/blob/4d4220c340c47f2d6241ab7fe169c80f8a9aa9c5/esphome-config/airgradient-2.yaml
+
+https://github.com/zuzu59/esphome_home5/blob/8d76b1aaf3964c540dfd58e859f8fd61baad1a3e/th0_mini_d1.yaml#L4
