@@ -12,3 +12,6 @@ all:
     k8s_control_plane:
       hosts:
         macmini:
+    pi_cluster:
+      hosts:
+        pinode01:

@@ -1,6 +1,6 @@
 ---
 - name: Set pi hostname to raspberry_pi_hostname.
-  hosts: pinode01
+  hosts: pi_cluster
   gather_facts: false
 
   vars:
