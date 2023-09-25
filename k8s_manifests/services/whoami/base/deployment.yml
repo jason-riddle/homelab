@@ -1,0 +1,21 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: whoami
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: whoami
+        image: traefik/whoami
+        imagePullPolicy: Always
+        env:
+        - name: WHOAMI_PORT_NUMBER
+          value: "2001"
+        - name: WHOAMI_NAME
+          value: "whoami"
+        ports:
+        - name: http
+          containerPort: 2001
