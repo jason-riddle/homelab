@@ -14,3 +14,6 @@ pi_cluster:
 
 ping:
 	ansible all --module-name ansible.builtin.ping --args="data=pong" --ask-pass
+
+deps:
+	ansible-galaxy install --role-file provisioning/requirements.yml --force
