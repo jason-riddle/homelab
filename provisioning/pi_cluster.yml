@@ -2,6 +2,7 @@
 - name: Set pi hostname to raspberry_pi_hostname.
   hosts: pi_cluster
   gather_facts: false
+  become: true
 
   vars:
     raspberry_pi_hostname: "{{ inventory_hostname }}"
