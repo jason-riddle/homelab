@@ -1,4 +1,30 @@
 ---
+- name: Set pi hostname to raspberry_pi_hostname.
+  hosts: pinode01
+  gather_facts: false
+
+  vars:
+    raspberry_pi_hostname: "{{ inventory_hostname }}"
+
+  tasks:
+    - name: Assert that raspberry_pi_hostname is not empty.
+      assert:
+        that:
+          - raspberry_pi_hostname | length > 0
+        quiet: true
+
+    - name: Set the hostname.
+      hostname:
+        name: "{{ raspberry_pi_hostname }}"
+      register: hostname
+
+    - name: Reboot machine.
+      reboot:
+        reboot_timeout: 300
+      when:
+        - hostname is changed
+
+
 - name: Deploy manifests in k8s_manifests to k8s_control_plane.
   hosts: k8s_control_plane
   gather_facts: false
