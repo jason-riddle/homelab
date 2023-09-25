@@ -50,3 +50,15 @@ logger:
     uptime.sensor: INFO
     web_server: INFO
     wifi_signal.sensor: INFO
+
+
+# Enable Home Assistant API
+# https://esphome.io/components/api
+api:
+  password: ""
+
+
+# https://esphome.io/components/ota
+ota:
+  safe_mode: true
+  password: ""
