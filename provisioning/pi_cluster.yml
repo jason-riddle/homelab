@@ -1,4 +1,26 @@
 ---
+- name: Configure boot config for pi_cluster.
+  hosts: pi_cluster
+  gather_facts: false
+  become: true
+
+  vars:
+    raspberry_pi_boot_config_options:
+      # Set the PoE hat fan speeds.
+      # REF: https://web.archive.org/web/20230504043802/https://www.jeffgeerling.com/blog/2021/taking-control-pi-poe-hats-overly-aggressive-fan
+      - regexp: "^#?dtparam=poe_fan_temp0"
+        line: "dtparam=poe_fan_temp0=50000"
+      - regexp: "^#?dtparam=poe_fan_temp1"
+        line: "dtparam=poe_fan_temp1=60000"
+      - regexp: "^#?dtparam=poe_fan_temp2"
+        line: "dtparam=poe_fan_temp2=70000"
+      - regexp: "^#?dtparam=poe_fan_temp3"
+        line: "dtparam=poe_fan_temp3=80000"
+
+  roles:
+    - geerlingguy.raspberry-pi
+
+
 - name: Configure hostname for pi_cluster.
   hosts: pi_cluster
   gather_facts: false
