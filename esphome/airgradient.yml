@@ -3,3 +3,25 @@
 substitutions:
   devicename: "jasons-airgradient-diy-pro"
   upper_devicename: "Jason's AirGradient DIY Pro"
+
+
+# https://esphome.io/components/esphome.html#esphome-core-configuration
+esphome:
+  name: "${devicename}"
+  friendly_name: "${upper_devicename}"
+  platform: ESP8266
+  board: d1_mini
+
+  # https://esphome.io/components/esphome.html#on-boot
+  on_boot:
+    priority: 800
+    then:
+      - lambda: >-
+          ESP_LOGD("main", "ON BOOT!");
+
+  # https://esphome.io/components/esphome.html#on-shutdown
+  on_shutdown:
+    priority: 600
+    then:
+      - lambda: >-
+          ESP_LOGD("main", "ON SHUTDOWN!");
