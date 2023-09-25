@@ -6,9 +6,6 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 ## Ansible
 
-main:
-	ansible-playbook main.yml
-
 k8s:
 	ansible-playbook provisioning/k8s_control_plane.yml
 
