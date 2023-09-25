@@ -298,3 +298,20 @@ time:
           - lambda: >-
               ESP_LOGD("main", "RESTARTING NOW");
           - button.press: restart_button
+
+
+# https://esphome.io/guides/automations.html#interval
+interval:
+  # Cycle through page on display
+  - interval: 3s
+    then:
+      - display.page.show_next: oled_display
+      - component.update: oled_display
+
+  # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
+  # Two-minute interval to extend the life span of the PMS5003 sensor
+  - interval: 150s
+    then:
+      - switch.turn_on: pms_switch
+      - delay: 30s
+      - switch.turn_off: pms_switch
