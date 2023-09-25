@@ -280,3 +280,21 @@ display:
           it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f°F", id(temp).state*9/5+32);
           it.printf(0, 34, id(ubuntu), "Hmd");
           it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity).state);
+
+
+# https://esphome.io/components/time/index.html
+# TODO: For some reason, if I use interval, the interval time is not respected
+#       and it immediately restarts, causing an infinite loop.
+time:
+  - platform: sntp
+    on_time:
+      # Every 60 minutes, restart the device.
+      - seconds: 0
+        minutes: /60
+        then:
+          - lambda: >-
+              ESP_LOGD("main", "RESTARTING IN 2 MINS");
+          - delay: 2min
+          - lambda: >-
+              ESP_LOGD("main", "RESTARTING NOW");
+          - button.press: restart_button
