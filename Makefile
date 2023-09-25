@@ -9,5 +9,11 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 main:
 	ansible-playbook main.yml
 
+k8s:
+	ansible-playbook provisioning/k8s_control_plane.yml
+
+pi_cluster:
+	ansible-playbook provisioning/pi_cluster.yml
+
 ping:
 	ansible all --module-name ansible.builtin.ping --args="data=pong"
