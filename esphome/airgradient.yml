@@ -25,3 +25,28 @@ esphome:
     then:
       - lambda: >-
           ESP_LOGD("main", "ON SHUTDOWN!");
+
+
+# https://esphome.io/components/logger
+logger:
+  level: DEBUG
+  logs:
+    adc: INFO
+    captive_portal: INFO
+    deep_sleep: INFO
+    htu21d: INFO
+    i2c: INFO
+    logger: INFO
+    mqtt.client: INFO
+    mqtt.component: INFO
+    mqtt.sensor: INFO
+    mqtt.switch: INFO
+    mqtt: INFO
+    ota: INFO
+    restart: INFO
+    sensor: INFO
+    switch.gpio: INFO
+    switch: INFO
+    uptime.sensor: INFO
+    web_server: INFO
+    wifi_signal.sensor: INFO
