@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - ./monitoring/prometheus
+  - ./tailscale/tailscale-operator

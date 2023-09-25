@@ -1,4 +1,9 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: tailscale
+---
+apiVersion: v1
 automountServiceAccountToken: true
 kind: ServiceAccount
 metadata:
@@ -65,6 +70,50 @@ metadata:
     helm.sh/chart: prometheus-23.4.0
   name: prometheus-server
   namespace: monitoring
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: operator
+  namespace: tailscale
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: proxies
+  namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: operator
+  namespace: tailscale
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - '*'
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: proxies
+  namespace: tailscale
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -324,6 +373,55 @@ rules:
   - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tailscale-operator
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - events
+  - services
+  - services/status
+  verbs:
+  - '*'
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  - ingresses/status
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: operator
+  namespace: tailscale
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: operator
+subjects:
+- kind: ServiceAccount
+  name: operator
+  namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: proxies
+  namespace: tailscale
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: proxies
+subjects:
+- kind: ServiceAccount
+  name: proxies
+  namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
@@ -364,6 +462,19 @@ subjects:
 - kind: ServiceAccount
   name: prometheus-server
   namespace: monitoring
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tailscale-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tailscale-operator
+subjects:
+- kind: ServiceAccount
+  name: operator
+  namespace: tailscale
 ---
 apiVersion: v1
 data:
@@ -1129,6 +1240,61 @@ spec:
         name: config-volume
       - emptyDir: {}
         name: storage-volume
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operator
+  namespace: tailscale
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operator
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: operator
+    spec:
+      containers:
+      - env:
+        - name: OPERATOR_HOSTNAME
+          value: tailscale-operator
+        - name: OPERATOR_SECRET
+          value: operator
+        - name: OPERATOR_LOGGING
+          value: info
+        - name: OPERATOR_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: CLIENT_ID_FILE
+          value: /oauth/client_id
+        - name: CLIENT_SECRET_FILE
+          value: /oauth/client_secret
+        - name: PROXY_IMAGE
+          value: tailscale/tailscale:unstable
+        - name: PROXY_TAGS
+          value: tag:k8s
+        - name: AUTH_PROXY
+          value: "false"
+        image: tailscale/k8s-operator:unstable
+        name: operator
+        resources:
+          requests:
+            cpu: 500m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /oauth
+          name: oauth
+          readOnly: true
+      serviceAccountName: operator
+      volumes:
+      - name: oauth
+        secret:
+          secretName: operator-oauth
 ---
 apiVersion: apps/v1
 kind: StatefulSet
