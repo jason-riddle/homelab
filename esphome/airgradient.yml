@@ -229,3 +229,54 @@ sensor:
     name: "Uptime Sensor"
     id: device_uptime
     update_interval: 60s
+
+
+# https://esphome.io/components/font
+font:
+  - file:
+      type: gfonts
+      family: Poppins
+      weight: light
+    id: poppins_light
+    size: 14
+    glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+
+  - file:
+      type: gfonts
+      family: Poppins
+      weight: light
+    id: poppins_light_12
+    size: 12
+    glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+
+  - file: "gfonts://Ubuntu Mono"
+    id: ubuntu
+    size: 20
+    glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+
+
+# https://esphome.io/components/display
+display:
+  # https://esphome.io/components/display/ssd1306.html
+  # Formatting reference: https://www.tutorialspoint.com/c_standard_library/c_function_printf.htm
+  - platform: ssd1306_i2c
+    model: "SH1106 128x64"
+    id: oled_display
+    reset_pin: D0
+    address: 0x3c
+    # rotation: 180°
+
+    # https://esphome.io/components/display/#display-pages
+    pages:
+      - id: air_quality
+        lambda: |-
+          it.printf(0, 6, id(ubuntu), "CO2");
+          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f ppm", id(co2).state);
+          it.printf(0, 34, id(ubuntu), "AQI");
+          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f    ", id(pm_2_5_aqi).state);
+      - id: air_temp
+        lambda: |-
+          it.printf(0, 6, id(ubuntu), "Tmp");
+          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f°F", id(temp).state*9/5+32);
+          it.printf(0, 34, id(ubuntu), "Hmd");
+          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity).state);
