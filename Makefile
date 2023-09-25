@@ -6,9 +6,6 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 ## Ansible
 
-k8s:
-	ansible-playbook provisioning/k8s.yml
-
 pi_cluster:
 	ansible-playbook provisioning/pi_cluster.yml --ask-pass --ask-become-pass
 
