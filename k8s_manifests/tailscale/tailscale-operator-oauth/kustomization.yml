@@ -11,6 +11,3 @@ secretGenerator:
   - name: operator-oauth
     envs:
       - .env
-
-# resources:
-#   - namespace.yml

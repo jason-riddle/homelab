@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: tailscale
 
 resources:
-  - namespace.yml
   - proxies-service-account.yml
   - proxies-role.yml
   - proxies-role-binding.yml
