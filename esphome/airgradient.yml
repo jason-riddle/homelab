@@ -111,3 +111,11 @@ switch:
       - uart.write:
           id: pms5003_uart
           data: [0x42, 0x4D, 0xE4, 0x00, 0x00, 0x01, 0x73]
+
+
+# Create a button to restart the device
+button:
+  - platform: restart
+    name: "Click Button to Restart AirGradient Device (->)"
+    id: restart_button
+    icon: "mdi:cellphone-arrow-down"
