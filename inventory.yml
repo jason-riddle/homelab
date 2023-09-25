@@ -3,3 +3,7 @@ all:
   hosts:
     mac-mini:
       ansible_connection: local
+
+    pinode01:
+      ansible_host: 192.168.1.170
+      ansible_port: 22
