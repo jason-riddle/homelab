@@ -119,3 +119,27 @@ button:
     name: "Click Button to Restart AirGradient Device (->)"
     id: restart_button
     icon: "mdi:cellphone-arrow-down"
+
+
+# Configuration for AirGradient DIY v2 device
+# https://www.esphome-devices.com/devices/AirGradient-DIY/
+# https://github.com/JacobMillward/airgradient_diy_pro_esphome/blob/main/airgradient_diy_pro.yaml
+
+# https://esphome.io/components/uart
+uart:
+  - rx_pin: D4
+    tx_pin: D3
+    baud_rate: 9600
+    id: senseair_s8_uart
+
+  - rx_pin: D5
+    tx_pin: D6
+    baud_rate: 9600
+    id: pms5003_uart
+
+
+# https://esphome.io/components/i2c
+i2c:
+  sda: D2
+  scl: D1
+  frequency: 400kHz  # Proposed fix for "Component took a long time for an operation" messages https://github.com/esphome/issues/issues/4717
