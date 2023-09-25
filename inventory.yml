@@ -1,7 +1,7 @@
 ---
 all:
   hosts:
-    mac-mini:
+    macmini:
       ansible_connection: local
 
     pinode01:
