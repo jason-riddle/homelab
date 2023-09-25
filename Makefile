@@ -5,4 +5,4 @@
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 ping:
-	ansible all --module-name ansible.builtin.ping
+	ansible all --module-name ansible.builtin.ping --args="data=pong"
