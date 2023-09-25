@@ -1,8 +1,1 @@
-# Ignore everything
-*
-# But not these files...
-!.gitignore
-
-!Makefile
-!kustomization.yml
-!namespace.yml
+manifest.yml
