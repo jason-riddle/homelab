@@ -14,5 +14,5 @@
     - name: Ensure homeassistant is installed.
       pip:
         name:
-          - homeassistant
+          - homeassistant==2023.9.3
         state: present
