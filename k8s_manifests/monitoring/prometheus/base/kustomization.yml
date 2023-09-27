@@ -10,6 +10,14 @@ helmCharts:
     includeCRDs: true
     valuesInline:
       server:
+        service:
+          enabled: true
+          annotations:
+            # https://tailscale.com/kb/1236/kubernetes-operator/
+            tailscale.com/expose: "true"
+            tailscale.com/hostname: "prometheus"
+        persistentVolume:
+          enabled: false
         remoteWrite:
           - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-d31d34d9-0d0d-4d03-b661-d54dcbd033d1/api/v1/remote_write
             sigv4:
@@ -18,13 +26,5 @@ helmCharts:
               max_samples_per_send: 1000
               max_shards: 200
               capacity: 2500
-        persistentVolume:
-          enabled: false
-        service:
-          enabled: true
-          annotations:
-            # https://tailscale.com/kb/1236/kubernetes-operator/
-            tailscale.com/expose: "true"
-            tailscale.com/hostname: "prometheus"
     releaseName: prometheus
     version: 23.4.0
