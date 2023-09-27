@@ -9,11 +9,11 @@ helmCharts:
     repo: https://prometheus-community.github.io/helm-charts
     includeCRDs: true
     valuesInline:
-      extraScrapeConfigs: "" # |
-        # - job_name: 'esphome-airgradient-exporter'
-        #   static_configs:
-        #     - targets:
-        #       - http://192.168.1.232
+      extraScrapeConfigs: |
+        - job_name: 'esphome-airgradient-exporter'
+          static_configs:
+            - targets:
+              - http://192.168.1.232
 
         # - job_name: 'prometheus-blackbox-exporter'
         #   metrics_path: /probe
