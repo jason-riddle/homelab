@@ -10,7 +10,7 @@ helmCharts:
     includeCRDs: true
     valuesInline:
       extraScrapeConfigs: |
-        - job_name: 'esphome-airgradient-exporter'
+        - job_name: 'airgradient'
           static_configs:
             - targets:
               - 192.168.1.232
