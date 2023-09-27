@@ -9,8 +9,6 @@ helmCharts:
     repo: https://prometheus-community.github.io/helm-charts
     includeCRDs: true
     valuesInline:
-      rbac:
-        create: true
       server:
         remoteWrite:
           - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-d31d34d9-0d0d-4d03-b661-d54dcbd033d1/api/v1/remote_write
