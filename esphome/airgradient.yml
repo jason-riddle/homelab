@@ -100,7 +100,7 @@ switch:
   # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
   # Source: https://github.com/airgradienthq/arduino/blob/master/AirGradient.cpp#L123
   - platform: template
-    name: "PMS5003 (PM Sensor) ON/OFF Switch"
+    name: "PM Sensor ON/OFF Switch" # PMS5003
     id: pms_switch
     optimistic: true
     turn_on_action:
@@ -152,7 +152,7 @@ sensor:
     type: PMSX003
     pm_2_5:
       id: pm_2_5
-      name: "Particulate Matter <2.5µm Concentration"
+      name: "PM <2.5µm Concentration"
       on_value:
         lambda: |-
           // https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI
@@ -183,18 +183,18 @@ sensor:
           }
     pm_1_0:
       id: pm10
-      name: "Particulate Matter <1.0µm Concentration"
+      name: "PM <1.0µm Concentration"
     pm_10_0:
       id: pm100
-      name: "Particulate Matter <10.0µm Concentration"
+      name: "PM <10.0µm Concentration"
     pm_0_3um:
-      name: "Particulate Matter >0.3µm Concentration"
+      name: "PM >0.3µm Concentration"
       id: pm_0_3um
     uart_id: pms5003_uart
     update_interval: 30s
 
   - platform: template
-    name: "Particulate Matter <2.5µm AQI"
+    name: "PM <2.5µm AQI"
     unit_of_measurement: "AQI"
     icon: "mdi:air-filter"
     accuracy_decimals: 0
@@ -204,7 +204,7 @@ sensor:
   - platform: senseair
     co2:
       id: co2
-      name: "SenseAir S8 CO2 Value"
+      name: "CO2 PPM"
     id: senseair_s8
     uart_id: senseair_s8_uart
     update_interval: 5s
