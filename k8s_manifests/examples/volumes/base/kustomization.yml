@@ -7,3 +7,4 @@ namespace: examples
 resources:
   - namespace.yml
   - pv.yml
+  # - pv-claim.yml
