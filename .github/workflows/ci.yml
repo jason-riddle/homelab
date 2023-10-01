@@ -52,6 +52,9 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install ansible
 
+      - name: Set HOSTNAME.
+        run: echo "HOSTNAME=$(cat /etc/hostname)" >> $GITHUB_ENV
+
       - name: Set up the test environment.
         run: |
           cp tests/ansible.cfg ./ansible.cfg
