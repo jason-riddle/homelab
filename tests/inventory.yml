@@ -3,3 +3,8 @@ all:
   hosts:
     127.0.0.1:
       ansible_connection: local
+
+  children:
+    pi_cluster:
+      hosts:
+        127.0.0.1:
