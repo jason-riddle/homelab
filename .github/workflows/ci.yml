@@ -35,23 +35,23 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install ansible
 
-      # - name: Set up the test environment.
-      #   run: |
-      #     cp tests/ansible.cfg ./ansible.cfg
-      #     cp tests/inventory.yml ./inventory.yml
-      #     ansible-galaxy install -r requirements.yml
+      - name: Set up the test environment.
+        run: |
+          cp tests/ansible.cfg ./ansible.cfg
+          cp tests/inventory.yml ./inventory.yml
+          ansible-galaxy install -r provisioning/requirements.yml
 
-      # - name: Test the bootstrap playbook's syntax.
-      #   run: ansible-playbook bootstrap.yml --syntax-check
+      - name: Test the pi_cluster playbook's syntax.
+        run: ansible-playbook provisioning/pi_cluster.yml --syntax-check
 
-      # - name: Test the bootstrap playbook.
-      #   run: ansible-playbook bootstrap.yml --skip-tags "hostname,hosts"
+      - name: Test the pi_cluster playbook.
+        run: ansible-playbook provisioning/pi_cluster.yml --skip-tags "hostname,hosts"
 
-      # - name: Idempotence check for bootstrap.
-      #   run: |
-      #     idempotence=$(mktemp)
-      #     ansible-playbook bootstrap.yml | tee -a ${idempotence}
-      #     tail ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+      - name: Idempotence check for pi_cluster.
+        run: |
+          idempotence=$(mktemp)
+          ansible-playbook provisioning/pi_cluster.yml | tee -a ${idempotence}
+          tail ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
 
       # - name: Test the main playbook's syntax.
       #   run: ansible-playbook main.yml --syntax-check
