@@ -29,6 +29,8 @@ env:
   # Requires Ansible 2.10
   # REF: https://web.archive.org/web/20230819083945/https://docs.ansible.com/ansible/latest/reference_appendices/config.html#task-timeout
   ANSIBLE_TASK_TIMEOUT: 120 # seconds
+  # Tailscale
+  GHA_TAILSCALE_AUTHKEY: "${{ secrets.GHA_TAILSCALE_AUTHKEY }}"
 
 jobs:
 
