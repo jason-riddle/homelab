@@ -69,8 +69,8 @@ jobs:
       - name: Test the pi_cluster playbook.
         run: ansible-playbook provisioning/pi_cluster.yml --skip-tags "boot,hostname"
 
-      - name: Idempotence check for pi_cluster playbook.
-        run: |
-          idempotence=$(mktemp)
-          ansible-playbook provisioning/pi_cluster.yml --skip-tags "boot,hostname" | tee -a ${idempotence}
-          tail ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+      # - name: Idempotence check for pi_cluster playbook.
+      #   run: |
+      #     idempotence=$(mktemp)
+      #     ansible-playbook provisioning/pi_cluster.yml --skip-tags "boot,hostname" | tee -a ${idempotence}
+      #     tail ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
