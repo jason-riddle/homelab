@@ -62,7 +62,7 @@ jobs:
         run: ansible-playbook provisioning/pi_cluster.yml --syntax-check
 
       - name: Test the pi_cluster playbook.
-        run: ansible-playbook provisioning/pi_cluster.yml --skip-tags "hostname,hosts"
+        run: ansible-playbook provisioning/pi_cluster.yml --skip-tags "boot,hostname"
 
       - name: Idempotence check for pi_cluster.
         run: |

@@ -1,6 +1,7 @@
 ---
 - name: Configure boot config for pi_cluster.
   hosts: pi_cluster
+  tags: boot
   gather_facts: false
   become: true
 
@@ -23,6 +24,7 @@
 
 - name: Configure hostname for pi_cluster.
   hosts: pi_cluster
+  tags: hostname
   gather_facts: false
   become: true
 
