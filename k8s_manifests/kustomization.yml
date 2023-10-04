@@ -6,6 +6,6 @@ resources:
   - ./namespaces
   - ./examples/http-https-echo
   - ./examples/whoami
-  - ./gitops/argocd
+  - ./argocd/argocd
   # - ./monitoring/prometheus
   # - ./monitoring/grafana
