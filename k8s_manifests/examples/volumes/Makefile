@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := build
 
 build:
-	kustomize build --enable-helm base > manifest.yml
+	kustomize build --enable-helm . > manifest.yml
 
 apply: build
 	kubectl apply --filename manifest.yml
