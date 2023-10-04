@@ -98,16 +98,17 @@ switch:
     icon: "mdi:cellphone-arrow-down"
 
   # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
-  # Source: https://github.com/airgradienthq/arduino/blob/master/AirGradient.cpp#L123
   - platform: template
     name: "PM Sensor ON/OFF Switch" # PMS5003
     id: pms_switch
     optimistic: true
     turn_on_action:
+      # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L254
       - uart.write:
           id: pms5003_uart
           data: [0x42, 0x4D, 0xE4, 0x00, 0x01, 0x01, 0x74]
     turn_off_action:
+      # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L247
       - uart.write:
           id: pms5003_uart
           data: [0x42, 0x4D, 0xE4, 0x00, 0x00, 0x01, 0x73]
