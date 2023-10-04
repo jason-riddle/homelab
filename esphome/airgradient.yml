@@ -128,13 +128,17 @@ button:
 
 # https://esphome.io/components/uart
 uart:
+  # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L705
   - rx_pin: D4
     tx_pin: D3
+    # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L708
     baud_rate: 9600
     id: senseair_s8_uart
 
+  # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L60
   - rx_pin: D5
     tx_pin: D6
+    # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L63
     baud_rate: 9600
     id: pms5003_uart
 
