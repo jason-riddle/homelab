@@ -4,5 +4,6 @@ kind: Kustomization
 
 resources:
   - ./namespaces
-  - ./monitoring/prometheus
-  - ./monitoring/grafana
+  - ./gitops/argocd
+  # - ./monitoring/prometheus
+  # - ./monitoring/grafana
