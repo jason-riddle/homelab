@@ -19,3 +19,6 @@ argocd-user:
 
 argocd-pass:
 	kubectl --namespace gitops get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode ; echo
+
+whoami:
+	kubectl --namespace examples port-forward service/whoami 8080:80

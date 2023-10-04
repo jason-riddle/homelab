@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ./namespaces
+  - ./examples/whoami
   - ./gitops/argocd
   # - ./monitoring/prometheus
   # - ./monitoring/grafana
