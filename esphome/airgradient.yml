@@ -318,5 +318,5 @@ interval:
   - interval: 150s
     then:
       - switch.turn_on: pms_switch
-      - delay: 30s
+      - delay: 45s
       - switch.turn_off: pms_switch
