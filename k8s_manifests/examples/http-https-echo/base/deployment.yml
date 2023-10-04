@@ -1,0 +1,21 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: http-https-echo
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: http-https-echo
+        image: mendhak/http-https-echo:latest
+        imagePullPolicy: Always
+        env:
+        - name: ECHO_INCLUDE_ENV_VARS
+          value: "1"
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
