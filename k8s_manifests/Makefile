@@ -12,13 +12,13 @@ prune:
 # Apps
 
 argocd:
-	kubectl --namespace gitops port-forward service/argocd-server 8080:80
+	kubectl --namespace argocd port-forward service/argo-cd-argocd-server 8080:80
 
 argocd-user:
 	@echo admin
 
 argocd-pass:
-	kubectl --namespace gitops get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode ; echo
+	kubectl --namespace argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode ; echo
 
 http-https-echo:
 	kubectl --namespace examples port-forward service/http-https-echo 8080:80

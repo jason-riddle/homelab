@@ -7,6 +7,6 @@ resources:
   # - ./examples/http-https-echo
   # - ./examples/whoami
   - ./argocd/argocd
-  # - ./argocd/guestbook
+  - ./argocd/guestbook
   # - ./monitoring/prometheus
   # - ./monitoring/grafana
