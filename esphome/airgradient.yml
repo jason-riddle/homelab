@@ -212,7 +212,7 @@ sensor:
       name: "CO2 PPM"
     id: senseair_s8
     uart_id: senseair_s8_uart
-    update_interval: 5s
+    update_interval: 30s
 
   # SHT30 https://esphome.io/components/sensor/sht3xd.html
   - platform: sht3xd  # Change to sht4x for SHT40
