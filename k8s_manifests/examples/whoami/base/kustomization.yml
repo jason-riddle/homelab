@@ -8,6 +8,5 @@ transformers:
   - label-transformer.yml
 
 resources:
-  - namespace.yml
   - service.yml
   - deployment.yml
