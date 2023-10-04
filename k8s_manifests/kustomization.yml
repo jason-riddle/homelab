@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ./namespaces
+  - ./examples/http-https-echo
   - ./examples/whoami
   - ./gitops/argocd
   # - ./monitoring/prometheus
