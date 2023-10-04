@@ -228,12 +228,12 @@ sensor:
   - platform: wifi_signal
     name: "WiFi Signal"
     id: wifi_dbm
-    update_interval: 60s
+    update_interval: 5s
 
   - platform: uptime
     name: "Uptime Sensor"
     id: device_uptime
-    update_interval: 60s
+    update_interval: 5s
 
 
 # https://esphome.io/components/font
