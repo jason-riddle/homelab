@@ -4,9 +4,9 @@ kind: Kustomization
 
 resources:
   - ./namespaces
-  - ./examples/http-https-echo
-  - ./examples/whoami
+  # - ./examples/http-https-echo
+  # - ./examples/whoami
   - ./argocd/argocd
-  - ./argocd/guestbook
+  # - ./argocd/guestbook
   # - ./monitoring/prometheus
   # - ./monitoring/grafana
