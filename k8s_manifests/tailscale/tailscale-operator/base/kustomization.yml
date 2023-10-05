@@ -13,7 +13,6 @@ secretGenerator:
       - .env
 
 resources:
-  - namespace.yml
   - proxies-service-account.yml
   - proxies-role.yml
   - proxies-role-binding.yml
