@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ./namespaces
+  - ./tailscale/tailscale-operator
   # - ./examples/http-https-echo
   # - ./examples/whoami
   - ./argocd/argocd
