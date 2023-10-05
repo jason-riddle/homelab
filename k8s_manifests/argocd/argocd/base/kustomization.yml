@@ -17,8 +17,12 @@ helmCharts:
   - name: argo-cd
     repo: https://argoproj.github.io/argo-helm
     includeCRDs: true
-    # valuesInline:
-    #   service:
-    #     enabled: true
+    valuesInline:
+      server:
+        service:
+          annotations:
+          # https://tailscale.com/kb/1236/kubernetes-operator/
+          tailscale.com/expose: "true"
+          tailscale.com/hostname: "argocd"
     releaseName: argo-cd
     version: 5.46.7
