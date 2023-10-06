@@ -9,5 +9,5 @@ resources:
   # - ./examples/whoami
   - ./argocd/argocd
   - ./argocd/guestbook
-  # - ./monitoring/prometheus
+  - ./monitoring/prometheus
   # - ./monitoring/grafana
