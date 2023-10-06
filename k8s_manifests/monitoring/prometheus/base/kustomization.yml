@@ -31,7 +31,7 @@ helmCharts:
         ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
         alerting_rules.yml:
           groups:
-            - name: node.rules
+            - name: airgradient.rules
               rules:
                 - alert: InstanceDown
                   expr: up{job="airgradient"} == 0
