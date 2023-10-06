@@ -17,11 +17,30 @@ helmCharts:
         enabled: false
       prometheus-pushgateway:
         enabled: false
+      configmapReload:
+        prometheus:
+          extraArgs:
+            log-level: "all"
       extraScrapeConfigs: |
         - job_name: 'airgradient'
           static_configs:
             - targets:
               - 192.168.1.232
+      serverFiles:
+        ## Alerts configuration
+        ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+        alerting_rules.yml:
+          groups:
+            - name: node.rules
+              rules:
+                - alert: InstanceDown
+                  expr: up{job="airgradient"} == 0
+                  for: 5m
+                  labels:
+                    severity: page
+                  annotations:
+                    description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.'
+                    summary: 'Instance {{ $labels.instance }} down'
       server:
         service:
           enabled: true
