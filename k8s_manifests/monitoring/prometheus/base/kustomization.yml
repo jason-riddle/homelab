@@ -38,13 +38,5 @@ helmCharts:
             tailscale.com/hostname: "prometheus"
         persistentVolume:
           enabled: false
-        # remoteWrite:
-        #   - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-d31d34d9-0d0d-4d03-b661-d54dcbd033d1/api/v1/remote_write
-        #     sigv4:
-        #       region: us-east-1
-        #     queue_config:
-        #       max_samples_per_send: 1000
-        #       max_shards: 200
-        #       capacity: 2500
     releaseName: prometheus
     version: 23.4.0
