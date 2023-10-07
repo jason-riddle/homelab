@@ -24,3 +24,9 @@
         owner: root
         group: root
         mode: 0644
+
+    - name: Ensure service is running as desired.
+      service:
+        name: homeassistant
+        state: started
+        enabled: true
