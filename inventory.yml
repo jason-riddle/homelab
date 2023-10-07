@@ -1,11 +1,6 @@
 ---
 all:
   hosts:
-    ha:
-      ansible_host: 192.168.1.170
-      ansible_port: 22
-      ansible_user: pi
-
     macmini:
       ansible_connection: local
 
@@ -15,6 +10,9 @@ all:
       ansible_user: pi
 
   children:
+    ha:
+      hosts:
+        pinode01:
     k8s_control_plane:
       hosts:
         macmini:
