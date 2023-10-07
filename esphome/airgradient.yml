@@ -99,7 +99,7 @@ switch:
 
   # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
   - platform: template
-    name: "PM Sensor ON/OFF Switch" # PMS5003
+    name: "PMS5003 Sensor ON/OFF Switch"
     id: pms_switch
     optimistic: true
     turn_on_action:
