@@ -217,7 +217,7 @@ sensor:
   - platform: senseair
     co2:
       id: co2_ppm
-      name: "CO2"
+      name: "CO2 PPM"
       # icon: "mdi:air-filter"
     id: senseair_s8
     uart_id: senseair_s8_uart
