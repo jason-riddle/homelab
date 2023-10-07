@@ -23,7 +23,7 @@
         name: homeassistant
         shell: /bin/bash
         createhome: true
-        groups: homeassistant
+        groups: "dialout,gpio,i2c"
         home: /home/homeassistant
         state: present
 
