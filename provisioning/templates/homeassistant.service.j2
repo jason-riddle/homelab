@@ -4,8 +4,8 @@ After=network-online.target
 
 [Service]
 Type=simple
-User={{ user }}
-ExecStart=/srv/homeassistant/bin/hass --config "/home/{{ user }}/.homeassistant"
+User=homeassistant
+ExecStart=/srv/homeassistant/bin/hass --config "/home/homeassistant/.homeassistant"
 RestartForceExitStatus=100
 
 [Install]
