@@ -225,6 +225,12 @@ sensor:
     address: 0x44
     update_interval: 30s
 
+  - platform: template
+    name: "Temperature - Fahrenheit"
+    id: temp_f
+    lambda: return id(temp_c).state * 9/5+32;
+    update_interval: 5s
+
   - platform: wifi_signal
     name: "WiFi Signal"
     id: wifi_dbm
