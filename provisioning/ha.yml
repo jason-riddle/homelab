@@ -42,8 +42,8 @@
         group: root
         mode: '0644'
 
-    - name: Ensure homeassistant service is running as desired.
-      service:
-        name: homeassistant
-        state: started
-        enabled: true
+    # - name: Ensure homeassistant service is running as desired.
+    #   service:
+    #     name: homeassistant
+    #     state: started
+    #     enabled: true
