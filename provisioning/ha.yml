@@ -22,18 +22,25 @@
       user:
         name: homeassistant
         shell: /bin/bash
-        groups: "dialout,gpio,i2c"
+        groups: dialout,gpio,i2c
         createhome: true
         home: /home/homeassistant
         state: present
 
+    - name: Ensure /srv/homeassistant directory exists.
+      file:
+        path: /srv/homeassistant
+        owner: homeassistant
+        state: directory
+        mode: '0755'
+
     - name: Ensure homeassistant service exists.
       template:
         src: homeassistant.service.j2
-        dest: "/etc/systemd/system/homeassistant.service"
+        dest: /etc/systemd/system/homeassistant.service
         owner: root
         group: root
-        mode: 0644
+        mode: '0644'
 
     - name: Ensure homeassistant service is running as desired.
       service:
