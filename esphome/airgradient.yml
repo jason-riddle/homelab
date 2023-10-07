@@ -217,7 +217,7 @@ sensor:
   # SHT30 https://esphome.io/components/sensor/sht3xd.html
   - platform: sht3xd  # Change to sht4x for SHT40
     temperature:
-      name: "Temperature - Celsius"
+      name: "Temperature in Celsius"
       id: temp_c
     humidity:
       name: "Humidity"
@@ -226,7 +226,7 @@ sensor:
     update_interval: 30s
 
   - platform: template
-    name: "Temperature - Fahrenheit"
+    name: "Temperature in Fahrenheit"
     id: temp_f
     lambda: return id(temp_c).state * 9/5+32;
     update_interval: 5s
