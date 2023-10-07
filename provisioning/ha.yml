@@ -17,6 +17,15 @@
           - homeassistant
         state: present
 
+    - name: Ensure homeassistant user is present.
+      user:
+        name: homeassistant
+        shell: /bin/bash
+        createhome: true
+        groups: homeassistant
+        home: /home/homeassistant
+        state: present
+
     - name: Ensure homeassistant systemd service exists.
       template:
         src: homeassistant.service.j2
