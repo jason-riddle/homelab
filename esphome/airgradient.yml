@@ -88,19 +88,22 @@ web_server:
   version: 1
 
 
+# https://esphome.io/components/switch
 switch:
   # https://esphome.io/components/switch/safe_mode
   # Create a switch for safe_mode in order to flash the device
   # Solution from this thread:
   # https://community.home-assistant.io/t/esphome-flashing-over-wifi-does-not-work/357352/1
   - platform: safe_mode
+    id: safe_mode_switch
     name: "Flash Mode (Safe Mode) ON/OFF Switch"
     icon: "mdi:cellphone-arrow-down"
 
   # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
   - platform: template
-    name: "PMS5003 Sensor ON/OFF Switch"
-    id: pms_switch
+    id: pms5003_switch
+    name: "PMS5003 ON/OFF Switch"
+    icon: "mdi:cellphone-arrow-down"
     optimistic: true
     turn_on_action:
       # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L254
@@ -115,10 +118,11 @@ switch:
 
 
 # Create a button to restart the device
+# https://esphome.io/components/button
 button:
   - platform: restart
-    name: "Click Button to Restart AirGradient Device (->)"
     id: restart_button
+    name: "Restart AirGradient Device Button"
     icon: "mdi:cellphone-arrow-down"
 
 
@@ -156,60 +160,65 @@ sensor:
   - platform: pmsx003
     type: PMSX003
     pm_2_5:
-      id: pm_2_5
+      id: pm_2_5um
       name: "PM <2.5µm Concentration"
+      # icon: "mdi:air-filter"
       on_value:
         lambda: |-
           // https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI
           // Borrowed from https://github.com/kylemanna/sniffer/blob/master/esphome/sniffer_common.yaml
-          if (id(pm_2_5).state <= 12.0) {
-            // good
-            id(pm_2_5_aqi).publish_state((50.0 - 0.0) / (12.0 - 0.0) * (id(pm_2_5).state - 0.0) + 0.0);
-          } else if (id(pm_2_5).state <= 35.4) {
-            // moderate
-            id(pm_2_5_aqi).publish_state((100.0 - 51.0) / (35.4 - 12.1) * (id(pm_2_5).state - 12.1) + 51.0);
-          } else if (id(pm_2_5).state <= 55.4) {
-            // usg
-            id(pm_2_5_aqi).publish_state((150.0 - 101.0) / (55.4 - 35.5) * (id(pm_2_5).state - 35.5) + 101.0);
-          } else if (id(pm_2_5).state <= 150.4) {
-            // unhealthy
-            id(pm_2_5_aqi).publish_state((200.0 - 151.0) / (150.4 - 55.5) * (id(pm_2_5).state - 55.5) + 151.0);
-          } else if (id(pm_2_5).state <= 250.4) {
-            // very unhealthy
-            id(pm_2_5_aqi).publish_state((300.0 - 201.0) / (250.4 - 150.5) * (id(pm_2_5).state - 150.5) + 201.0);
-          } else if (id(pm_2_5).state <= 350.4) {
-            // hazardous
-            id(pm_2_5_aqi).publish_state((400.0 - 301.0) / (350.4 - 250.5) * (id(pm_2_5).state - 250.5) + 301.0);
-          } else if (id(pm_2_5).state <= 500.4) {
-            // hazardous 2
-            id(pm_2_5_aqi).publish_state((500.0 - 401.0) / (500.4 - 350.5) * (id(pm_2_5).state - 350.5) + 401.0);
+          if (id(pm_2_5um).state <= 12.0) {
+            // Good
+            id(pm_2_5um_aqi).publish_state((50.0 - 0.0) / (12.0 - 0.0) * (id(pm_2_5um).state - 0.0) + 0.0);
+          } else if (id(pm_2_5um).state <= 35.4) {
+            // Moderate
+            id(pm_2_5um_aqi).publish_state((100.0 - 51.0) / (35.4 - 12.1) * (id(pm_2_5um).state - 12.1) + 51.0);
+          } else if (id(pm_2_5um).state <= 55.4) {
+            // Unhealthy for sensitive groups
+            id(pm_2_5um_aqi).publish_state((150.0 - 101.0) / (55.4 - 35.5) * (id(pm_2_5um).state - 35.5) + 101.0);
+          } else if (id(pm_2_5um).state <= 150.4) {
+            // Unhealthy
+            id(pm_2_5um_aqi).publish_state((200.0 - 151.0) / (150.4 - 55.5) * (id(pm_2_5um).state - 55.5) + 151.0);
+          } else if (id(pm_2_5um).state <= 250.4) {
+            // Very Unhealthy
+            id(pm_2_5um_aqi).publish_state((300.0 - 201.0) / (250.4 - 150.5) * (id(pm_2_5um).state - 150.5) + 201.0);
+          } else if (id(pm_2_5um).state <= 350.4) {
+            // Hazardous
+            id(pm_2_5um_aqi).publish_state((400.0 - 301.0) / (350.4 - 250.5) * (id(pm_2_5um).state - 250.5) + 301.0);
+          } else if (id(pm_2_5um).state <= 500.4) {
+            // Hazardous - 2
+            id(pm_2_5um_aqi).publish_state((500.0 - 401.0) / (500.4 - 350.5) * (id(pm_2_5um).state - 350.5) + 401.0);
           } else {
-            id(pm_2_5_aqi).publish_state(500);
+            id(pm_2_5um_aqi).publish_state(500);
           }
     pm_1_0:
-      id: pm10
+      id: pm_1_0um
       name: "PM <1.0µm Concentration"
+      # icon: "mdi:air-filter"
     pm_10_0:
-      id: pm100
+      id: pm_10_0um
       name: "PM <10.0µm Concentration"
-    pm_0_3um:
-      name: "PM >0.3µm Concentration"
-      id: pm_0_3um
+      # icon: "mdi:air-filter"
+    # pm_0_3um:
+    #   id: pm_0_3um
+    #   name: "PM >0.3µm Concentration"
+    #   # icon: "mdi:air-filter"
     uart_id: pms5003_uart
     update_interval: 30s
 
   - platform: template
+    id: pm_2_5um_aqi
     name: "PM <2.5µm AQI"
+    # icon: "mdi:air-filter"
     unit_of_measurement: "AQI"
-    icon: "mdi:air-filter"
     accuracy_decimals: 0
-    id: pm_2_5_aqi
 
   # SenseAir S8 https://esphome.io/components/sensor/senseair.html
   - platform: senseair
     co2:
-      id: co2
-      name: "CO2 PPM"
+      id: co2_ppm
+      name: "CO2"
+      # icon: "mdi:air-filter"
     id: senseair_s8
     uart_id: senseair_s8_uart
     update_interval: 30s
@@ -217,48 +226,54 @@ sensor:
   # SHT30 https://esphome.io/components/sensor/sht3xd.html
   - platform: sht3xd  # Change to sht4x for SHT40
     temperature:
-      name: "Temperature in Celsius"
       id: temp_c
+      name: "Temperature (Celsius)"
+      # icon: "mdi:cellphone-arrow-down"
     humidity:
+      id: humidity_p
       name: "Humidity"
-      id: humidity
+      # icon: "mdi:cellphone-arrow-down"
     address: 0x44
     update_interval: 30s
 
   - platform: template
-    name: "Temperature in Fahrenheit"
     id: temp_f
+    name: "Temperature (Fahrenheit)"
+    # icon: "mdi:cellphone-arrow-down"
     lambda: return id(temp_c).state * 9/5+32;
+    unit_of_measurement: "°F"
     update_interval: 5s
 
   - platform: wifi_signal
-    name: "WiFi Signal"
     id: wifi_dbm
+    name: "WiFi Signal"
+    # icon: "mdi:cellphone-arrow-down"
     update_interval: 5s
 
   - platform: uptime
-    name: "Uptime Sensor"
-    id: device_uptime
+    id: uptime_s
+    name: "Uptime"
+    # icon: "mdi:cellphone-arrow-down"
     update_interval: 5s
 
 
 # https://esphome.io/components/font
 font:
-  - file:
-      type: gfonts
-      family: Poppins
-      weight: light
-    id: poppins_light
-    size: 14
-    glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+  # - file:
+  #     type: gfonts
+  #     family: Poppins
+  #     weight: light
+  #   id: poppins_light_14
+  #   size: 14
+  #   glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
 
-  - file:
-      type: gfonts
-      family: Poppins
-      weight: light
-    id: poppins_light_12
-    size: 12
-    glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+  # - file:
+  #     type: gfonts
+  #     family: Poppins
+  #     weight: light
+  #   id: poppins_light_12
+  #   size: 12
+  #   glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
 
   - file: "gfonts://Ubuntu Mono"
     id: ubuntu
@@ -282,15 +297,15 @@ display:
       - id: air_quality
         lambda: |-
           it.printf(0, 6, id(ubuntu), "CO2");
-          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f ppm", id(co2).state);
+          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f ppm", id(co2_ppm).state);
           it.printf(0, 34, id(ubuntu), "AQI");
-          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f    ", id(pm_2_5_aqi).state);
+          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f    ", id(pm_2_5um_aqi).state);
       - id: air_temp
         lambda: |-
           it.printf(0, 6, id(ubuntu), "Tmp");
           it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f°F", id(temp_f).state);
           it.printf(0, 34, id(ubuntu), "Hmd");
-          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity).state);
+          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity_p).state);
 
 
 # https://esphome.io/components/time/index.html
@@ -314,7 +329,7 @@ time:
 # https://esphome.io/guides/automations.html#interval
 interval:
   # Cycle through page on display
-  - interval: 3s
+  - interval: 5s
     then:
       - display.page.show_next: oled_display
       - component.update: oled_display
@@ -323,6 +338,6 @@ interval:
   # Two-minute interval to extend the life span of the PMS5003 sensor
   - interval: 150s
     then:
-      - switch.turn_on: pms_switch
+      - switch.turn_on: pms5003_switch
       - delay: 45s
-      - switch.turn_off: pms_switch
+      - switch.turn_off: pms5003_switch
