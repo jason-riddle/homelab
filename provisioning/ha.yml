@@ -16,3 +16,11 @@
         name:
           - homeassistant
         state: present
+
+    - name: Ensure homeassistant systemd service exists.
+      template:
+        src: homeassistant.service.j2
+        dest: "/etc/systemd/system/homeassistant.service"
+        owner: root
+        group: root
+        mode: 0644

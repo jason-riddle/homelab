@@ -1,0 +1,12 @@
+[Unit]
+Description=Home Assistant
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ user }}
+ExecStart=/srv/homeassistant/bin/hass --config "/home/{{ user }}/.homeassistant"
+RestartForceExitStatus=100
+
+[Install]
+WantedBy=multi-user.target
