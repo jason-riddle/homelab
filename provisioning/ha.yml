@@ -26,7 +26,7 @@
         home: /home/homeassistant
         state: present
 
-    - name: Ensure homeassistant systemd service exists.
+    - name: Ensure homeassistant service is present.
       template:
         src: homeassistant.service.j2
         dest: "/etc/systemd/system/homeassistant.service"
@@ -34,7 +34,7 @@
         group: root
         mode: 0644
 
-    - name: Ensure service is running as desired.
+    - name: Ensure homeassistant service is running as desired.
       service:
         name: homeassistant
         state: started
