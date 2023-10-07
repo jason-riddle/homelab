@@ -217,8 +217,8 @@ sensor:
   # SHT30 https://esphome.io/components/sensor/sht3xd.html
   - platform: sht3xd  # Change to sht4x for SHT40
     temperature:
-      name: "Temperature"
-      id: temp
+      name: "Temperature - Celsius"
+      id: temp_c
     humidity:
       name: "Humidity"
       id: humidity
@@ -288,7 +288,7 @@ display:
       - id: air_temp
         lambda: |-
           it.printf(0, 6, id(ubuntu), "Tmp");
-          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f°F", id(temp).state*9/5+32);
+          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f°F", id(temp_f).state);
           it.printf(0, 34, id(ubuntu), "Hmd");
           it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity).state);
 
