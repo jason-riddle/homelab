@@ -18,5 +18,8 @@ ping:
 reboot:
 	ansible all --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
+upgrade:
+	ansible-playbook provisioning/tasks/upgrade.yml --ask-pass --ask-become-pass
+
 deps:
 	ansible-galaxy install --role-file provisioning/requirements.yml --force

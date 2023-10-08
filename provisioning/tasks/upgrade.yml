@@ -1,6 +1,6 @@
 ---
-- name: Upgrade everything on all machines.
-  hosts: all
+- name: Upgrade everything on pi_cluster machines.
+  hosts: pi_cluster
   gather_facts: false
   become: true
 
