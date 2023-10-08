@@ -13,12 +13,6 @@
           - python3-venv
         state: present
 
-    - name: Ensure homeassistant is installed.
-      pip:
-        name:
-          - homeassistant
-        state: present
-
     - name: Ensure homeassistant user exists.
       user:
         name: homeassistant
@@ -34,6 +28,14 @@
         owner: homeassistant
         state: directory
         mode: '0755'
+
+    - name: Ensure homeassistant required packages are installed.
+      pip:
+        name:
+          - homeassistant==2023.10.1
+          - wheel
+        virtualenv: /srv/homeassistant
+        state: present
 
     - name: Ensure homeassistant service exists.
       template:
