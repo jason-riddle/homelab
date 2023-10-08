@@ -1,4 +1,5 @@
 ---
+# https://www.home-assistant.io/installation/raspberrypi#install-home-assistant-core
 - name: Install homeassistant.
   hosts: ha
   gather_facts: false
