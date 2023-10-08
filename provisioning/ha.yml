@@ -6,11 +6,30 @@
   become: true
 
   tasks:
-    - name: Ensure homeassistant dependencies are installed.
+    - name: Ensure dependencies are installed.
       package:
         name:
-          - python3-pip
-          - python3-venv
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - software-properties-common
+          - tzdata
+        state: present
+
+    - name: Add ppa:deadsnakes/ppa repo.
+      apt_repository:
+        repo: ppa:deadsnakes/ppa
+
+    - name: Update apt cache.
+      apt:
+        update_cache: true
+      changed_when: false
+
+    - name: Ensure dependencies are installed.
+      package:
+        name:
+          - python3.11
         state: present
 
     - name: Ensure homeassistant user exists.
@@ -29,11 +48,24 @@
         state: directory
         mode: '0755'
 
-    - name: Ensure homeassistant required packages are installed.
+    - name: Initialize the virtualenv environment.
+      command:
+        cmd: python3 -m venv /srv/homeassistant
+        creates: /srv/homeassistant/bin/activate
+
+    - name: Ensure pip is up-to-date (within virtualenv).
       pip:
         name:
-          - homeassistant==2023.10.1
-          - wheel
+          - pip
+        extra_args: --upgrade
+        virtualenv: /srv/homeassistant
+        state: present
+
+    - name: Ensure pip packages are installed (within virtualenv).
+      pip:
+        name:
+          - homeassistant==2023.10.0
+        extra_args: --upgrade
         virtualenv: /srv/homeassistant
         state: present
 
