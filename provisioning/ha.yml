@@ -1,36 +1,68 @@
 ---
-- name: Install homeassistant.
+- name: Setup docker and docker-compose.
+  hosts: ha
+  become: true
+
+  vars:
+    docker_users:
+      - pi
+
+  roles:
+    - geerlingguy.docker
+
+  post_tasks:
+    - name: Verify docker is installed.
+      command: docker --version
+      changed_when: false
+
+    - name: Verify docker-compose is installed.
+      command: docker-compose --version
+      changed_when: false
+
+
+- name: Setup home-assistant.
   hosts: ha
   gather_facts: false
   become: true
 
   tasks:
-    - name: Ensure /etc/docker/compose/homeassistant directory exists.
+    - name: Ensure /opt/docker/home-assistant/compose directory exists.
       file:
-        path: /etc/docker/compose/homeassistant
+        path: /opt/docker/home-assistant/compose
         state: directory
         owner: root
         group: root
         mode: '0755'
 
-    - name: Ensure docker-compose-ha.yml file is up-to-date.
+    - name: Ensure /opt/docker/home-assistant/volumes/config directory exists.
+      file:
+        path: /opt/docker/home-assistant/volumes/config
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Ensure docker-compose.yml file is up-to-date.
       template:
-        src: docker-compose-ha.yml.j2
-        dest: /tmp/docker-compose-ha.yml
+        src: docker-compose.yml.j2
+        dest: /opt/docker/home-assistant/compose/docker-compose.yml
         owner: root
         group: root
         mode: '0644'
 
-    - name: Ensure docker-compose-ha.service is up-to-date.
+    - name: Ensure docker-compose.service is up-to-date.
       template:
-        src: docker-compose-ha.service.j2
-        dest: /etc/systemd/system/docker-compose-ha.service
+        src: docker-compose.service.j2
+        dest: /etc/systemd/system/docker-compose.service
         owner: root
         group: root
         mode: '0644'
 
-    - name: Ensure docker-compose-ha service is running as desired.
+    - name: Pull down the docker image.
+      command: docker pull homeassistant/home-assistant:latest
+
+    - name: Ensure docker-compose service is running as desired.
       service:
-        name: docker-compose-ha
+        name: docker-compose
         state: started
         enabled: true

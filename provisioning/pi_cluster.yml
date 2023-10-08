@@ -1,5 +1,5 @@
 ---
-- name: Configure boot config for pi_cluster.
+- name: Setup boot config.
   hosts: pi_cluster
   tags: boot
   gather_facts: false
@@ -22,7 +22,7 @@
     - geerlingguy.raspberry-pi
 
 
-- name: Configure hostname for pi_cluster.
+- name: Setup hostname.
   hosts: pi_cluster
   tags: hostname
   gather_facts: false
@@ -50,7 +50,7 @@
         - hostname is changed
 
 
-- name: Configure tailscale for pi_cluster.
+- name: Setup tailscale.
   hosts: pi_cluster
   become: true
 

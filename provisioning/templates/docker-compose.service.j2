@@ -6,8 +6,8 @@ After=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=true
-WorkingDirectory=/etc/docker/compose/homeassistant
-ExecStart=/usr/local/bin/docker-compose up -d --remove-orphans
+WorkingDirectory=/opt/docker/home-assistant/compose
+ExecStart=/usr/local/bin/docker-compose up --detach --remove-orphans
 ExecStop=/usr/local/bin/docker-compose down
 
 [Install]
