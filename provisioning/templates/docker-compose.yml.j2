@@ -2,11 +2,11 @@
 version: '3'
 
 services:
-  home-assistant:
-    image: homeassistant/home-assistant:2023.10.1
+  homeassistant:
+    image: lscr.io/linuxserver/homeassistant
     volumes:
       - type: bind
-        source: /opt/docker/home-assistant/volumes/config
+        source: /opt/docker/homeassistant/volumes/config
         target: /config
     ports:
       - 8123:8123
