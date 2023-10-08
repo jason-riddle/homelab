@@ -1,20 +1,26 @@
 ---
-- name: Upgrade all software.
-  apt:
-    update_cache: true
-    upgrade: dist
+- name: Upgrade everything on all machines.
+  hosts: all
+  gather_facts: false
+  become: true
 
-- name: Check if a reboot is required.
-  stat:
-    path: /var/run/reboot-required
-    get_md5: no
-  register: reboot_required_file
+  tasks:
+    - name: Upgrade all software.
+      apt:
+        update_cache: true
+        upgrade: dist
 
-- name: Reboot the machine (if required).
-  reboot:
-    reboot_timeout: 300
-  when: reboot_required_file.stat.exists == true
+    - name: Check if a reboot is required.
+      stat:
+        path: /var/run/reboot-required
+        get_md5: no
+      register: reboot_required_file
 
-- name: Remove dependencies that are no longer required.
-  apt:
-    autoremove: yes
+    - name: Reboot the machine (if required).
+      reboot:
+        reboot_timeout: 300
+      when: reboot_required_file.stat.exists == true
+
+    - name: Remove dependencies that are no longer required.
+      apt:
+        autoremove: yes
