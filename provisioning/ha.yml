@@ -26,14 +26,10 @@
   become: true
 
   handlers:
-    - name: reload docker-compose service
+    - name: reload and restart docker-compose service
       systemd:
         name: docker-compose
         daemon_reload: yes
-
-    - name: restart docker-compose service
-      service:
-        name: docker-compose
         state: restarted
 
   tasks:
@@ -61,7 +57,7 @@
         group: root
         mode: '0644'
       notify:
-        - restart docker-compose service
+        - reload and restart docker-compose service
 
     - name: Ensure docker-compose.service is up-to-date.
       template:
@@ -71,7 +67,7 @@
         group: root
         mode: '0644'
       notify:
-        - reload docker-compose service
+        - reload and restart docker-compose service
 
     # Restart and/or reload docker-compose service, if required.
     - name: Run handlers.
