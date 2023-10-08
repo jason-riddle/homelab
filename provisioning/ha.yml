@@ -4,10 +4,33 @@
   gather_facts: false
   become: true
 
-    - name: Ensure docker-compose file is up-to-date.
+  tasks:
+    - name: Ensure /etc/docker/compose/homeassistant directory exists.
+      file:
+        path: /etc/docker/compose/homeassistant
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Ensure docker-compose-ha.yml file is up-to-date.
       template:
-        src: docker-compose.yml.j2
-        dest: /tmp/docker-compose.yml
+        src: docker-compose-ha.yml.j2
+        dest: /tmp/docker-compose-ha.yml
         owner: root
         group: root
         mode: '0644'
+
+    - name: Ensure docker-compose-ha.service is up-to-date.
+      template:
+        src: docker-compose-ha.service.j2
+        dest: /etc/systemd/system/docker-compose-ha.service
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Ensure docker-compose-ha service is running as desired.
+      service:
+        name: docker-compose-ha
+        state: started
+        enabled: true
