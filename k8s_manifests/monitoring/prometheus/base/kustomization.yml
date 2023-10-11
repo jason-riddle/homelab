@@ -22,6 +22,16 @@ helmCharts:
           static_configs:
             - targets:
               - 192.168.1.232
+      serverFiles:
+        ## Alerts configuration
+        ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+        alerting_rules.yml:
+          groups:
+            - name: airgradient.rules
+              rules:
+                - alert: InstanceDown
+                  expr: up{job="airgradient"} == 0
+                  for: 5m
       server:
         service:
           enabled: true
