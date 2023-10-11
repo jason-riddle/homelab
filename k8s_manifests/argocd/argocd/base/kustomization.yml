@@ -9,6 +9,9 @@ helmCharts:
     repo: https://argoproj.github.io/argo-helm
     includeCRDs: true
     valuesInline:
+      configs:
+        cm:
+          kustomize.buildOptions: --enable-helm
       server:
         service:
           annotations:
