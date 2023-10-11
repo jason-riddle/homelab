@@ -9,6 +9,8 @@ resources:
   # - ./examples/whoami
   # - ./argocd/argocd
   # - ./argocd/guestbook
-  - ./monitoring/prometheus
-  - ./monitoring/alertmanager
+  - ./argocd/argocd
+  - ./argocd/kustomize-http-https-echo
+  # - ./monitoring/prometheus
+  # - ./monitoring/alertmanager
   # - ./monitoring/grafana
