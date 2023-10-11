@@ -4,7 +4,7 @@ apiVersion: apps/v1
 metadata:
   name: http-https-echo
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
       containers:
