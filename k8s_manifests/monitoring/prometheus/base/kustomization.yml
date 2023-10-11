@@ -17,10 +17,6 @@ helmCharts:
         enabled: false
       prometheus-pushgateway:
         enabled: false
-      configmapReload:
-        prometheus:
-          extraArgs:
-            log-level: "all"
       extraScrapeConfigs: |
         - job_name: 'airgradient'
           static_configs:
