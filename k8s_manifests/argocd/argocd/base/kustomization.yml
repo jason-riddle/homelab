@@ -12,6 +12,7 @@ helmCharts:
       configs:
         cm:
           kustomize.buildOptions: --enable-helm
+          timeout.reconciliation: 60s
       server:
         service:
           annotations:
