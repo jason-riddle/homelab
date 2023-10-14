@@ -81,3 +81,5 @@
         name: docker-compose
         state: started
         enabled: true
+      async: 30
+      poll: 5
