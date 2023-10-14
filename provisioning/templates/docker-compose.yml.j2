@@ -8,5 +8,6 @@ services:
       - type: bind
         source: /opt/docker/homeassistant/volumes/config
         target: /config
-    ports:
-      - 8123:8123
+    network_mode: host
+    # ports:
+    #   - 8123:8123
