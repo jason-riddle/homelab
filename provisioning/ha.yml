@@ -41,9 +41,9 @@
         group: root
         mode: '0755'
 
-    - name: Ensure /opt/docker/homeassistant/volumes/config directory exists.
+    - name: Ensure /opt/docker/homeassistant/volumes directory exists.
       file:
-        path: /opt/docker/homeassistant/volumes/config
+        path: /opt/docker/homeassistant/volumes
         state: directory
         owner: root
         group: root
