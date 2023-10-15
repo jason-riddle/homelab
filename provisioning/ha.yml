@@ -20,7 +20,7 @@
       changed_when: false
 
 
-- name: Setup homeassistant.
+- name: Setup ha.
   hosts: ha
   gather_facts: false
   become: true
@@ -33,17 +33,17 @@
         state: restarted
 
   tasks:
-    - name: Ensure /opt/docker/homeassistant/compose directory exists.
+    - name: Ensure /opt/docker/ha/compose directory exists.
       file:
-        path: /opt/docker/homeassistant/compose
+        path: /opt/docker/ha/compose
         state: directory
         owner: root
         group: root
         mode: '0755'
 
-    - name: Ensure /opt/docker/homeassistant/volumes/config directory exists.
+    - name: Ensure /opt/docker/ha/volumes/config directory exists.
       file:
-        path: /opt/docker/homeassistant/volumes/config
+        path: /opt/docker/ha/volumes/config
         state: directory
         owner: root
         group: root
@@ -51,8 +51,8 @@
 
     - name: Ensure docker-compose.yml file is up-to-date.
       template:
-        src: docker-compose.yml.j2
-        dest: /opt/docker/homeassistant/compose/docker-compose.yml
+        src: templates/docker-compose.yml
+        dest: /opt/docker/ha/compose/docker-compose.yml
         owner: root
         group: root
         mode: '0644'
@@ -61,7 +61,7 @@
 
     - name: Ensure docker-compose.service is up-to-date.
       template:
-        src: docker-compose.service.j2
+        src: templates/docker-compose.service
         dest: /etc/systemd/system/docker-compose.service
         owner: root
         group: root

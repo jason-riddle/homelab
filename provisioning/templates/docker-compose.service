@@ -8,7 +8,7 @@ Type=oneshot
 User=root
 Group=root
 RemainAfterExit=true
-WorkingDirectory=/opt/docker/homeassistant/compose
+WorkingDirectory=/opt/docker/ha/compose
 ExecStart=/usr/local/bin/docker-compose up --detach --remove-orphans
 ExecStop=/usr/local/bin/docker-compose down
 
