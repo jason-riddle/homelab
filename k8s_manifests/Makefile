@@ -1,13 +1,10 @@
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := apply
 
-build:
-	kustomize build --enable-helm . > manifest.yml
-
-apply: build
-	kubectl apply --filename manifest.yml
+apply:
+	kubectl apply --kustomize .
 
 prune:
-	kubectl apply --prune --all --filename manifest.yml
+	kubectl apply --kustomize . --prune
 
 # Apps
 
@@ -22,6 +19,3 @@ argocd-pass:
 
 http-https-echo:
 	kubectl --namespace examples port-forward service/http-https-echo 8080:80
-
-whoami:
-	kubectl --namespace examples port-forward service/whoami 8080:80
