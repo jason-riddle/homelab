@@ -6,9 +6,6 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 ## Ansible
 
-ha:
-	ansible-playbook provisioning/ha.yml --ask-pass --ask-become-pass
-
 pi_cluster:
 	ansible-playbook provisioning/pi_cluster.yml --ask-pass --ask-become-pass
 

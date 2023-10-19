@@ -1,10 +1,13 @@
-.DEFAULT_GOAL := apply
+.DEFAULT_GOAL := build
 
-apply:
-	kubectl apply --kustomize .
+build:
+	kustomize build --enable-helm . > manifest.yml
+
+apply: build
+	kubectl apply --filename manifest.yml
 
 prune:
-	kubectl apply --kustomize . --prune
+	kubectl apply --filename manifest.yml --prune --all
 
 # Apps
 

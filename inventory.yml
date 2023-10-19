@@ -10,9 +10,6 @@ all:
       ansible_user: pi
 
   children:
-    ha:
-      hosts:
-        pinode01:
     k8s_control_plane:
       hosts:
         macmini:
