@@ -6,4 +6,6 @@
 .esphome
 .venv
 
+charts
+
 manifest.yml
