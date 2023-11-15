@@ -302,9 +302,9 @@ display:
           it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f    ", id(pm_2_5um_aqi).state);
       - id: air_temp
         lambda: |-
-          it.printf(0, 6, id(ubuntu), "Tmp");
+          it.printf(0, 6, id(ubuntu), "TMP");
           it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f°F", id(temp_f).state);
-          it.printf(0, 34, id(ubuntu), "Hmd");
+          it.printf(0, 34, id(ubuntu), "HUM");
           it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity_p).state);
 
 
