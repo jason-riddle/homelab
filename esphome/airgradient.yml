@@ -12,7 +12,6 @@ esphome:
   platform: ESP8266
   board: d1_mini
 
-  # Print message on boot.
   # REF: https://esphome.io/components/esphome.html#on-boot
   on_boot:
     priority: 800
@@ -20,7 +19,6 @@ esphome:
       - lambda: >-
           ESP_LOGD("main", "ON BOOT!");
 
-  # Print message on shutdown.
   # REF: https://esphome.io/components/esphome.html#on-shutdown
   on_shutdown:
     priority: 600
@@ -54,7 +52,7 @@ logger:
     wifi_signal.sensor: INFO
 
 
-# Enable the Home Assistant API.
+# Enable the API.
 # REF: https://esphome.io/components/api
 api:
   password: ""
