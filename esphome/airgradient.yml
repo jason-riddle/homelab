@@ -165,8 +165,8 @@ sensor:
       # icon: "mdi:air-filter"
       on_value:
         lambda: |-
-          // https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI
-          // Borrowed from https://github.com/kylemanna/sniffer/blob/master/esphome/sniffer_common.yaml
+          // Copied from: https://github.com/kylemanna/sniffer/blob/0688b91c0b9d8d5362a944abe697ca703c964ef3/esphome/sniffer_common.yaml#L189-L211
+          // See: https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI
           if (id(pm_2_5um).state <= 12.0) {
             // Good
             id(pm_2_5um_aqi).publish_state((50.0 - 0.0) / (12.0 - 0.0) * (id(pm_2_5um).state - 0.0) + 0.0);
