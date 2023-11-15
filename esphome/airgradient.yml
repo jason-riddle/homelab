@@ -213,7 +213,8 @@ sensor:
     unit_of_measurement: "AQI"
     accuracy_decimals: 0
 
-  # SenseAir S8 https://esphome.io/components/sensor/senseair.html
+  # SenseAir S8
+  # https://esphome.io/components/sensor/senseair.html
   - platform: senseair
     co2:
       id: co2_ppm
@@ -223,7 +224,8 @@ sensor:
     uart_id: senseair_s8_uart
     update_interval: 30s
 
-  # SHT30 https://esphome.io/components/sensor/sht3xd.html
+  # SHT30
+  # https://esphome.io/components/sensor/sht3xd.html
   - platform: sht3xd  # Change to sht4x for SHT40
     temperature:
       id: temp_c
