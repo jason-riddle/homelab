@@ -97,13 +97,13 @@ switch:
   - platform: safe_mode
     id: safe_mode_switch
     name: "Flash Mode (Safe Mode) ON/OFF Switch"
-    icon: "mdi:cellphone-arrow-down"
+    # icon: "mdi:cellphone-arrow-down"
 
   # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
   - platform: template
     id: pms5003_switch
     name: "PMS5003 ON/OFF Switch"
-    icon: "mdi:cellphone-arrow-down"
+    # icon: "mdi:cellphone-arrow-down"
     optimistic: true
     turn_on_action:
       # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L254
@@ -123,7 +123,7 @@ button:
   - platform: restart
     id: restart_button
     name: "Restart AirGradient Device Button"
-    icon: "mdi:cellphone-arrow-down"
+    # icon: "mdi:cellphone-arrow-down"
 
 
 # Configuration for AirGradient DIY v2 device
