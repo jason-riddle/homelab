@@ -1,7 +1,7 @@
-.DEFAULT_GOAL := flash
+.DEFAULT_GOAL := esphome
 
-flash:
+esphome:
 	devenv shell -- esphome run airgradient.yml --device http://192.168.1.232
 
-flash-usb:
+esphome-usb:
 	devenv shell -- esphome run airgradient.yml --device /dev/cu.usbserial-2130
