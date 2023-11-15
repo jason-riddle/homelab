@@ -1,25 +1,27 @@
 ---
-# https://esphome.io/guides/configuration-types.html#substitutions
+# REF: https://esphome.io/guides/configuration-types.html#substitutions
 substitutions:
   devicename: "jasons-airgradient"
   upper_devicename: "Jason's AirGradient"
 
 
-# https://esphome.io/components/esphome.html#esphome-core-configuration
+# REF: https://esphome.io/components/esphome.html#esphome-core-configuration
 esphome:
   name: "${devicename}"
   friendly_name: "${upper_devicename}"
   platform: ESP8266
   board: d1_mini
 
-  # https://esphome.io/components/esphome.html#on-boot
+  # Print message on boot.
+  # REF: https://esphome.io/components/esphome.html#on-boot
   on_boot:
     priority: 800
     then:
       - lambda: >-
           ESP_LOGD("main", "ON BOOT!");
 
-  # https://esphome.io/components/esphome.html#on-shutdown
+  # Print message on shutdown.
+  # REF: https://esphome.io/components/esphome.html#on-shutdown
   on_shutdown:
     priority: 600
     then:
@@ -27,7 +29,7 @@ esphome:
           ESP_LOGD("main", "ON SHUTDOWN!");
 
 
-# https://esphome.io/components/logger
+# REF: https://esphome.io/components/logger
 logger:
   level: DEBUG
   logs:
@@ -52,74 +54,79 @@ logger:
     wifi_signal.sensor: INFO
 
 
-# Enable Home Assistant API
-# https://esphome.io/components/api
+# Enable the Home Assistant API.
+# REF: https://esphome.io/components/api
 api:
   password: ""
 
 
-# https://esphome.io/components/ota
+# Enable OTA updates.
+# REF: https://esphome.io/components/ota
 ota:
   safe_mode: true
   password: ""
 
 
-# https://esphome.io/components/wifi
+# Connect to WIFI.
+# REF: https://esphome.io/components/wifi
 wifi:
   networks:
     - ssid: !secret wifi_ssid
       password: !secret wifi_password
   reboot_timeout: 15min
 
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  # Defaults to device name with no password
+  # Enable fallback hotspot (captive portal) in case wifi connection fails.
+  # Defaults to device name with no password.
   ap: {}
-# https://esphome.io/components/captive_portal
+# REF: https://esphome.io/components/captive_portal
 captive_portal:
 
 
-# Provide a /metrics endpoint for Prometheus
-# https://esphome.io/components/prometheus
+# Provide a /metrics endpoint for Prometheus.
+# REF: https://esphome.io/components/prometheus
 prometheus:
-# Please note that enabling this component will take up a lot of memory and may decrease stability, especially on ESP8266.
-# https://esphome.io/components/web_server
+# Enable the web server.
+# NOTE: Enabling this component will take up a lot of memory and may decrease stability, especially on ESP8266.
+# REF: https://esphome.io/components/web_server
 web_server:
   port: 80
   version: 1
 
 
-# https://esphome.io/components/switch
+# Switches for controlling behavior.
+# REF: https://esphome.io/components/switch
 switch:
-  # https://esphome.io/components/switch/safe_mode
-  # Create a switch for safe_mode in order to flash the device
-  # Solution from this thread:
-  # https://community.home-assistant.io/t/esphome-flashing-over-wifi-does-not-work/357352/1
+  # Create a switch for safe_mode in order to flash the device.
+  # REF: https://community.home-assistant.io/t/esphome-flashing-over-wifi-does-not-work/357352/1
+  # REF: https://esphome.io/components/switch/safe_mode
   - platform: safe_mode
     id: safe_mode_switch
     name: "Flash Mode (Safe Mode) ON/OFF Switch"
     # icon: "mdi:cellphone-arrow-down"
 
-  # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
+  # Create a switch the turn the pms sensor on and off.
+  # REF: https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
   - platform: template
     id: pms5003_switch
     name: "PMS5003 ON/OFF Switch"
     # icon: "mdi:cellphone-arrow-down"
     optimistic: true
     turn_on_action:
-      # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L254
+      # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L254
       - uart.write:
           id: pms5003_uart
           data: [0x42, 0x4D, 0xE4, 0x00, 0x01, 0x01, 0x74]
     turn_off_action:
-      # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L247
+      # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L247
       - uart.write:
           id: pms5003_uart
           data: [0x42, 0x4D, 0xE4, 0x00, 0x00, 0x01, 0x73]
 
 
-# Create a button to restart the device
-# https://esphome.io/components/button
+# Buttons for controlling behavior.
+# REF: https://esphome.io/components/button
 button:
+  # Create a button to restart the device.
   - platform: restart
     id: restart_button
     name: "Restart AirGradient Device Button"
@@ -127,36 +134,41 @@ button:
 
 
 # Configuration for AirGradient DIY v2 device
-# https://www.esphome-devices.com/devices/AirGradient-DIY/
-# https://github.com/JacobMillward/airgradient_diy_pro_esphome/blob/main/airgradient_diy_pro.yaml
+# REF: https://www.esphome-devices.com/devices/AirGradient-DIY/
+# SRC: https://github.com/JacobMillward/airgradient_diy_pro_esphome/blob/26287ba87942aa1a6bb6af4a67c9daa54b177839/airgradient_diy_pro.yaml
 
-# https://esphome.io/components/uart
+
+# TODO: Not sure what uart means.
+# REF: https://esphome.io/components/uart
 uart:
-  # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L705
+  # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L705
   - rx_pin: D4
     tx_pin: D3
-    # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L708
+    # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L708
     baud_rate: 9600
     id: senseair_s8_uart
 
-  # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L60
+  # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L60
   - rx_pin: D5
     tx_pin: D6
-    # Source: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L63
+    # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L63
     baud_rate: 9600
     id: pms5003_uart
 
 
-# https://esphome.io/components/i2c
+# TODO: Not sure what i2c means.
+# REF: https://esphome.io/components/i2c
 i2c:
   sda: D2
   scl: D1
   frequency: 400kHz  # Proposed fix for "Component took a long time for an operation" messages https://github.com/esphome/issues/issues/4717
 
 
-# https://esphome.io/components/sensor
+# Sensors read data.
+# REF: https://esphome.io/components/sensor
 sensor:
-  # PMS5003 https://esphome.io/components/sensor/pmsx003.html
+  # SENSOR: PMS5003
+  # REF: https://esphome.io/components/sensor/pmsx003.html
   - platform: pmsx003
     type: PMSX003
     pm_2_5:
@@ -213,8 +225,8 @@ sensor:
     unit_of_measurement: "AQI"
     accuracy_decimals: 0
 
-  # SenseAir S8
-  # https://esphome.io/components/sensor/senseair.html
+  # SENSOR: SenseAir S8
+  # REF: https://esphome.io/components/sensor/senseair.html
   - platform: senseair
     co2:
       id: co2_ppm
@@ -224,8 +236,8 @@ sensor:
     uart_id: senseair_s8_uart
     update_interval: 30s
 
-  # SHT30
-  # https://esphome.io/components/sensor/sht3xd.html
+  # SENSOR: SHT30
+  # REF: https://esphome.io/components/sensor/sht3xd.html
   - platform: sht3xd  # Change to sht4x for SHT40
     temperature:
       id: temp_c
@@ -259,7 +271,7 @@ sensor:
     update_interval: 5s
 
 
-# https://esphome.io/components/font
+# REF: https://esphome.io/components/font
 font:
   # - file:
   #     type: gfonts
@@ -283,10 +295,9 @@ font:
     glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
 
 
-# https://esphome.io/components/display
+# REF: https://esphome.io/components/display
 display:
-  # https://esphome.io/components/display/ssd1306.html
-  # Formatting reference: https://www.tutorialspoint.com/c_standard_library/c_function_printf.htm
+  # REF: https://esphome.io/components/display/ssd1306.html
   - platform: ssd1306_i2c
     model: "SH1106 128x64"
     id: oled_display
@@ -294,7 +305,8 @@ display:
     address: 0x3c
     # rotation: 180°
 
-    # https://esphome.io/components/display/#display-pages
+    # REF: https://esphome.io/components/display/#display-pages
+    # REF: https://www.tutorialspoint.com/c_standard_library/c_function_printf.htm
     pages:
       - id: air_quality
         lambda: |-
@@ -310,7 +322,6 @@ display:
           it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity_p).state);
 
 
-# https://esphome.io/components/time/index.html
 # TODO: For some reason, if I use interval, the interval time is not respected
 #       and it immediately restarts, causing an infinite loop.
 #
@@ -319,6 +330,8 @@ display:
 #       On restart, the device should reset and the Nan should go away. But it's
 #       not been going away.
 #
+# Time will trigger events at timed intervals.
+# REF: https://esphome.io/components/time/index.html
 # time:
 #   - platform: sntp
 #     on_time:
@@ -334,16 +347,17 @@ display:
 #           - button.press: restart_button
 
 
-# https://esphome.io/guides/automations.html#interval
+# Interval will trigger events at timed intervals.
+# REF: https://esphome.io/guides/automations.html#interval
 interval:
-  # Cycle through page on display
+  # Cycle through page on display.
   - interval: 5s
     then:
       - display.page.show_next: oled_display
       - component.update: oled_display
 
-  # https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
-  # Two-minute interval to extend the life span of the PMS5003 sensor
+  # Turn the PMS5003 sensor on and off at timed intervals in order to extend the life span of the sensor.
+  # REF: https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
   - interval: 150s
     then:
       - switch.turn_on: pms5003_switch
