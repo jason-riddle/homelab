@@ -1,0 +1,13 @@
+---
+version: '3'
+
+services:
+  benthos:
+    image: jeffail/benthos:latest
+    volumes:
+      - type: bind
+        source: volumes/config/benthos.yaml
+        target: /benthos.yaml
+        read_only: true
+    ports:
+      - 4195:4195
