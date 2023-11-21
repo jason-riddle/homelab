@@ -345,6 +345,11 @@ display:
 #           - button.press: restart_button
 
 
+# Enable HTTP requests.
+# REF: https://esphome.io/components/http_request.html
+http_request:
+
+
 # Interval will trigger events at timed intervals.
 # REF: https://esphome.io/guides/automations.html#interval
 interval:
