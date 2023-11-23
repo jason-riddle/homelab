@@ -8,6 +8,12 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 ## ESPHome
 
+esphome:
+	esphome run airgradient.yml --device http://192.168.1.232
+
+esphome-usb:
+	esphome run airgradient.yml --device /dev/cu.usbserial-2130
+
 ## Kubernetes
 
 ## Maintenance
