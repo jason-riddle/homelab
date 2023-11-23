@@ -1,6 +1,6 @@
 ---
 - name: Setup boot config.
-  hosts: setup
+  hosts: all
   tags: boot
   gather_facts: false
   become: true
@@ -23,7 +23,7 @@
 
 
 - name: Setup hostname.
-  hosts: setup
+  hosts: all
   tags: hostname
   gather_facts: false
   become: true
