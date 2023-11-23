@@ -11,3 +11,9 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 ## Kubernetes
 
 ## Maintenance
+
+reboot:
+	ansible all --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+
+upgrade:
+	ansible-playbook maintenance/tasks/upgrade.yml --ask-pass --ask-become-pass
