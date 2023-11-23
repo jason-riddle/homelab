@@ -1,0 +1,7 @@
+---
+- name: Setup tailscale.
+  hosts: setup
+  become: true
+
+  roles:
+    - jason_riddle.tailscale
