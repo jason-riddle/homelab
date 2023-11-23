@@ -7,7 +7,7 @@ all:
       ansible_user: pi
 
   children:
-    pi_cluster:
+    cluster:
       hosts:
         pinode01:
       vars:
