@@ -22,3 +22,9 @@ upgrade:
 	ansible-playbook maintenance/tasks/upgrade.yml --ask-pass --ask-become-pass
 
 ## Provisioning
+
+setup:
+	ansible-playbook provisioning/tasks/setup.yml --ask-pass --ask-become-pass
+
+tailscale:
+	ansible-playbook provisioning/tasks/tailscale.yml --ask-pass --ask-become-pass
