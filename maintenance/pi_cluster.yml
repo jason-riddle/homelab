@@ -1,6 +1,6 @@
 ---
 - name: Setup boot config.
-  hosts: pi_cluster
+  hosts: setup
   tags: boot
   gather_facts: false
   become: true
@@ -23,7 +23,7 @@
 
 
 - name: Setup hostname.
-  hosts: pi_cluster
+  hosts: setup
   tags: hostname
   gather_facts: false
   become: true
@@ -51,7 +51,7 @@
 
 
 - name: Setup tailscale.
-  hosts: pi_cluster
+  hosts: setup
   become: true
 
   roles:
