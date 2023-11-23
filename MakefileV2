@@ -28,3 +28,8 @@ setup:
 
 tailscale:
 	ansible-playbook provisioning/tasks/tailscale.yml --ask-pass --ask-become-pass
+
+## Development
+
+deps:
+	ansible-galaxy install --role-file requirements.yml --force
