@@ -8,9 +8,11 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 ## ESPHome
 
+.PHONY: esphome
 esphome:
 	esphome run esphome/airgradient.yml --device http://192.168.1.232
 
+.PHONY: esphome-usb
 esphome-usb:
 	esphome run esphome/airgradient.yml --device /dev/cu.usbserial-2130
 
