@@ -46,21 +46,21 @@ jobs:
 
       ## Cluster
 
-      ### Cluster - Test syntax.
+      ### Cluster - Check.
 
-      - name: Test cluster/tasks/setup.yml playbook syntax.
+      - name: Check cluster/tasks/setup.yml syntax.
         run: ansible-playbook cluster/tasks/setup.yml --syntax-check
 
-      - name: Test cluster/tasks/tailscale.yml playbook syntax.
+      - name: Check cluster/tasks/tailscale.yml syntax.
         run: ansible-playbook cluster/tasks/tailscale.yml --syntax-check
 
-      - name: Test cluster/tasks/upgrade.yml playbook syntax.
+      - name: Check cluster/tasks/upgrade.yml syntax.
         run: ansible-playbook cluster/tasks/upgrade.yml --syntax-check
 
-      ### Cluster - Run playbook.
+      ### Cluster - Run.
 
-      - name: Run cluster/tasks/tailscale.yml playbook.
+      - name: Run cluster/tasks/tailscale.yml.
         run: ansible-playbook cluster/tasks/tailscale.yml
 
-      - name: Run cluster/tasks/upgrade.yml playbook.
+      - name: Run cluster/tasks/upgrade.yml.
         run: ansible-playbook cluster/tasks/upgrade.yml
