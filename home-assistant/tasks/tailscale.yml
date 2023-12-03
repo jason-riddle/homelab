@@ -1,6 +1,6 @@
 ---
 - name: Tailscale.
-  hosts: all
+  hosts: home-assistant
   become: true
 
   vars:

@@ -1,6 +1,6 @@
 ---
 - name: Tailscale.
-  hosts: all
+  hosts: cluster
   become: true
 
   vars:
