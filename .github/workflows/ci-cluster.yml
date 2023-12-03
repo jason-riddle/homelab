@@ -13,6 +13,9 @@ on:
     # REF: https://crontab.guru/#0_3_*_*_5
     - cron: "0 3 * * 5"
 
+env:
+  TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
+
 jobs:
 
   integration:
