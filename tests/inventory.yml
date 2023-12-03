@@ -5,11 +5,6 @@ all:
       ansible_connection: local
 
   children:
-    pi_cluster:
+    cluster:
       hosts:
         127.0.0.1:
-      vars:
-        tailscale_up_node: true
-        tailscale_up_authkey: "{{ lookup('env', 'GHA_TAILSCALE_AUTHKEY', default=undef()) }}"
-        tailscale_up_extra_args: "--accept-routes --hostname=gh-actions-homelab-{{ lookup('env', 'HOSTNAME') }}-{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version|lower }}-{{ ansible_architecture|replace('_', '-') }}"
-        tailscale_up_no_log: false

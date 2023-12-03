@@ -19,11 +19,11 @@ reboot:
 setup:
 	ansible-playbook cluster/tasks/setup.yml --ask-pass --ask-become-pass
 
-upgrade:
-	ansible-playbook cluster/tasks/upgrade.yml --ask-pass --ask-become-pass
-
 tailscale:
 	ansible-playbook cluster/tasks/tailscale.yml --ask-pass --ask-become-pass
+
+upgrade:
+	ansible-playbook cluster/tasks/upgrade.yml --ask-pass --ask-become-pass
 
 ## ESPHome
 

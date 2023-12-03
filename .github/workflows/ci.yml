@@ -1,0 +1,54 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+  schedule:
+    # Run at 3pm on Friday.
+    # REF: https://crontab.guru/#0_3_*_*_5
+    - cron: "0 3 * * 5"
+
+jobs:
+
+  integration:
+    name: Integration
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - debian11 # Bullseye
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install ansible
+
+      - name: Set HOSTNAME.
+        run: echo "HOSTNAME=$(cat /etc/hostname)" >> $GITHUB_ENV
+
+      - name: Set up the test environment.
+        run: |
+          cp tests/ansible.cfg ./ansible.cfg
+          cp tests/inventory.yml ./inventory.yml
+          ansible-galaxy install -r requirements.yml
+
+      - name: Test cluster/tasks/setup.yml playbook syntax.
+        run: ansible-playbook cluster/tasks/setup.yml --syntax-check
+
+      - name: Test cluster/tasks/tailscale.yml playbook syntax.
+        run: ansible-playbook cluster/tasks/tailscale.yml --syntax-check
+
+      - name: Test cluster/tasks/upgrade.yml playbook syntax.
+        run: ansible-playbook cluster/tasks/upgrade.yml --syntax-check
