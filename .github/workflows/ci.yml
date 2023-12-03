@@ -44,6 +44,8 @@ jobs:
           cp tests/inventory.yml ./inventory.yml
           ansible-galaxy install -r requirements.yml
 
+      ## Test syntax.
+
       - name: Test cluster/tasks/setup.yml playbook syntax.
         run: ansible-playbook cluster/tasks/setup.yml --syntax-check
 
@@ -52,6 +54,11 @@ jobs:
 
       - name: Test cluster/tasks/upgrade.yml playbook syntax.
         run: ansible-playbook cluster/tasks/upgrade.yml --syntax-check
+
+      ## Run playbook.
+
+      - name: Run cluster/tasks/tailscale.yml playbook.
+        run: ansible-playbook cluster/tasks/tailscale.yml
 
       - name: Run cluster/tasks/upgrade.yml playbook.
         run: ansible-playbook cluster/tasks/upgrade.yml
