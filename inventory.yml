@@ -10,3 +10,5 @@ all:
     cluster:
       hosts:
         pinode01:
+      vars:
+        tailscale_up_extra_args: "--accept-routes"
