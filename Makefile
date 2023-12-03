@@ -37,6 +37,9 @@ ha-reboot:
 
 ### Provisioning
 
+ha-main:
+	ansible-playbook home-assistant/main.yml --ask-pass --ask-become-pass
+
 ha-setup:
 	ansible-playbook home-assistant/tasks/setup.yml --ask-pass --ask-become-pass
 

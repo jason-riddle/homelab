@@ -1,0 +1,34 @@
+---
+# https://community.home-assistant.io/t/improving-docker-security-non-root-configuration/399971
+# https://community.home-assistant.io/t/zigbee-config-docker-access-to-usb-stick/226567
+
+version: '3'
+
+services:
+  ha:
+    image: lscr.io/linuxserver/homeassistant:2023.10.1
+    container_name: ha
+    # network_mode: host
+    environment:
+      - TZ=America/Los_Angeles
+    volumes:
+      - type: bind
+        source: "${HA_CONFIG_DIR:-./volumes/config}"
+        target: /config
+      # - type: bind
+      #   source: /run/dbus
+      #   target: /run/dbus
+      #   read_only: true
+      # - type: bind
+      #   source: /dev/serial/by-id
+      #   target: /dev/serial/by-id
+      #   read_only: true
+    # privileged: true
+    # cap_add:
+    #   - NET_ADMIN
+    #   - NET_RAW
+    # devices:
+    #   - /dev/ttyUSB0:/dev/ttyUSB0
+    #   - /dev/ttyUSB1:/dev/ttyUSB1
+    ports:
+      - 8123:8123

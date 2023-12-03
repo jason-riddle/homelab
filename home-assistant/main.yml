@@ -1,0 +1,85 @@
+---
+- name: Ensure docker-compose is installed.
+  hosts: ha
+  become: true
+
+  vars:
+    docker_users:
+      - pi
+
+  roles:
+    - geerlingguy.docker
+
+  post_tasks:
+    - name: Verify docker is installed.
+      command: docker --version
+      changed_when: false
+
+    - name: Verify docker-compose is installed.
+      command: docker-compose --version
+      changed_when: false
+
+
+- name: Deploy home-assistant.
+  hosts: ha
+  gather_facts: false
+  become: true
+
+  handlers:
+    - name: restart service
+      systemd:
+        name: ha
+        daemon_reload: yes
+        state: restarted
+
+  tasks:
+    - name: Ensure /opt/docker/ha/compose directory exists.
+      file:
+        path: /opt/docker/ha/compose
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Ensure /opt/docker/ha/volumes/config directory exists.
+      file:
+        path: /opt/docker/ha/volumes/config
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Ensure docker-compose.yml file is up-to-date.
+      template:
+        src: "{{ playbook_dir }}/templates/docker-compose.yml"
+        dest: /opt/docker/ha/compose/docker-compose.yml
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+        - restart service
+
+    - name: Ensure ha.service is up-to-date.
+      template:
+        src: "{{ playbook_dir }}/templates/ha.service"
+        dest: /etc/systemd/system/ha.service
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+        - restart service
+
+    # Restart and/or reload docker-compose service, if required.
+    - name: Run handlers.
+      meta: flush_handlers
+
+    - name: Pull down docker image.
+      command: docker pull lscr.io/linuxserver/homeassistant:2023.10.1
+
+    - name: Ensure ha service is running as desired.
+      service:
+        name: ha
+        state: started
+        enabled: true
+      async: 30
+      poll: 5
