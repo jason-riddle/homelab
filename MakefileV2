@@ -9,23 +9,15 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 ### Maintenance
 
 ping:
-	ansible all --module-name ansible.builtin.ping --args="data=pong" --ask-pass
+	ansible cluster --module-name ansible.builtin.ping --args="data=pong" --ask-pass
 
 reboot:
-	ansible all --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
-
-upgrade:
-	ansible-playbook maintenance/upgrade.yml --ask-pass --ask-become-pass
+	ansible cluster --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
 ### Provisioning
 
 setup:
-	ansible-playbook provisioning/setup.yml --ask-pass --ask-become-pass
-
-tailscale:
-	ansible-playbook provisioning/tailscale.yml --ask-pass --ask-become-pass
-
-## Compose
+	ansible-playbook cluster/tasks/setup.yml --ask-pass --ask-become-pass
 
 ## ESPHome
 
