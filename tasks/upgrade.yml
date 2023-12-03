@@ -24,6 +24,8 @@
       reboot:
         reboot_timeout: 300
       when: reboot_required_file.stat.exists == true
+      tags:
+        - reboot
 
     - name: Remove dependencies that are no longer required.
       apt:
