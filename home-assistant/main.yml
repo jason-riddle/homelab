@@ -33,7 +33,7 @@
         state: restarted
 
   tasks:
-    - name: Ensure /opt/docker/ha/compose directory exists.
+    - name: Ensure compose directory exists.
       file:
         path: /opt/docker/ha/compose
         state: directory
@@ -41,7 +41,7 @@
         group: root
         mode: '0755'
 
-    - name: Ensure /opt/docker/ha/volumes/config directory exists.
+    - name: Ensure config directory exists.
       file:
         path: /opt/docker/ha/volumes/config
         state: directory
@@ -49,7 +49,7 @@
         group: root
         mode: '0755'
 
-    - name: Ensure docker-compose.yml file is up-to-date.
+    - name: Ensure docker-compose.yml is up to date.
       template:
         src: "{{ playbook_dir }}/templates/docker-compose.yml"
         dest: /opt/docker/ha/compose/docker-compose.yml
@@ -59,7 +59,7 @@
       notify:
         - restart service
 
-    - name: Ensure ha.service is up-to-date.
+    - name: Ensure service is up to date.
       template:
         src: "{{ playbook_dir }}/templates/ha.service"
         dest: /etc/systemd/system/ha.service
@@ -73,10 +73,10 @@
     - name: Run handlers.
       meta: flush_handlers
 
-    - name: Pull down docker image.
+    - name: Pull docker image.
       command: docker pull lscr.io/linuxserver/homeassistant:2023.10.1
 
-    - name: Ensure ha service is running as desired.
+    - name: Ensure service is running as desired.
       service:
         name: ha
         state: started
