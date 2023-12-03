@@ -1,6 +1,6 @@
 ---
 - name: Upgrade.
-  hosts: all
+  hosts: cluster
   gather_facts: false
   become: true
 

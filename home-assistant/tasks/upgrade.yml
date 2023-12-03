@@ -1,6 +1,6 @@
 ---
 - name: Upgrade.
-  hosts: all
+  hosts: home-assistant
   gather_facts: false
   become: true
 
