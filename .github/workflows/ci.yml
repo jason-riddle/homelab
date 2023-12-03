@@ -52,3 +52,6 @@ jobs:
 
       - name: Test cluster/tasks/upgrade.yml playbook syntax.
         run: ansible-playbook cluster/tasks/upgrade.yml --syntax-check
+
+      - name: Run cluster/tasks/upgrade.yml playbook.
+        run: ansible-playbook cluster/tasks/upgrade.yml
