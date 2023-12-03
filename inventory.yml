@@ -12,3 +12,9 @@ all:
         pinode01:
       vars:
         tailscale_up_extra_args: "--accept-routes"
+
+    ha:
+      hosts:
+        pinode01:
+      vars:
+        tailscale_up_extra_args: "--accept-routes"

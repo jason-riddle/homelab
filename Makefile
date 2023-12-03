@@ -25,6 +25,27 @@ tailscale:
 upgrade:
 	ansible-playbook cluster/tasks/upgrade.yml --ask-pass --ask-become-pass
 
+## Home-Assistant
+
+### Maintenance
+
+ha-ping:
+	ansible ha --module-name ansible.builtin.ping --args="data=pong" --ask-pass
+
+ha-reboot:
+	ansible ha --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+
+### Provisioning
+
+ha-setup:
+	ansible-playbook home-assistant/tasks/setup.yml --ask-pass --ask-become-pass
+
+ha-tailscale:
+	ansible-playbook home-assistant/tasks/tailscale.yml --ask-pass --ask-become-pass
+
+ha-upgrade:
+	ansible-playbook home-assistant/tasks/upgrade.yml --ask-pass --ask-become-pass
+
 ## ESPHome
 
 .PHONY: esphome

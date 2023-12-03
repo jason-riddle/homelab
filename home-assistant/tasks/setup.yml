@@ -1,6 +1,6 @@
 ---
 - name: Setup /boot/config.
-  hosts: home-assistant
+  hosts: ha
   gather_facts: false
   become: true
 
@@ -29,7 +29,7 @@
 
 
 - name: Setup hostname.
-  hosts: home-assistant
+  hosts: ha
   gather_facts: false
   become: true
 
