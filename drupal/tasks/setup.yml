@@ -32,6 +32,8 @@
   hosts: drupal
   gather_facts: false
   become: true
+  tags:
+    - hostname
 
   vars:
     raspberry_pi_hostname: "{{ inventory_hostname }}"

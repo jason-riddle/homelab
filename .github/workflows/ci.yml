@@ -59,8 +59,8 @@ jobs:
 
       ### Drupal - Run.
 
-      # - name: Run drupal/tasks/tailscale.yml.
-      #   run: ansible-playbook drupal/tasks/tailscale.yml
+      - name: Run drupal/tasks/setup.yml.
+        run: ansible-playbook drupal/tasks/setup.yml --skip-tags "hostname"
 
       - name: Run drupal/tasks/upgrade.yml.
         run: ansible-playbook drupal/tasks/upgrade.yml --skip-tags "reboot"
