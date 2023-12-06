@@ -1,5 +1,5 @@
 [Unit]
-Description=HA
+Description=home-assistant
 PartOf=docker.service
 After=docker.service
 
@@ -8,8 +8,8 @@ Type=oneshot
 User=root
 Group=root
 RemainAfterExit=true
-Environment="HA_CONFIG_DIR=/opt/docker/ha/volumes/config"
-WorkingDirectory=/opt/docker/ha/compose
+Environment="CONFIG_DIR=/opt/docker/home-assistant/volumes/config"
+WorkingDirectory=/opt/docker/home-assistant/compose
 ExecStart=/usr/local/bin/docker-compose up --detach --remove-orphans
 ExecStop=/usr/local/bin/docker-compose down
 

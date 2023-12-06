@@ -1,6 +1,6 @@
 ---
 - name: Setup /boot/config.
-  hosts: ha
+  hosts: home-assistant
   gather_facts: false
   become: true
 
@@ -29,7 +29,7 @@
 
 
 - name: Setup hostname.
-  hosts: ha
+  hosts: home-assistant
   gather_facts: false
   become: true
 
@@ -56,12 +56,13 @@
 
 
 - name: Setup tailscale.
-  hosts: ha
+  hosts: home-assistant
   become: true
 
   vars:
     tailscale_up_node: true
     tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY', default=undef()) }}"
+    tailscale_up_extra_args: "--accept-routes"
     tailscale_up_no_log: false
 
   roles:

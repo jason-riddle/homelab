@@ -1,6 +1,6 @@
 ---
 - name: Ensure docker-compose is installed.
-  hosts: ha
+  hosts: home-assistant
   become: true
 
   vars:
@@ -21,21 +21,21 @@
 
 
 - name: Deploy home-assistant.
-  hosts: ha
+  hosts: home-assistant
   gather_facts: false
   become: true
 
   handlers:
     - name: restart service
       systemd:
-        name: ha
+        name: home-assistant
         daemon_reload: yes
         state: restarted
 
   tasks:
     - name: Ensure compose directory exists.
       file:
-        path: /opt/docker/ha/compose
+        path: /opt/docker/home-assistant/compose
         state: directory
         owner: root
         group: root
@@ -43,7 +43,7 @@
 
     - name: Ensure config directory exists.
       file:
-        path: /opt/docker/ha/volumes/config
+        path: /opt/docker/home-assistant/volumes/config
         state: directory
         owner: root
         group: root
@@ -52,7 +52,7 @@
     - name: Ensure docker-compose.yml is up to date.
       template:
         src: "{{ playbook_dir }}/templates/docker-compose.yml"
-        dest: /opt/docker/ha/compose/docker-compose.yml
+        dest: /opt/docker/home-assistant/compose/docker-compose.yml
         owner: root
         group: root
         mode: '0644'
@@ -61,8 +61,8 @@
 
     - name: Ensure service is up to date.
       template:
-        src: "{{ playbook_dir }}/templates/ha.service"
-        dest: /etc/systemd/system/ha.service
+        src: "{{ playbook_dir }}/templates/home-assistant.service"
+        dest: /etc/systemd/system/home-assistant.service
         owner: root
         group: root
         mode: '0644'
@@ -78,7 +78,7 @@
 
     - name: Ensure service is running as desired.
       service:
-        name: ha
+        name: home-assistant
         state: started
         enabled: true
       async: 30

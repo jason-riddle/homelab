@@ -27,10 +27,10 @@ dp-upgrade:
 ### Maintenance
 
 ha-ping:
-	ansible ha --module-name ansible.builtin.ping --args="data=pong" --ask-pass
+	ansible home-assistant --module-name ansible.builtin.ping --args="data=pong" --ask-pass
 
 ha-reboot:
-	ansible ha --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+	ansible home-assistant --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
 ### Provisioning
 

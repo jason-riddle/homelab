@@ -10,11 +10,7 @@ all:
     drupal:
       hosts:
         drupal-pi.local:
-      vars:
-        tailscale_up_extra_args: "--accept-routes"
 
-    # ha:
+    # home-assistant:
     #   hosts:
-    #     pinode01:
-    #   vars:
-    #     tailscale_up_extra_args: "--accept-routes"
+    #     home-assistant-pi.local:
