@@ -53,3 +53,16 @@
         reboot_timeout: 300
       when:
         - hostname is changed
+
+
+- name: Setup tailscale.
+  hosts: all
+  become: true
+
+  vars:
+    tailscale_up_node: true
+    tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY', default=undef()) }}"
+    tailscale_up_no_log: false
+
+  roles:
+    - jason_riddle.tailscale

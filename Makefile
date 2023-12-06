@@ -19,9 +19,6 @@ reboot:
 setup:
 	ansible-playbook cluster/tasks/setup.yml --ask-pass --ask-become-pass
 
-tailscale:
-	ansible-playbook cluster/tasks/tailscale.yml --ask-pass --ask-become-pass
-
 upgrade:
 	ansible-playbook cluster/tasks/upgrade.yml --ask-pass --ask-become-pass
 
@@ -42,9 +39,6 @@ ha-main:
 
 ha-setup:
 	ansible-playbook home-assistant/tasks/setup.yml --ask-pass --ask-become-pass
-
-ha-tailscale:
-	ansible-playbook home-assistant/tasks/tailscale.yml --ask-pass --ask-become-pass
 
 ha-upgrade:
 	ansible-playbook home-assistant/tasks/upgrade.yml --ask-pass --ask-become-pass
