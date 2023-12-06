@@ -1,0 +1,11 @@
+---
+- name: Deploy drupal.
+  hosts: drupal
+  gather_facts: false
+  become: true
+
+  vars:
+    tailscale_up_node: true
+
+  roles:
+    - geerlingguy.drupal
