@@ -1,6 +1,6 @@
 ---
 - name: Setup /boot/config.
-  hosts: cluster
+  hosts: drupal
   gather_facts: false
   become: true
 
@@ -29,7 +29,7 @@
 
 
 - name: Setup hostname.
-  hosts: cluster
+  hosts: drupal
   gather_facts: false
   become: true
 
@@ -56,7 +56,7 @@
 
 
 - name: Setup tailscale.
-  hosts: cluster
+  hosts: drupal
   become: true
 
   vars:

@@ -1,20 +1,20 @@
 ---
 all:
   hosts:
-    pinode01:
+    drupal-pi.local:
       ansible_host: 192.168.1.170
       ansible_port: 22
       ansible_user: pi
 
   children:
-    cluster:
+    drupal:
       hosts:
-        pinode01:
+        drupal-pi.local:
       vars:
         tailscale_up_extra_args: "--accept-routes"
 
-    ha:
-      hosts:
-        pinode01:
-      vars:
-        tailscale_up_extra_args: "--accept-routes"
+    # ha:
+    #   hosts:
+    #     pinode01:
+    #   vars:
+    #     tailscale_up_extra_args: "--accept-routes"

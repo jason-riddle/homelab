@@ -1,26 +1,26 @@
-.DEFAULT_GOAL := ping
+.DEFAULT_GOAL := deps
 
 # REF: https://github.com/ansible/ansible/issues/76322
 # REF: https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#running-on-macos-as-a-controller
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
-## Cluster
+## Drupal
 
 ### Maintenance
 
-ping:
-	ansible cluster --module-name ansible.builtin.ping --args="data=pong" --ask-pass
+dp-ping:
+	ansible drupal --module-name ansible.builtin.ping --args="data=pong" --ask-pass
 
-reboot:
-	ansible cluster --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+dp-reboot:
+	ansible drupal --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
 ### Provisioning
 
-setup:
-	ansible-playbook cluster/tasks/setup.yml --ask-pass --ask-become-pass
+dp-setup:
+	ansible-playbook drupal/tasks/setup.yml --ask-pass --ask-become-pass
 
-upgrade:
-	ansible-playbook cluster/tasks/upgrade.yml --ask-pass --ask-become-pass
+dp-upgrade:
+	ansible-playbook drupal/tasks/upgrade.yml --ask-pass --ask-become-pass
 
 ## Home-Assistant
 
