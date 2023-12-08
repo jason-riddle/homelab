@@ -17,7 +17,7 @@ dp-reboot:
 ### Provisioning
 
 dp:
-	ansible-playbook drupal/main.yml --ask-pass --ask-become-pass
+	ansible-playbook drupal/main.yml #--ask-pass --ask-become-pass
 
 dp-setup:
 	ansible-playbook drupal/tasks/setup.yml --ask-pass --ask-become-pass

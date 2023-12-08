@@ -57,24 +57,34 @@
         - hostname is changed
 
 
-- name: Setup tailscale.
-  hosts: drupal
-  become: true
+# - name: Setup tailscale.
+#   hosts: drupal
+#   become: true
 
-  vars:
-    tailscale_up_node: true
-    tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY', default=undef()) }}"
-    tailscale_up_extra_args: "--accept-routes"
-    tailscale_up_no_log: false
+#   vars:
+#     tailscale_up_node: true
+#     tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY', default=undef()) }}"
+#     tailscale_up_extra_args: "--accept-routes"
+#     tailscale_up_no_log: false
 
-  roles:
-    - jason_riddle.tailscale
+#   roles:
+#     - jason_riddle.tailscale
 
 
 - name: Setup users.
   hosts: drupal
   gather_facts: false
   become: true
+
+  vars:
+    users:
+      - name: pi
+
+    users_absent: []
+    # users_absent:
+    #   - pi
+
+    users_authorized_keys_exclusive: true
 
   tasks:
     - name: Ensure users are present.
