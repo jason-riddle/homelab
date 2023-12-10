@@ -3,11 +3,6 @@
   hosts: drupal
   become: true
 
-  # vars:
-  #   php_version: "8.0"
-  #   php_opcache_enable: "0"
-  #   php_enable_webserver: false
-
   vars_files:
     - vars/main.yml
 
