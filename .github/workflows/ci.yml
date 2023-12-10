@@ -68,6 +68,6 @@ jobs:
       # - name: Run drupal/tasks/upgrade.yml.
       #   run: ansible-playbook drupal/tasks/upgrade.yml --skip-tags "reboot"
 
-      # - name: Run drupal/tasks/main.yml.
-      #   run: ansible-playbook drupal/tasks/main.yml
+      - name: Run drupal/main.yml.
+        run: ansible-playbook drupal/main.yml
 
