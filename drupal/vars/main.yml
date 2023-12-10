@@ -7,13 +7,3 @@ php_enable_webserver: false
 # drush_launcher_install: false
 # drush_composer_global_install: true
 # drush_composer_update: true
-
-# Users
-users:
-  - name: pi
-
-users_absent: []
-# users_absent:
-#   - pi
-
-users_authorized_keys_exclusive: true

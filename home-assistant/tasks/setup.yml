@@ -70,3 +70,43 @@
   roles:
     - jason_riddle.tailscale
 
+
+- name: Setup users.
+  hosts: drupal
+  gather_facts: false
+  become: true
+
+  vars:
+    users:
+      - name: pi
+
+    users_absent: []
+    # users_absent:
+    #   - pi
+
+    users_authorized_keys_exclusive: true
+
+  tasks:
+    - name: Ensure users are present.
+      user:
+        name: "{{ item.name | default(item) }}"
+        shell: /bin/bash
+        createhome: true
+        groups: "{{ item.groups | default(omit) }}"
+        home: "/home/{{ item.name | default(item) }}"
+        state: present
+      with_items: "{{ users }}"
+
+    - name: Ensure authorized_keys for users are present.
+      authorized_key:
+        user: "{{ item.name | default(item) }}"
+        key: "{{ lookup('url', 'https://github.com/jason-riddle.keys', split_lines=False) }}"
+        manage_dir: true
+        exclusive: "{{ users_authorized_keys_exclusive }}"
+      with_items: "{{ users }}"
+
+    - name: Ensure users in users_absent are absent.
+      user:
+        name: "{{ item.name | default(item) }}"
+        state: absent
+      with_items: "{{ users_absent }}"

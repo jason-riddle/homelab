@@ -17,7 +17,7 @@ dp-reboot:
 ### Provisioning
 
 dp:
-	ansible-playbook drupal/main.yml #--ask-pass --ask-become-pass
+	ansible-playbook drupal/main.yml
 
 dp-setup:
 	ansible-playbook drupal/tasks/setup.yml --ask-pass --ask-become-pass
@@ -38,7 +38,7 @@ ha-reboot:
 ### Provisioning
 
 ha:
-	ansible-playbook home-assistant/main.yml --ask-pass --ask-become-pass
+	ansible-playbook home-assistant/main.yml
 
 ha-setup:
 	ansible-playbook home-assistant/tasks/setup.yml --ask-pass --ask-become-pass
