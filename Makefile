@@ -4,27 +4,6 @@
 # REF: https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#running-on-macos-as-a-controller
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
-## Drupal
-
-### Maintenance
-
-dp-ping:
-	ansible drupal --module-name ansible.builtin.ping --args="data=pong" --ask-pass
-
-dp-reboot:
-	ansible drupal --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
-
-### Provisioning
-
-dp:
-	ansible-playbook drupal/main.yml
-
-dp-setup:
-	ansible-playbook drupal/tasks/setup.yml --ask-pass --ask-become-pass
-
-dp-upgrade:
-	ansible-playbook drupal/tasks/upgrade.yml --ask-pass --ask-become-pass
-
 ## Home-Assistant
 
 ### Maintenance

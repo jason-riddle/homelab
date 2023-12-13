@@ -72,7 +72,7 @@
 
 
 - name: Setup users.
-  hosts: drupal
+  hosts: home-assistant
   gather_facts: false
   become: true
 

@@ -1,9 +1,0 @@
----
-php_version: "8.0"
-php_opcache_enable: "0"
-php_enable_webserver: false
-
-# Use Composer global install.
-# drush_launcher_install: false
-# drush_composer_global_install: true
-# drush_composer_update: true
