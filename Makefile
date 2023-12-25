@@ -20,10 +20,10 @@ ha:
 	ansible-playbook home-assistant/main.yml
 
 ha-setup:
-	ansible-playbook home-assistant/tasks/setup.yml --ask-pass --ask-become-pass
+	ansible-playbook home-assistant/setup.yml --ask-pass --ask-become-pass
 
 ha-upgrade:
-	ansible-playbook home-assistant/tasks/upgrade.yml --ask-pass --ask-become-pass
+	ansible-playbook home-assistant/upgrade.yml --ask-pass --ask-become-pass
 
 ## ESPHome
 
