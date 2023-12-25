@@ -9,7 +9,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 ### Maintenance
 
 ha-ping:
-	ansible home-assistant --module-name ansible.builtin.ping --args="data=pong" --ask-pass
+	ansible home-assistant --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
 
 ha-reboot:
 	ansible home-assistant --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
