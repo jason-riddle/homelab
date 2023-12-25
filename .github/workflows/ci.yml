@@ -41,7 +41,21 @@ jobs:
       - name: Set HOSTNAME.
         run: echo "HOSTNAME=$(cat /etc/hostname)" >> $GITHUB_ENV
 
-      ## Home-Assistant
+      ## cluster
+
+      - name: Set up cluster test environment.
+        run: |
+          cp cluster/tests/ansible.cfg ./ansible.cfg
+          cp cluster/tests/inventory.yml ./inventory.yml
+          ansible-galaxy install -r requirements.yml
+
+      - name: Check cluster/main.yml syntax.
+        run: ansible-playbook cluster/main.yml --syntax-check
+
+      - name: Run cluster/main.yml.
+        run: ansible-playbook cluster/main.yml
+
+      ## home-assistant
 
       - name: Set up home-assistant test environment.
         run: |
