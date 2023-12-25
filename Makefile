@@ -31,6 +31,12 @@ cluster-upgrade:
 build:
 	kustomize build --enable-helm cluster/manifests > cluster/manifests/manifest.yml
 
+apply: build
+	kubectl apply --filename cluster/manifests/manifest.yml
+
+prune:
+	kubectl apply --filename cluster/manifests/manifest.yml --prune --all
+
 ## Home-Assistant
 
 ### Maintenance
