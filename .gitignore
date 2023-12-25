@@ -4,6 +4,7 @@
 .env
 .esphome
 .venv
+charts
 manifest.yml
 secrets.yaml
 secrets.yml
