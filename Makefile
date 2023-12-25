@@ -27,8 +27,8 @@ ha-upgrade:
 
 ### Debug
 
-ha-serial:
-	tio /dev/cu.usbserial-210
+ha-console:
+	sudo tio /dev/cu.usbserial-210
 
 ## ESPHome
 
