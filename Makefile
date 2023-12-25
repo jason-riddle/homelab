@@ -30,6 +30,9 @@ ha-upgrade:
 ha-console:
 	sudo tio /dev/cu.usbserial-210
 
+ha-screen:
+	sudo screen /dev/cu.usbserial-210 115200
+
 ## ESPHome
 
 .PHONY: esphome
