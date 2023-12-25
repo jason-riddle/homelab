@@ -26,6 +26,11 @@ cluster-setup:
 cluster-upgrade:
 	ansible-playbook cluster/upgrade.yml --ask-pass --ask-become-pass
 
+### Manifests
+
+build:
+	kustomize build --enable-helm cluster/manifests > cluster/manifests/manifest.yml
+
 ## Home-Assistant
 
 ### Maintenance
