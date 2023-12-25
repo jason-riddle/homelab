@@ -3,6 +3,13 @@
   hosts: home-assistant
   gather_facts: false
   become: true
+  tags:
+    - boot-config
+
+  handlers:
+    - name: reboot-pi
+      ansible.builtin.reboot:
+        reboot_timeout: 300
 
   vars:
     raspberry_pi_boot_config_options:
@@ -26,6 +33,7 @@
         insertafter: EOF
         state: present
       with_items: "{{ raspberry_pi_boot_config_options }}"
+      notify: reboot-pi
 
 
 - name: Setup hostname.
@@ -34,6 +42,11 @@
   become: true
   tags:
     - hostname
+
+  handlers:
+    - name: reboot-pi
+      ansible.builtin.reboot:
+        reboot_timeout: 300
 
   vars:
     raspberry_pi_hostname: "{{ inventory_hostname }}"
@@ -48,13 +61,7 @@
     - name: Set the hostname.
       hostname:
         name: "{{ raspberry_pi_hostname }}"
-      register: hostname
-
-    - name: Reboot machine.
-      reboot:
-        reboot_timeout: 300
-      when:
-        - hostname is changed
+      notify: reboot-pi
 
 
 - name: Setup tailscale.
