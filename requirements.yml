@@ -1,4 +1,6 @@
 ---
 roles:
+  - name: geerlingguy.docker
+    version: 7.0.2
   - name: jason_riddle.tailscale
     version: 1.1.18
