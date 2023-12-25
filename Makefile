@@ -39,3 +39,8 @@ esphome-usb:
 
 deps:
 	ansible-galaxy install --role-file requirements.yml --force
+
+## Debug
+
+inventory:
+	ansible-inventory --graph
