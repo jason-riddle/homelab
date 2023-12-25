@@ -4,6 +4,28 @@
 # REF: https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#running-on-macos-as-a-controller
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
+## Cluster
+
+### Maintenance
+
+cluster-ping:
+	ansible cluster --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
+
+cluster-reboot:
+	ansible cluster --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+
+### Provisioning
+
+.PHONY: cluster
+cluster:
+	ansible-playbook cluster/main.yml
+
+cluster-setup:
+	ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
+
+cluster-upgrade:
+	ansible-playbook cluster/upgrade.yml --ask-pass --ask-become-pass
+
 ## Home-Assistant
 
 ### Maintenance
