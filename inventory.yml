@@ -1,7 +1,15 @@
 ---
 all:
   hosts:
-    home-assistant:
+    node1:
       ansible_host: 192.168.1.170
       ansible_port: 22
       ansible_user: pi
+
+control_plane:
+  hosts:
+    node1:
+
+cluster:
+  children:
+    control_plane:
