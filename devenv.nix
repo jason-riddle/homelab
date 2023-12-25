@@ -7,6 +7,11 @@
     venv.enable = true;
   };
 
+  # https://devenv.sh/packages/
+  packages = [
+    pkgs.tio
+  ];
+
   # enterShell = ''
   #   pip3 install "esphome==2023.8.3" "pillow>4.0.0,<10.0.0"
   # '';

@@ -25,6 +25,11 @@ ha-setup:
 ha-upgrade:
 	ansible-playbook home-assistant/upgrade.yml --ask-pass --ask-become-pass
 
+### Debug
+
+ha-serial:
+	tio /dev/cu.usbserial-210
+
 ## ESPHome
 
 .PHONY: esphome
