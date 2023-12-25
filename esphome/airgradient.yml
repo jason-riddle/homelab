@@ -1,7 +1,7 @@
 ---
 # REF: https://esphome.io/guides/configuration-types.html#substitutions
 substitutions:
-  devicename: "Jasons-AirGradient"
+  devicename: "jasons-airgradient"
   upper_devicename: "Jason's AirGradient"
 
 

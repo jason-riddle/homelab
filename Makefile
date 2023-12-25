@@ -29,11 +29,11 @@ ha-upgrade:
 
 .PHONY: esphome
 esphome:
-	esphome run esphome/airgradient.yml --device http://192.168.1.232
+	devenv shell -- esphome run esphome/airgradient.yml --device http://192.168.1.232
 
 .PHONY: esphome-usb
 esphome-usb:
-	esphome run esphome/airgradient.yml --device /dev/cu.usbserial-2130
+	devenv shell -- esphome run esphome/airgradient.yml --device /dev/cu.usbserial-2130
 
 ## Dependencies
 
