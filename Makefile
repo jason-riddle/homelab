@@ -35,12 +35,12 @@ esphome:
 esphome-usb:
 	esphome run esphome/airgradient.yml --device /dev/cu.usbserial-2130
 
-## Development
+## Dependencies
 
 deps:
 	ansible-galaxy install --role-file requirements.yml --force
 
 ## Debug
 
-inventory:
+graph:
 	ansible-inventory --graph
