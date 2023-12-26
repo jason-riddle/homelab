@@ -1,6 +1,5 @@
 ---
 # https://community.home-assistant.io/t/improving-docker-security-non-root-configuration/399971
-# https://community.home-assistant.io/t/zigbee-config-docker-access-to-usb-stick/226567
 
 version: '3'
 
@@ -25,37 +24,23 @@ services:
       - TAILSCALE_AUTHKEY=${TAILSCALE_AUTHKEY:-0}
     # Access the bluetooth device.
     # See: https://github.com/linuxserver/docker-homeassistant#accessing-bluetooth-device
+    privileged: true
     cap_add:
       - NET_ADMIN
       - NET_RAW
     devices:
+      # Access the bluetooth device.
+      # See: https://github.com/linuxserver/docker-homeassistant#accessing-bluetooth-device
       - /var/run/dbus:/var/run/dbus:ro
+      # Access the usb devices.
+      # See: https://community.home-assistant.io/t/zigbee-config-docker-access-to-usb-stick/226567
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/ttyUSB1:/dev/ttyUSB1
     volumes:
+      # Access the usb devices.
+      # See: https://community.home-assistant.io/t/zigbee-config-docker-access-to-usb-stick/226567
+      - /dev/serial/by-id:/dev/serial/by-id
       - "${CONFIG_VOLUME_DIR:-./volumes/config}:/config"
       - "${TAILSCALE_VOLUME_DIR:-./volumes/tailscale}:/var/lib/tailscale"
-    # volumes:
-    #   - type: bind
-    #     source: "/opt/docker/hass/volumes/config"
-    #     # source: "${CONFIG_DIR:-./volumes/config}"
-    #     target: /config
-    #   - type: bind
-    #     source: "/opt/docker/hass/volumes/var-lib-tailscale"
-    #     # source: "${VAR_LIB_TAILSCALE_DIR:-./volumes/var-lib-tailscale}"
-    #     target: /var/lib/tailscale
-      # - type: bind
-      #   source: /run/dbus
-      #   target: /run/dbus
-      #   read_only: true
-      # - type: bind
-      #   source: /dev/serial/by-id
-      #   target: /dev/serial/by-id
-      #   read_only: true
-    # privileged: true
-    # cap_add:
-    #   - NET_ADMIN
-    #   - NET_RAW
-    # devices:
-    #   - /dev/ttyUSB0:/dev/ttyUSB0
-    #   - /dev/ttyUSB1:/dev/ttyUSB1
     # ports:
     #   - 8123:8123
