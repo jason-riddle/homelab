@@ -1,6 +1,6 @@
 ---
 - name: Setup /boot/config.
-  hosts: home-assistant
+  hosts: hass
   gather_facts: false
   become: true
   tags:
@@ -37,7 +37,7 @@
 
 
 - name: Setup hostname.
-  hosts: home-assistant
+  hosts: hass
   gather_facts: false
   become: true
   tags:
@@ -65,7 +65,7 @@
 
 
 - name: Setup tailscale.
-  hosts: home-assistant
+  hosts: hass
   become: true
 
   vars:
@@ -79,7 +79,7 @@
 
 
 - name: Setup users.
-  hosts: home-assistant
+  hosts: hass
   gather_facts: false
   become: true
 

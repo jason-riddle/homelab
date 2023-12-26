@@ -1,6 +1,6 @@
 ---
 - name: Upgrade.
-  hosts: home-assistant
+  hosts: hass
   gather_facts: false
   become: true
 

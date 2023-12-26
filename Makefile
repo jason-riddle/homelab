@@ -37,33 +37,33 @@ apply: build
 prune:
 	kubectl apply --filename cluster/manifests/manifest.yml --prune --all
 
-## Home-Assistant
+## Home Assistant
 
 ### Maintenance
 
-ha-ping:
-	ansible home-assistant --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
+hass-ping:
+	ansible hass --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
 
-ha-reboot:
-	ansible home-assistant --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+hass-reboot:
+	ansible hass --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
 ### Provisioning
 
-ha:
-	ansible-playbook home-assistant/main.yml
+hass:
+	ansible-playbook hass/main.yml
 
-ha-setup:
-	ansible-playbook home-assistant/setup.yml --ask-pass --ask-become-pass
+hass-setup:
+	ansible-playbook hass/setup.yml --ask-pass --ask-become-pass
 
-ha-upgrade:
-	ansible-playbook home-assistant/upgrade.yml --ask-pass --ask-become-pass
+hass-upgrade:
+	ansible-playbook hass/upgrade.yml --ask-pass --ask-become-pass
 
 ### Debug
 
-ha-console:
+hass-console:
 	sudo tio /dev/cu.usbserial-210
 
-ha-screen:
+hass-screen:
 	sudo screen /dev/cu.usbserial-210 115200
 
 ## ESPHome
