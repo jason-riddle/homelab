@@ -10,6 +10,7 @@
   # https://devenv.sh/packages/
   packages = [
     pkgs.ansible
+    pkgs.kubectl
     pkgs.kustomize
     pkgs.tio
   ];

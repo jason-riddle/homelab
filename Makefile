@@ -32,10 +32,10 @@ build:
 	devenv shell -- kustomize build --enable-helm cluster/manifests > cluster/manifests/manifest.yml
 
 apply: build
-	kubectl apply --filename cluster/manifests/manifest.yml
+	devenv shell -- kubectl apply --filename cluster/manifests/manifest.yml
 
 prune:
-	kubectl apply --filename cluster/manifests/manifest.yml --prune --all
+	devenv shell -- kubectl apply --filename cluster/manifests/manifest.yml --prune --all
 
 ## Home Assistant
 
