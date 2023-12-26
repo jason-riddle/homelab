@@ -13,10 +13,14 @@ services:
       - TZ=America/Los_Angeles
       # TODO DOCS: https://github.com/tailscale-dev/docker-mod
       # - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
+      - TAILSCALE_STATE_DIR=/var/lib/tailscale
     volumes:
       - type: bind
         source: "${CONFIG_DIR:-./volumes/config}"
         target: /config
+      - type: bind
+        source: "${VAR_LIB_TAILSCALE_DIR:-./volumes/var-lib-tailscale}"
+        target: /var/lib/tailscale
       # - type: bind
       #   source: /run/dbus
       #   target: /run/dbus

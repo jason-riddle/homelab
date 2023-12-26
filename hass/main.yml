@@ -49,6 +49,14 @@
         group: root
         mode: '0755'
 
+    - name: Ensure var-lib-tailscale directory exists.
+      file:
+        path: /opt/docker/hass/volumes/var-lib-tailscale
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
     - name: Ensure docker-compose.yml is up to date.
       template:
         src: "{{ playbook_dir }}/templates/docker-compose.yml"
