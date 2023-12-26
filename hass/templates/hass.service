@@ -8,8 +8,8 @@ Type=oneshot
 User=root
 Group=root
 RemainAfterExit=true
-Environment="CONFIG_DIR=/opt/docker/hass/volumes/config"
-Environment="VAR_LIB_TAILSCALE_DIR=/opt/docker/hass/volumes/var-lib-tailscale"
+Environment="CONFIG_VOLUME_DIR=/opt/docker/hass/volumes/config"
+Environment="TAILSCALE_VOLUME_DIR=/opt/docker/hass/volumes/var-lib-tailscale"
 WorkingDirectory=/opt/docker/hass/compose
 ExecStart=/usr/local/bin/docker-compose up --detach --remove-orphans
 ExecStop=/usr/local/bin/docker-compose down

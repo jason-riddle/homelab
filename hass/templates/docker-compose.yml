@@ -11,18 +11,28 @@ services:
     # network_mode: host
     environment:
       - TZ=America/Los_Angeles
-      # TODO DOCS: https://github.com/tailscale-dev/docker-mod
-      # - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
+      # TODO
+      # See: https://tailscale.dev/blog/docker-mod-tailscale
+      # See: https://github.com/tailscale-dev/docker-mod
+      - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
       - TAILSCALE_STATE_DIR=/var/lib/tailscale
+      - TAILSCALE_SERVE_MODE=${TAILSCALE_SERVE_MODE:-https}
+      - TAILSCALE_SERVE_PORT=${TAILSCALE_SERVE_PORT:-8123}
+      - TAILSCALE_USE_SSH=${TAILSCALE_USE_SSH:-1}
+      - TAILSCALE_HOSTNAME=${TAILSCALE_HOSTNAME:-hass}
+      - TAILSCALE_AUTHKEY=${TAILSCALE_AUTHKEY:-0}
     volumes:
-      - type: bind
-        source: "/opt/docker/hass/volumes/config"
-        # source: "${CONFIG_DIR:-./volumes/config}"
-        target: /config
-      - type: bind
-        source: "/opt/docker/hass/volumes/var-lib-tailscale"
-        # source: "${VAR_LIB_TAILSCALE_DIR:-./volumes/var-lib-tailscale}"
-        target: /var/lib/tailscale
+      - "${CONFIG_VOLUME_DIR:-./volumes/config}:/config"
+      - "${TAILSCALE_VOLUME_DIR:-./volumes/tailscale}:/var/lib/tailscale"
+    # volumes:
+    #   - type: bind
+    #     source: "/opt/docker/hass/volumes/config"
+    #     # source: "${CONFIG_DIR:-./volumes/config}"
+    #     target: /config
+    #   - type: bind
+    #     source: "/opt/docker/hass/volumes/var-lib-tailscale"
+    #     # source: "${VAR_LIB_TAILSCALE_DIR:-./volumes/var-lib-tailscale}"
+    #     target: /var/lib/tailscale
       # - type: bind
       #   source: /run/dbus
       #   target: /run/dbus
@@ -38,5 +48,5 @@ services:
     # devices:
     #   - /dev/ttyUSB0:/dev/ttyUSB0
     #   - /dev/ttyUSB1:/dev/ttyUSB1
-    ports:
-      - 8123:8123
+    # ports:
+    #   - 8123:8123
