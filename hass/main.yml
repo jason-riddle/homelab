@@ -81,8 +81,8 @@
     - name: Run handlers.
       meta: flush_handlers
 
-    - name: Pull docker image.
-      command: docker pull lscr.io/linuxserver/homeassistant:2023.10.1
+    - name: Pull latest docker image.
+      command: docker pull lscr.io/linuxserver/homeassistant:latest
 
     - name: Ensure service is running as desired.
       service:
