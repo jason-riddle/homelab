@@ -10,6 +10,7 @@ Group=root
 RemainAfterExit=true
 Environment="CONFIG_VOLUME_DIR=/opt/docker/hass/volumes/config"
 Environment="TAILSCALE_VOLUME_DIR=/opt/docker/hass/volumes/var-lib-tailscale"
+Environment="TAILSCALE_AUTHKEY={{ lookup('env', 'HASS_TAILSCALE_AUTHKEY', default=undef()) }}"
 WorkingDirectory=/opt/docker/hass/compose
 ExecStart=/usr/local/bin/docker-compose up --detach --remove-orphans
 ExecStop=/usr/local/bin/docker-compose down
