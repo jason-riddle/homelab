@@ -49,6 +49,7 @@ hass-reboot:
 
 ### Provisioning
 
+.PHONY: hass
 hass:
 	ansible-playbook hass/main.yml
 
