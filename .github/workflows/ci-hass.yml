@@ -16,7 +16,8 @@ on:
 env:
   PY_COLORS: '1'
   ANSIBLE_FORCE_COLOR: '1'
-  TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
+  # Uncomment if running setup.yml
+  # TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
   HASS_TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
 
 jobs:
