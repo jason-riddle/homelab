@@ -55,16 +55,16 @@ jobs:
       - name: Run cluster/main.yml.
         run: ansible-playbook cluster/main.yml
 
-      ## home-assistant
+      ## hass
 
-      - name: Set up home-assistant test environment.
+      - name: Set up hass test environment.
         run: |
-          cp home-assistant/tests/ansible.cfg ./ansible.cfg
-          cp home-assistant/tests/inventory.yml ./inventory.yml
+          cp hass/tests/ansible.cfg ./ansible.cfg
+          cp hass/tests/inventory.yml ./inventory.yml
           ansible-galaxy install -r requirements.yml
 
-      - name: Check home-assistant/main.yml syntax.
-        run: ansible-playbook home-assistant/main.yml --syntax-check
+      - name: Check hass/main.yml syntax.
+        run: ansible-playbook hass/main.yml --syntax-check
 
-      - name: Run home-assistant/main.yml.
-        run: ansible-playbook home-assistant/main.yml
+      - name: Run hass/main.yml.
+        run: ansible-playbook hass/main.yml
