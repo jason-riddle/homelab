@@ -20,7 +20,8 @@
   # '';
 
   enterShell = ''
-    pip3 install "esphome==2023.12.5" "pillow==10.1.0"
+    pip install --upgrade pip
+    pip install "esphome==2023.12.5" "pillow==10.1.0"
   '';
 
   # https://devenv.sh/pre-commit-hooks/
