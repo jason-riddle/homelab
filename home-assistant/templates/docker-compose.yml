@@ -11,6 +11,7 @@ services:
     # network_mode: host
     environment:
       - TZ=America/Los_Angeles
+      # TODO DOCS: https://github.com/tailscale-dev/docker-mod
       # - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
     volumes:
       - type: bind
