@@ -9,6 +9,7 @@
 
   # https://devenv.sh/packages/
   packages = [
+    pkgs.kustomize
     pkgs.tio
   ];
 
