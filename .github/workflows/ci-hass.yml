@@ -14,6 +14,8 @@ on:
     - cron: "0 3 * * 5"
 
 env:
+  PY_COLORS: '1'
+  ANSIBLE_FORCE_COLOR: '1'
   TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
   HASS_TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
 
