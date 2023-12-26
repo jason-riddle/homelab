@@ -6,3 +6,4 @@ resources:
   - ./namespaces
   - ./tailscale/tailscale-operator-oauth
   - ./tailscale/tailscale-operator
+  - ./examples/http-https-echo

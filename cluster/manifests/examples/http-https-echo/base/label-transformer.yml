@@ -1,0 +1,17 @@
+---
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: LabelTransformer
+labels:
+  app.kubernetes.io/name: "http-https-echo"
+fieldSpecs:
+- kind: Service
+  path: spec/selector
+  create: true
+- kind: Deployment
+  path: spec/selector/matchLabels
+  create: true
+- kind: Deployment
+  path: spec/template/metadata/labels
+  create: true
