@@ -9,22 +9,22 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 ### Maintenance
 
 cluster-ping:
-	ansible cluster --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
+	devenv shell -- ansible cluster --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
 
 cluster-reboot:
-	ansible cluster --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+	devenv shell -- ansible cluster --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
 ### Provisioning
 
 .PHONY: cluster
 cluster:
-	ansible-playbook cluster/main.yml
+	devenv shell -- ansible-playbook cluster/main.yml
 
 cluster-setup:
-	ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
+	devenv shell -- ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
 
 cluster-upgrade:
-	ansible-playbook cluster/upgrade.yml --ask-pass --ask-become-pass
+	devenv shell -- ansible-playbook cluster/upgrade.yml --ask-pass --ask-become-pass
 
 ### Manifests
 
@@ -42,22 +42,22 @@ prune:
 ### Maintenance
 
 hass-ping:
-	ansible hass --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
+	devenv shell -- ansible hass --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
 
 hass-reboot:
-	ansible hass --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
+	devenv shell -- ansible hass --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
 ### Provisioning
 
 .PHONY: hass
 hass:
-	ansible-playbook hass/main.yml
+	devenv shell -- ansible-playbook hass/main.yml
 
 hass-setup:
-	ansible-playbook hass/setup.yml --ask-pass --ask-become-pass
+	devenv shell -- ansible-playbook hass/setup.yml --ask-pass --ask-become-pass
 
 hass-upgrade:
-	ansible-playbook hass/upgrade.yml --ask-pass --ask-become-pass
+	devenv shell -- ansible-playbook hass/upgrade.yml --ask-pass --ask-become-pass
 
 ### Debug
 
@@ -80,9 +80,9 @@ esphome-usb:
 ## Dependencies
 
 deps:
-	ansible-galaxy install --role-file requirements.yml --force
+	devenv shell -- ansible-galaxy install --role-file requirements.yml --force
 
 ## Debug
 
 graph:
-	ansible-inventory --graph
+	devenv shell -- ansible-inventory --graph
