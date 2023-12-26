@@ -11,6 +11,7 @@ services:
     # network_mode: host
     environment:
       - TZ=America/Los_Angeles
+      # - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
     volumes:
       - type: bind
         source: "${CONFIG_DIR:-./volumes/config}"
