@@ -16,10 +16,12 @@ services:
       - TAILSCALE_STATE_DIR=/var/lib/tailscale
     volumes:
       - type: bind
-        source: "${CONFIG_DIR:-./volumes/config}"
+        source: "/opt/docker/hass/volumes/config"
+        # source: "${CONFIG_DIR:-./volumes/config}"
         target: /config
       - type: bind
-        source: "${VAR_LIB_TAILSCALE_DIR:-./volumes/var-lib-tailscale}"
+        source: "/opt/docker/hass/volumes/var-lib-tailscale"
+        # source: "${VAR_LIB_TAILSCALE_DIR:-./volumes/var-lib-tailscale}"
         target: /var/lib/tailscale
       # - type: bind
       #   source: /run/dbus
