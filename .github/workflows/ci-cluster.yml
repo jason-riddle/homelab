@@ -53,4 +53,4 @@ jobs:
         run: ansible-playbook cluster/main.yml --syntax-check
 
       - name: Run cluster/main.yml.
-        run: ansible-playbook cluster/main.yml
+        run: ansible-playbook cluster/main.yml --skip-tags "boot-cmdline"
