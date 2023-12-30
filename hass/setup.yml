@@ -24,6 +24,11 @@
       - regexp: "^#?dtparam=poe_fan_temp3"
         line: "dtparam=poe_fan_temp3=80000"
 
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
   tasks:
     - name: Configure options in /boot/config.txt.
       lineinfile:
@@ -51,6 +56,11 @@
   vars:
     raspberry_pi_hostname: "{{ inventory_hostname }}"
 
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
   tasks:
     - name: Assert that raspberry_pi_hostname is not empty.
       assert:
@@ -73,6 +83,11 @@
     node_exporter_host: '0.0.0.0'
     node_exporter_port: 9100
 
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
   roles:
     - geerlingguy.node_exporter
 
@@ -86,6 +101,11 @@
     tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY', default=undef()) }}"
     tailscale_up_extra_args: "--accept-routes"
     tailscale_up_no_log: false
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
 
   roles:
     - jason_riddle.tailscale
@@ -105,6 +125,11 @@
     #   - pi
 
     users_authorized_keys_exclusive: true
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
 
   tasks:
     - name: Ensure users are present.

@@ -4,11 +4,12 @@
   gather_facts: false
   become: true
 
-  tasks:
+  pre_tasks:
     - name: Ping to validate the initial connection.
       ansible.builtin.ping:
         data: pong
 
+  tasks:
     - name: Upgrade all software.
       apt:
         update_cache: true

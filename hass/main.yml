@@ -7,6 +7,11 @@
     docker_users:
       - pi
 
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
   roles:
     - geerlingguy.docker
 
@@ -31,6 +36,11 @@
         name: hass
         daemon_reload: yes
         state: restarted
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
 
   tasks:
     - name: Ensure compose directory exists.

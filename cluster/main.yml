@@ -8,6 +8,11 @@
     - name: reboot-pi
       ansible.builtin.reboot:
 
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
   tasks:
     - name: Ensure cgroups are configured correctly in cmdline.txt.
       ansible.builtin.replace:
@@ -33,6 +38,11 @@
   gather_facts: false
   become: true
 
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
   tasks:
     - name: Install K3s on control plane (takes a while).
       ansible.builtin.shell: >-
@@ -55,6 +65,11 @@
   hosts: nodes
   gather_facts: false
   become: true
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
 
   tasks:
     - name: Install K3s on nodes (takes a while).
