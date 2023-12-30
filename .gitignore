@@ -3,6 +3,7 @@
 .devenv.flake.nix
 .env
 .esphome
+.secrets
 .venv
 charts
 manifest.yml
