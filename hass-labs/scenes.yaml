@@ -1,2 +1,5 @@
 ---
-# http://homeassistant.local:8123/core_configurator/ingress
+#
+# EDITOR: http://homeassistant.local:8123/core_configurator/ingress
+#
+# REF: https://www.home-assistant.io/docs/scene/

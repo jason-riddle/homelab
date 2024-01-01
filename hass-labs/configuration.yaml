@@ -1,5 +1,8 @@
 ---
-# http://homeassistant.local:8123/core_configurator/ingress
+#
+# EDITOR: http://homeassistant.local:8123/core_configurator/ingress
+#
+# REF: https://www.home-assistant.io/docs/configuration/
 
 # Loads default set of integrations. Do not remove.
 default_config:
