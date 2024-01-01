@@ -11,3 +11,12 @@ frontend:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+aws:
+  credentials:
+    - name: AWS
+      aws_access_key_id: !secret aws_access_key_id
+      aws_secret_access_key: !secret aws_secret_access_key
+  notify:
+    - service: lambda
+      region_name: us-east-1
