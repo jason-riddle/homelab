@@ -75,11 +75,11 @@ hass-screen:
 
 .PHONY: esphome
 esphome:
-	devenv shell -- esphome run esphome/airgradient/airgradient.yml --device http://192.168.1.232
+	devenv shell -- esphome run esphome/airgradient/config.yml --device http://192.168.1.232
 
 .PHONY: esphome-usb
 esphome-usb:
-	devenv shell -- esphome run esphome/airgradient/airgradient.yml --device /dev/cu.usbserial-2130
+	devenv shell -- esphome run esphome/airgradient/config.yml --device /dev/cu.usbserial-2130
 
 ## Dependencies
 
