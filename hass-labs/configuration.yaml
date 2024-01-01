@@ -14,7 +14,7 @@ scene: !include scenes.yaml
 
 aws:
   credentials:
-    - name: AWS
+    - name: aws_credentials
       aws_access_key_id: !secret aws_access_key_id
       aws_secret_access_key: !secret aws_secret_access_key
   notify:
