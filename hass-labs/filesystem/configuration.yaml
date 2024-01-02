@@ -15,6 +15,9 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
+http:
+  server_port: 8123
+
 aws:
   credentials:
     - name: aws_credentials
