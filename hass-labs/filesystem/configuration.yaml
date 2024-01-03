@@ -8,18 +8,34 @@
 homeassistant:
   # REF: https://www.home-assistant.io/docs/configuration/basic/#name
   name: "FOO Home"
-  # # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  # time_zone: "America/Los_Angeles"
-  # latitude: 32.87336
-  # longitude: 117.22743
-  # elevation: 430
-  # unit_system: asd
-  # temperature_unit:
-  # time_zone: asd
-  # external_url: asd
-  # internal_url: asd
-  # country: asd
-  # currency: asd
+
+  # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#time_zone
+  time_zone: "America/Los_Angeles"
+
+  # REF: https://www.latlong.net/
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#latitude
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#longitude
+  latitude: !secret latitude
+  longitude: !secret longitude
+
+  # REF: https://whatismyelevation.com/map
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#elevation
+  elevation: !secret elevation
+
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#unit_system
+  unit_system: us_customary
+
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#country
+  country: "US"
+
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#currency
+  currency: "USD"
+
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#external_url
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#internal_url
+  external_url: "https://www.example.com"
+  internal_url: "http://homeassistant.local:8123"
 
 # Loads default set of integrations. Do not remove.
 # REF: https://www.home-assistant.io/integrations/default_config/
