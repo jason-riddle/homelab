@@ -67,10 +67,17 @@ scene: !include scenes.yaml
 # Log Levels: notset, debug, info, warn, warning, error, fatal, critical
 # REF: https://www.home-assistant.io/integrations/logger/
 logger:
-  default: debug
+  default: info
   logs:
+    aioesphomeapi.connection: debug
     aiohttp.access: debug
     aiohttp.server: debug
+    homeassistant.components.brother: debug
+    homeassistant.components.dhcp: debug
+    homeassistant.components.http.auth: debug
+    homeassistant.components.http.view: debug
+    homeassistant.components.prometheus: debug
+    homeassistant.components.websocket_api.http.connection: debug
     homeassistant.core: debug
 
 
