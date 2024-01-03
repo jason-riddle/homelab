@@ -67,18 +67,3 @@ logger:
   logs:
     aiohttp.access: critical
     aiohttp.server: critical
-
-# REF: https://www.home-assistant.io/integrations/aws/
-# aws:
-#   credentials:
-#     - name: aws_credentials
-#       aws_access_key_id: !secret aws_access_key_id
-#       aws_secret_access_key: !secret aws_secret_access_key
-#       validate: true
-#   notify:
-#     - name: lambda
-#       service: lambda
-#       region_name: us-east-1
-#     - name: sns
-#       service: sns
-#       region_name: us-east-1
