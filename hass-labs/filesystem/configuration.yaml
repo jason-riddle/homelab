@@ -67,3 +67,6 @@ logger:
   logs:
     aiohttp.access: critical
     aiohttp.server: critical
+
+# REF: https://www.home-assistant.io/integrations/prometheus/
+prometheus:
