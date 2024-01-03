@@ -79,12 +79,6 @@ http:
   server_port: 8123
 
 
-# REF: https://www.home-assistant.io/integrations/homekit/
-# homekit:
-#   - name: "Home Assistant Bridge"
-#     port: 21063
-
-
 # Provide a /api/prometheus endpoint for Prometheus.
 # REF: https://www.home-assistant.io/integrations/prometheus/
 prometheus:
