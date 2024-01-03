@@ -1,3 +1,5 @@
+https://github.com/frenck/awesome-home-assistant
+
 https://github.com/rivy/homeassistant-config/blob/a20b588e31ee8ba2a657c5406e4c34eea302c465/configuration.yaml#L359
 
 https://github.com/johnboiles/homeassistant-config/blob/bb24ce1a02d0084b900d63f17eeeb4852a3a3890/configuration.yaml#L37
