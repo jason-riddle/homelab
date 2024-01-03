@@ -1,33 +1,51 @@
 ---
-#
 # EDITOR: http://homeassistant.local:8123/core_configurator/ingress
-#
+# RELOAD: http://homeassistant.local:8123/developer-tools/yaml
+
 # REF: https://www.home-assistant.io/docs/configuration/
 
 # Loads default set of integrations. Do not remove.
+# REF: https://www.home-assistant.io/integrations/default_config/
 default_config:
 
-# Load frontend themes from the themes folder
+# Load frontend themes from the themes folder.
+# REF: https://www.home-assistant.io/integrations/frontend/
 frontend:
   themes: !include_dir_merge_named themes
 
+# REF: https://www.home-assistant.io/docs/automation/
+# REF: https://www.home-assistant.io/getting-started/automation/
 automation: !include automations.yaml
+
+# REF: https://www.home-assistant.io/integrations/script/
 script: !include scripts.yaml
+
+# REF: https://www.home-assistant.io/docs/scene/
+# REF: https://www.home-assistant.io/integrations/scene/
 scene: !include scenes.yaml
 
+# REF: https://www.home-assistant.io/integrations/http/
 http:
   server_port: 8123
 
-aws:
-  credentials:
-    - name: aws_credentials
-      aws_access_key_id: !secret aws_access_key_id
-      aws_secret_access_key: !secret aws_secret_access_key
-      validate: true
-  notify:
-    - name: lambda
-      service: lambda
-      region_name: us-east-1
-    - name: sns
-      service: sns
-      region_name: us-east-1
+# REF: https://www.home-assistant.io/integrations/logger/
+logger:
+  default: error
+  logs:
+    aiohttp.access: critical
+    aiohttp.server: critical
+
+# REF: https://www.home-assistant.io/integrations/aws/
+# aws:
+#   credentials:
+#     - name: aws_credentials
+#       aws_access_key_id: !secret aws_access_key_id
+#       aws_secret_access_key: !secret aws_secret_access_key
+#       validate: true
+#   notify:
+#     - name: lambda
+#       service: lambda
+#       region_name: us-east-1
+#     - name: sns
+#       service: sns
+#       region_name: us-east-1

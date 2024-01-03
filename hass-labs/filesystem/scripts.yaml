@@ -1,5 +1,5 @@
 ---
-#
 # EDITOR: http://homeassistant.local:8123/core_configurator/ingress
-#
+# RELOAD: http://homeassistant.local:8123/developer-tools/yaml
+
 # REF: https://www.home-assistant.io/integrations/script/
