@@ -6,8 +6,20 @@
 
 # REF: https://www.home-assistant.io/docs/configuration/basic/
 homeassistant:
-  # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: "America/Los_Angeles"
+  # REF: https://www.home-assistant.io/docs/configuration/basic/#name
+  name: "FOO Home"
+  # # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  # time_zone: "America/Los_Angeles"
+  # latitude: 32.87336
+  # longitude: 117.22743
+  # elevation: 430
+  # unit_system: asd
+  # temperature_unit:
+  # time_zone: asd
+  # external_url: asd
+  # internal_url: asd
+  # country: asd
+  # currency: asd
 
 # Loads default set of integrations. Do not remove.
 # REF: https://www.home-assistant.io/integrations/default_config/
