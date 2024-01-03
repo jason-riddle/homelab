@@ -68,5 +68,8 @@ logger:
     aiohttp.access: critical
     aiohttp.server: critical
 
+# Provide a /api/prometheus endpoint for Prometheus.
 # REF: https://www.home-assistant.io/integrations/prometheus/
 prometheus:
+  namespace: "hass"
+  requires_auth: false
