@@ -67,10 +67,10 @@ scene: !include scenes.yaml
 # Log Levels: notset, debug, info, warn, warning, error, fatal, critical
 # REF: https://www.home-assistant.io/integrations/logger/
 logger:
-  default: debug
-  logs:
-    aiohttp.access: critical
-    aiohttp.server: critical
+  default: info
+  # logs:
+  #   aiohttp.access: critical
+  #   aiohttp.server: critical
 
 
 # REF: https://www.home-assistant.io/integrations/http/
