@@ -72,7 +72,6 @@ logger:
     aioesphomeapi.connection: debug
     aiohttp.access: debug
     aiohttp.server: debug
-    homeassistant.components.brother: debug
     homeassistant.components.dhcp: debug
     homeassistant.components.discovery: debug
     homeassistant.components.homekit: debug
