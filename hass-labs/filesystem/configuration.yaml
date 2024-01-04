@@ -8,7 +8,7 @@
 # REF: https://www.home-assistant.io/docs/configuration/basic/
 homeassistant:
   # REF: https://www.home-assistant.io/docs/configuration/basic/#name
-  name: "Jason's Home Assistant"
+  name: "Jason's Home"
 
   # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   # REF: https://www.home-assistant.io/docs/configuration/basic/#time_zone
