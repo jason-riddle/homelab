@@ -17,4 +17,4 @@ helmCharts:
           tailscale.com/expose: "true"
           tailscale.com/hostname: "grafana"
     releaseName: grafana
-    version: 6.60.1
+    version: 7.0.19
