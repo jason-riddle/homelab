@@ -4,6 +4,7 @@ kind: Kustomization
 
 namespace: monitoring
 
+# See: https://artifacthub.io/packages/helm/grafana/grafana-agent
 helmCharts:
   - name: grafana-agent
     repo: https://grafana.github.io/helm-charts
