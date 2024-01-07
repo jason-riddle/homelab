@@ -3,7 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ./namespaces
-  - ./tailscale/tailscale-operator-oauth
-  - ./tailscale/tailscale-operator
-  - ./examples/http-https-echo
+  # - ./namespaces
+  - ./monitoring/grafana
+  # - ./tailscale/tailscale-operator-oauth
+  # - ./tailscale/tailscale-operator
+  # - ./examples/http-https-echo

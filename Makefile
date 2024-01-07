@@ -38,8 +38,9 @@ build:
 apply: build
 	devenv shell -- kubectl apply --filename cluster/manifests/manifest.yml
 
-prune:
-	devenv shell -- kubectl apply --filename cluster/manifests/manifest.yml --prune --all
+# TODO: Not working
+# prune:
+# 	devenv shell -- kubectl apply --filename cluster/manifests/manifest.yml --prune --all
 
 ## Home Assistant
 

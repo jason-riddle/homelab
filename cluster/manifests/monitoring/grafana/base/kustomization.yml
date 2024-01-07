@@ -10,6 +10,8 @@ helmCharts:
     repo: https://grafana.github.io/helm-charts
     includeCRDs: true
     valuesInline:
+      adminUser: admin
+      adminPassword: password
       service:
         enabled: true
         annotations:
