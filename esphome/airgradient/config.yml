@@ -100,14 +100,12 @@ switch:
   - platform: safe_mode
     id: safe_mode_switch
     name: "Flash Mode (Safe Mode) ON/OFF Switch"
-    # icon: "mdi:cellphone-arrow-down"
 
   # Create a switch the turn the pms sensor on and off.
   # REF: https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
   - platform: template
     id: pms5003_switch
     name: "PMS5003 ON/OFF Switch"
-    # icon: "mdi:cellphone-arrow-down"
     optimistic: true
     turn_on_action:
       # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L254
@@ -128,7 +126,6 @@ button:
   - platform: restart
     id: restart_button
     name: "Restart AirGradient Device Button"
-    # icon: "mdi:cellphone-arrow-down"
 
 
 # Configuration for AirGradient DIY v2 device
@@ -172,7 +169,6 @@ sensor:
     pm_2_5:
       id: pm_2_5um
       name: "PM <2.5µm Concentration"
-      # icon: "mdi:air-filter"
       on_value:
         lambda: |-
           // Copied from: https://github.com/kylemanna/sniffer/blob/0688b91c0b9d8d5362a944abe697ca703c964ef3/esphome/sniffer_common.yaml#L189-L211
@@ -204,22 +200,18 @@ sensor:
     pm_1_0:
       id: pm_1_0um
       name: "PM <1.0µm Concentration"
-      # icon: "mdi:air-filter"
     pm_10_0:
       id: pm_10_0um
       name: "PM <10.0µm Concentration"
-      # icon: "mdi:air-filter"
     # pm_0_3um:
     #   id: pm_0_3um
     #   name: "PM >0.3µm Concentration"
-    #   # icon: "mdi:air-filter"
     uart_id: pms5003_uart
     update_interval: 30s
 
   - platform: template
     id: pm_2_5um_aqi
     name: "PM <2.5µm AQI"
-    # icon: "mdi:air-filter"
     unit_of_measurement: "AQI"
     accuracy_decimals: 0
 
@@ -229,7 +221,6 @@ sensor:
     co2:
       id: co2_ppm
       name: "CO2 PPM"
-      # icon: "mdi:air-filter"
     id: senseair_s8
     uart_id: senseair_s8_uart
     update_interval: 30s
@@ -240,18 +231,15 @@ sensor:
     temperature:
       id: temp_c
       name: "Temperature (Celsius)"
-      # icon: "mdi:cellphone-arrow-down"
     humidity:
       id: humidity_p
       name: "Humidity"
-      # icon: "mdi:cellphone-arrow-down"
     address: 0x44
     update_interval: 30s
 
   - platform: template
     id: temp_f
     name: "Temperature (Fahrenheit)"
-    # icon: "mdi:cellphone-arrow-down"
     lambda: return id(temp_c).state * 9/5+32;
     unit_of_measurement: "°F"
     update_interval: 5s
@@ -259,13 +247,11 @@ sensor:
   - platform: wifi_signal
     id: wifi_dbm
     name: "WiFi Signal"
-    # icon: "mdi:cellphone-arrow-down"
     update_interval: 5s
 
   - platform: uptime
     id: uptime_s
     name: "Uptime"
-    # icon: "mdi:cellphone-arrow-down"
     update_interval: 5s
 
 
