@@ -88,7 +88,7 @@ logger:
 
 # REF: https://www.home-assistant.io/integrations/http/
 http:
-  server_port: 8123
+  server_port: 80
 
 
 # Provide a /api/prometheus endpoint for Prometheus.
