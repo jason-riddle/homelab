@@ -219,8 +219,8 @@ sensor:
   # REF: https://esphome.io/components/sensor/senseair.html
   - platform: senseair
     co2:
-      id: co2_ppm
-      name: "CO2 PPM"
+      id: carbon_dioxide
+      name: "Carbon Dioxide"
     id: senseair_s8
     uart_id: senseair_s8_uart
     update_interval: 30s
@@ -295,7 +295,7 @@ display:
       - id: air_quality
         lambda: |-
           it.printf(0, 6, id(ubuntu), "CO2");
-          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f ppm", id(co2_ppm).state);
+          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f ppm", id(carbon_dioxide).state);
           it.printf(0, 34, id(ubuntu), "AQI");
           it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f    ", id(pm_2_5um_aqi).state);
       - id: air_temp
