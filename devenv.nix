@@ -26,6 +26,7 @@
 
   enterShell = ''
     pip install --upgrade pip
+    pip install esphome "pillow==10.1.0"
   '';
 
   # https://devenv.sh/pre-commit-hooks/
