@@ -35,7 +35,7 @@ homeassistant:
 
   # REF: https://www.home-assistant.io/docs/configuration/basic/#external_url
   # REF: https://www.home-assistant.io/docs/configuration/basic/#internal_url
-  external_url: "http://homeassistant.greyhound-little.ts.net:8123"
+  external_url: "http://jasons-home-assistant.greyhound-little.ts.net:8123"
   internal_url: "http://homeassistant.local:8123"
 
 
