@@ -5,3 +5,6 @@ https://github.com/rivy/homeassistant-config/blob/a20b588e31ee8ba2a657c5406e4c34
 https://github.com/johnboiles/homeassistant-config/blob/bb24ce1a02d0084b900d63f17eeeb4852a3a3890/configuration.yaml#L37
 
 https://github.com/geekofweek/homeassistant/blob/4dc6f57738db458568166d036ecf7f8ceb2c7aa2/configuration.yaml#L51
+
+# EDITOR: http://jasons-home-assistant.local/core_configurator/ingress
+# RELOAD: http://jasons-home-assistant.local/developer-tools/yaml

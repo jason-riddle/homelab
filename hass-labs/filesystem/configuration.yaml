@@ -1,10 +1,4 @@
 ---
-# EDITOR: http://homeassistant.local:8123/core_configurator/ingress
-# RELOAD: http://homeassistant.local:8123/developer-tools/yaml
-
-# REF: https://www.home-assistant.io/docs/configuration/
-
-
 # REF: https://www.home-assistant.io/docs/configuration/basic/
 homeassistant:
   # REF: https://www.home-assistant.io/docs/configuration/basic/#name
@@ -35,8 +29,8 @@ homeassistant:
 
   # REF: https://www.home-assistant.io/docs/configuration/basic/#external_url
   # REF: https://www.home-assistant.io/docs/configuration/basic/#internal_url
-  external_url: "http://jasons-home-assistant.greyhound-little.ts.net:8123"
-  internal_url: "http://homeassistant.local:8123"
+  external_url: "http://jasons-home-assistant.greyhound-little.ts.net:80"
+  internal_url: "http://jasons-home-assistant.local:80"
 
 
 # Loads default set of integrations. Do not remove.
