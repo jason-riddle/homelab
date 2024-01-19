@@ -6,5 +6,5 @@ resources:
   - ./namespaces
   # - ./monitoring/grafana
   - ./tailscale/tailscale-operator-oauth
-  # - ./tailscale/tailscale-operator
+  - ./tailscale/tailscale-operator
   # - ./examples/http-https-echo
