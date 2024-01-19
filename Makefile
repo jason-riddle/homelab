@@ -33,7 +33,7 @@ cluster-upgrade:
 ### Manifests
 
 build:
-	devenv shell -- kustomize build --enable-helm cluster/manifests > cluster/manifests/manifest.yml
+	devenv shell -- kustomize build --enable-helm cluster/manifests | grep -v Requirement > cluster/manifests/manifest.yml
 
 apply: build
 	devenv shell -- kubectl apply --filename cluster/manifests/manifest.yml
