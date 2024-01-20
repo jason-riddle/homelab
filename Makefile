@@ -81,7 +81,7 @@ hass-screen:
 
 .PHONY: esphome
 esphome:
-	devenv shell -- esphome run esphome/airgradient/config.yml --device http://192.168.1.232
+	devenv shell -- esphome run esphome/airgradient/config.yml --device http://192.168.1.162
 
 .PHONY: esphome-usb
 esphome-usb:
