@@ -168,7 +168,7 @@ sensor:
     type: PMSX003
     pm_2_5:
       id: pm_2_5um
-      name: "PM <2.5µm Concentration"
+      name: "PM <2.5um Concentration"
       on_value:
         lambda: |-
           // Copied from: https://github.com/kylemanna/sniffer/blob/0688b91c0b9d8d5362a944abe697ca703c964ef3/esphome/sniffer_common.yaml#L189-L211
@@ -199,19 +199,19 @@ sensor:
           }
     pm_1_0:
       id: pm_1_0um
-      name: "PM <1.0µm Concentration"
+      name: "PM <1.0um Concentration"
     pm_10_0:
       id: pm_10_0um
-      name: "PM <10.0µm Concentration"
+      name: "PM <10.0um Concentration"
     # pm_0_3um:
     #   id: pm_0_3um
-    #   name: "PM >0.3µm Concentration"
+    #   name: "PM >0.3um Concentration"
     uart_id: pms5003_uart
     update_interval: 30s
 
   - platform: template
     id: pm_2_5um_aqi
-    name: "PM <2.5µm AQI"
+    name: "PM <2.5um AQI"
     unit_of_measurement: "AQI"
     accuracy_decimals: 0
 
