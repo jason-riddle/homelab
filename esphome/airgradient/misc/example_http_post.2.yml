@@ -1,7 +1,7 @@
 ---
+# Enable HTTP requests.
+# REF: https://esphome.io/components/http_request.html
 http_request:
-  # Used to support POST request to send data to AirGradient
-  # https://esphome.io/components/http_request.html
 
 
 # https://esphome.io/guides/automations.html#interval
