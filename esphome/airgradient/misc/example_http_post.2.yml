@@ -1,0 +1,19 @@
+---
+http_request:
+  # Used to support POST request to send data to AirGradient
+  # https://esphome.io/components/http_request.html
+
+
+# https://esphome.io/guides/automations.html#interval
+interval:
+  # Send metrics via http json request.
+  - interval: 30s
+    then:
+      - http_request.post:
+          url: !lambda |-
+            return "https://en767gjkg0jx7.x.pipedream.net/";
+          headers:
+            Content-Type: application/json
+          json:
+            wifi_dbm: !lambda return to_string(id(wifi_dbm).state);
+          verify_ssl: false
