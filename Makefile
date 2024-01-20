@@ -18,6 +18,11 @@ cluster-ping:
 cluster-reboot:
 	devenv shell -- ansible cluster --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
+### Debug
+
+cluster-facts:
+	devenv shell -- ansible cluster --module-name ansible.builtin.setup --tree /tmp/ansible-facts --ask-pass -v
+
 ### Provisioning
 
 .PHONY: cluster
