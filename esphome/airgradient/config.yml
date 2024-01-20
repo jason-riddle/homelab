@@ -318,6 +318,19 @@ time:
     timezone: "America/Los_Angeles"
 
 
+# TODO: Use SNTP instead?
+# Time will trigger events at timed intervals.
+# REF: https://esphome.io/components/time/index.html
+# time:
+#   # Sync time from using SNTP (Simple Network Time Protocol).
+#   # REF: https://esphome.io/components/time/sntp.html
+#   - platform: platform
+#     id: sntp_time
+#     # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#     # REF: https://en.wikipedia.org/wiki/America/Los_Angeles
+#     timezone: "America/Los_Angeles"
+
+
 # Interval will trigger events at timed intervals.
 # REF: https://esphome.io/guides/automations.html#interval
 interval:
