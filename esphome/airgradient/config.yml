@@ -1,8 +1,8 @@
 ---
 # REF: https://esphome.io/guides/configuration-types.html#substitutions
 substitutions:
-  devicename: "jasons-airgradient"
-  upper_devicename: "Jason's AirGradient"
+  devicename: "jasons-airgradient-diy-pro"
+  upper_devicename: "Jason's AirGradient DIY Pro"
 
 
 # REF: https://esphome.io/components/esphome.html#esphome-core-configuration
