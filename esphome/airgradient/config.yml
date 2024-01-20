@@ -125,7 +125,7 @@ button:
   # Create a button to restart the device.
   - platform: restart
     id: restart_button
-    name: "Restart AirGradient Device Button"
+    name: "Restart ${upper_devicename} Button"
 
 
 # Configuration for AirGradient DIY v2 device
