@@ -306,29 +306,16 @@ display:
           it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity_p).state);
 
 
-# TODO: For some reason, if I use interval, the interval time is not respected
-#       and it immediately restarts, causing an infinite loop.
-#
-# TODO: I don't think this is doing anything. The original purpose of restarting
-#       every so often is because the TEMP and HUMD start reporting Nan.
-#       On restart, the device should reset and the Nan should go away. But it's
-#       not been going away.
-#
 # Time will trigger events at timed intervals.
 # REF: https://esphome.io/components/time/index.html
-# time:
-#   - platform: sntp
-#     on_time:
-#       # Every 60 minutes, restart the device.
-#       - seconds: 0
-#         minutes: /60
-#         then:
-#           - lambda: >-
-#               ESP_LOGD("main", "RESTARTING IN 2 MINS");
-#           - delay: 2min
-#           - lambda: >-
-#               ESP_LOGD("main", "RESTARTING NOW");
-#           - button.press: restart_button
+time:
+  # Sync time from home assistant.
+  # REF: https://esphome.io/components/time/homeassistant.html
+  - platform: homeassistant
+    id: homeassistant_time
+    # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    # REF: https://en.wikipedia.org/wiki/America/Los_Angeles
+    timezone: "America/Los_Angeles"
 
 
 # Interval will trigger events at timed intervals.
