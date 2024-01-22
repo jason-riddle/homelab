@@ -1,0 +1,18 @@
+---
+# See: https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html
+# See: https://devopscube.com/setup-ansible-aws-dynamic-inventory/
+
+plugin: amazon.aws.aws_ec2
+profile: "default"
+regions:
+  - us-east-1
+
+filters:
+  # Filter and only show instances with their state as `running`.
+  instance-state-name: running
+
+keyed_groups:
+  - prefix: aws_tag
+    key: tags
+  - prefix: aws_region
+    key: placement.region

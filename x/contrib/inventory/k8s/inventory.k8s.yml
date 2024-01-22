@@ -1,0 +1,8 @@
+---
+# See: https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_inventory.html
+
+plugin: kubernetes.core.k8s
+
+connections:
+  - kubeconfig: ~/.kube/config
+    context: 'default'
