@@ -15,4 +15,5 @@ helmCharts:
     releaseName: tailscale-operator
     # https://github.com/tailscale/tailscale/releases
     version: 1.56.1
-    # version: 1.80.0
+    # See: https://github.com/tailscale/tailscale/issues/10951
+    # version: 1.58.2
