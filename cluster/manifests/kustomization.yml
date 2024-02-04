@@ -4,9 +4,9 @@ kind: Kustomization
 
 resources:
   - ./namespaces
-  # - ./monitoring/grafana
-  - ./rook/rook-ceph
-  - ./rook/rook-ceph-cluster
-  # - ./tailscale/tailscale-operator-oauth
-  # - ./tailscale/tailscale-operator
-  # - ./examples/http-https-echo
+  # - ./apps/monitoring/grafana
+  - ./apps/rook/rook-ceph
+  - ./apps/rook/rook-ceph-cluster
+  # - ./apps/tailscale/tailscale-operator-oauth
+  # - ./apps/tailscale/tailscale-operator
+  # - ./apps/examples/http-https-echo
