@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./namespaces
   # - ./monitoring/grafana
-  - ./tailscale/tailscale-operator-oauth
-  - ./tailscale/tailscale-operator
+  - ./rook/rook-operator
+  # - ./tailscale/tailscale-operator-oauth
+  # - ./tailscale/tailscale-operator
   # - ./examples/http-https-echo
