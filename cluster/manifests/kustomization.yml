@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - ./namespaces
-  # - ./apps/monitoring/grafana
+  # - ./apps/grafana/grafana
   # - ./apps/tailscale/tailscale-operator-oauth
   # - ./apps/tailscale/tailscale-operator
   # - ./apps/examples/http-https-echo
