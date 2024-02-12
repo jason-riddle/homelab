@@ -47,36 +47,6 @@ apply: build
 # prune:
 # 	devenv shell -- kubectl apply --filename cluster/manifests/manifest.yml --prune --all
 
-## Home Assistant
-
-### Maintenance
-
-hass-ping:
-	devenv shell -- ansible hass --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
-
-hass-reboot:
-	devenv shell -- ansible hass --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
-
-### Provisioning
-
-.PHONY: hass
-hass:
-	devenv shell -- ansible-playbook hass/main.yml
-
-hass-setup:
-	devenv shell -- ansible-playbook hass/setup.yml --ask-pass --ask-become-pass
-
-hass-upgrade:
-	devenv shell -- ansible-playbook hass/upgrade.yml --ask-pass --ask-become-pass
-
-### Debug
-
-hass-console:
-	sudo tio /dev/cu.usbserial-210
-
-hass-screen:
-	sudo screen /dev/cu.usbserial-210 115200
-
 ## ESPHome
 
 .PHONY: esphome
