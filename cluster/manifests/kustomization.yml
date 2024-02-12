@@ -5,8 +5,6 @@ kind: Kustomization
 resources:
   - ./namespaces
   # - ./apps/monitoring/grafana
-  - ./apps/rook/rook-ceph
-  - ./apps/rook/rook-ceph-cluster
   # - ./apps/tailscale/tailscale-operator-oauth
   # - ./apps/tailscale/tailscale-operator
   # - ./apps/examples/http-https-echo
