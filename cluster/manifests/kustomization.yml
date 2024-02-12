@@ -5,7 +5,5 @@ kind: Kustomization
 resources:
   - ./namespaces
   - ./apps/authelia/authelia
-  # - ./apps/grafana/grafana
   # - ./apps/tailscale/tailscale-operator-oauth
   # - ./apps/tailscale/tailscale-operator
-  # - ./apps/examples/http-https-echo
