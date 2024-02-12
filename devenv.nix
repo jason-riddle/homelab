@@ -15,15 +15,6 @@
     pkgs.tio
   ];
 
-  # enterShell = ''
-  #   pip3 install "esphome==2023.8.3" "pillow>4.0.0,<10.0.0"
-  # '';
-
-  # enterShell = ''
-  #   pip install --upgrade pip
-  #   pip install "esphome==2023.12.5" "pillow==10.1.0"
-  # '';
-
   enterShell = ''
     pip install --upgrade pip
     pip install esphome "pillow==10.1.0"
