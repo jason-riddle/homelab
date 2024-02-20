@@ -1,5 +1,5 @@
 ---
-name: CI - Cluster
+name: CI - Hass
 
 on:
   push:
@@ -18,6 +18,7 @@ env:
   ANSIBLE_FORCE_COLOR: '1'
   # Uncomment if running setup.yml
   # TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
+  HASS_TAILSCALE_AUTHKEY: "${{ secrets.TAILSCALE_AUTHKEY }}"
 
 jobs:
 
@@ -44,16 +45,16 @@ jobs:
       - name: Set HOSTNAME.
         run: echo "HOSTNAME=$(cat /etc/hostname)" >> $GITHUB_ENV
 
-      ## cluster
+      ## hass
 
-      - name: Set up cluster test environment.
+      - name: Set up hass test environment.
         run: |
-          cp cluster/tests/ansible.cfg ./ansible.cfg
-          cp cluster/tests/inventory.yml ./inventory.yml
+          cp hass/tests/ansible.cfg ./ansible.cfg
+          cp hass/tests/inventory.yml ./inventory.yml
           ansible-galaxy install -r requirements.yml
 
-      - name: Check cluster/main.yml syntax.
-        run: ansible-playbook cluster/main.yml --syntax-check
+      - name: Check hass/main.yml syntax.
+        run: ansible-playbook hass/main.yml --syntax-check
 
-      - name: Run cluster/main.yml.
-        run: ansible-playbook cluster/main.yml --skip-tags "boot-cmdline"
+      - name: Run hass/main.yml.
+        run: ansible-playbook hass/main.yml
