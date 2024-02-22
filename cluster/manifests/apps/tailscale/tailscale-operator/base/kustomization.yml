@@ -13,7 +13,7 @@ helmCharts:
         hostname: "tailscale-operator"
         logging: "info"
     releaseName: tailscale-operator
-    # https://github.com/tailscale/tailscale/releases
-    # version: 1.56.1
-    # See: https://github.com/tailscale/tailscale/issues/10951
+    # Tailscale Releases: https://github.com/tailscale/tailscale/releases
+    # Helm Chart Releases: https://pkgs.tailscale.com/helmcharts/index.yaml
+    # DOCS: https://tailscale.com/kb/1236/kubernetes-operator
     version: 1.58.2
