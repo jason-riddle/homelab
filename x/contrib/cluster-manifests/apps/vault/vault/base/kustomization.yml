@@ -20,6 +20,7 @@ helmCharts:
           enabled: false
         dev:
           enabled: true
+          devRootToken: "root"
       ui:
         enabled: true
         serviceType: "ClusterIP"
