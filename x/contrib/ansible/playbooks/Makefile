@@ -28,24 +28,11 @@ mp: macports
 
 .PHONY: macports
 macports:
-	devenv shell -- ansible-playbook macports/packages.yml --ask-become-pass
-
-## OSX
-
-### Provisioning
-
-osx: osx-cli-tools
-
-.PHONY: osx-cli-tools
-osx-cli-tools:
-	devenv shell -- ansible-playbook osx-cli-tools/install.yml --ask-become-pass
+	devenv shell -- ansible-playbook macports/ports.yml --ask-become-pass
 
 ## Dependencies
 
-deps: macports-deps osx-cli-tools-deps
+deps: macports-deps
 
 macports-deps:
 	devenv shell -- ansible-galaxy install --role-file macports/requirements.yml --force
-
-osx-cli-tools-deps:
-	devenv shell -- ansible-galaxy install --role-file osx-cli-tools/requirements.yml --force

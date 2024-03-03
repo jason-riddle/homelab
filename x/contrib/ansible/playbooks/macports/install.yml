@@ -11,11 +11,6 @@
     macports_selfupdate: false
     macports_upgrade_outdated: false
 
-  pre_tasks:
-    - name: Ping to validate the initial connection.
-      ansible.builtin.ping:
-        data: pong
-
   roles:
     - role: ansiblebit.macports
 

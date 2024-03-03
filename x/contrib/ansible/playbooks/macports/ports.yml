@@ -7,11 +7,6 @@
     ports:
       - git
 
-  pre_tasks:
-    - name: Ping to validate the initial connection.
-      ansible.builtin.ping:
-        data: pong
-
   tasks:
     - name: Ensure ports are installed.
       # https://docs.ansible.com/ansible/latest/collections/community/general/macports_module.html
