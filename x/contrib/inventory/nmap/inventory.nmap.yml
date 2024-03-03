@@ -1,0 +1,4 @@
+---
+# See: https://docs.ansible.com/ansible/latest/collections/community/general/nmap_inventory.html
+
+plugin: community.general.nmap
