@@ -8,20 +8,21 @@ helmCharts:
   - name: consul
     repo: https://helm.releases.hashicorp.com
     includeCRDs: true
+    releaseName: consul
+    # https://artifacthub.io/packages/helm/hashicorp/consul
+    # https://github.com/hashicorp/consul-k8s/releases
+    version: 1.4.0
     valuesInline:
       global:
+        enabled: false
         logLevel: "info"
         datacenter: homelab
       server:
-        enabled: false
+        enabled: true
         replicas: 1
         bootstrapExpect: 1
         disruptionBudget:
           maxUnavailable: 0
-      client:
-        enabled: false
-      telemetryCollector:
-        enabled: false
       ui:
         enabled: true
         service:
@@ -29,7 +30,3 @@ helmCharts:
             # https://tailscale.com/kb/1236/kubernetes-operator/
             tailscale.com/expose: "true"
             tailscale.com/hostname: "consul"
-    releaseName: consul
-    # https://artifacthub.io/packages/helm/hashicorp/consul
-    # https://github.com/hashicorp/consul-k8s/releases
-    version: 1.4.0
