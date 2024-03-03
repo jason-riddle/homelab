@@ -12,13 +12,13 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 .PHONY: hass
 hass:
-	devenv shell -- ansible-playbook playbooks/hass/main.yml
+	devenv shell -- ansible-playbook hass/main.yml
 
 hass-setup:
-	devenv shell -- ansible-playbook playbooks/hass/setup.yml --ask-pass --ask-become-pass
+	devenv shell -- ansible-playbook hass/setup.yml --ask-pass --ask-become-pass
 
 hass-upgrade:
-	devenv shell -- ansible-playbook playbooks/hass/upgrade.yml --ask-pass --ask-become-pass
+	devenv shell -- ansible-playbook hass/upgrade.yml --ask-pass --ask-become-pass
 
 ## MacPorts
 
@@ -26,4 +26,10 @@ hass-upgrade:
 
 .PHONY: macports
 macports:
-	devenv shell -- ansible-playbook playbooks/macports/main.yml
+	devenv shell -- ansible-playbook macports/main.yml --ask-become-pass
+
+## Dependencies
+
+deps: macports-deps
+macports-deps:
+	devenv shell -- ansible-galaxy install --role-file macports/requirements.yml --force

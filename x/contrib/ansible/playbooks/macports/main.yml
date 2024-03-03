@@ -1,6 +1,21 @@
 ---
 - name: Ensure osx-command-line-tools is installed.
+  hosts: localhost
+  connection: local
   become: true
+
+  vars:
+    force_install: true
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
 
   roles:
     - elliotweiser.osx-command-line-tools
+
+  post_tasks:
+    - name: Verify osx-command-line-tools are installed.
+      command: xcode-select --print-path
+      changed_when: false
