@@ -14,6 +14,7 @@
 
   tasks:
     - name: Ensure ports are installed.
+      # https://docs.ansible.com/ansible/latest/collections/community/general/macports_module.html
       community.general.macports:
         name: "{{ item.name | default(item) }}"
         state: "{{ item.state | default('present') }}"
