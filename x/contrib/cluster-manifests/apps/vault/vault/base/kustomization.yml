@@ -8,19 +8,16 @@ helmCharts:
   - name: vault
     repo: https://helm.releases.hashicorp.com
     includeCRDs: true
+    releaseName: vault
+    # https://artifacthub.io/packages/helm/hashicorp/vault
+    # https://github.com/hashicorp/vault-helm/releases
+    version: 0.27.0
     valuesInline:
-      injector:
+      global:
         enabled: false
       server:
-        agent:
-          enabled: false
-        auditStorage:
-          enabled: false
-        dataStorage:
-          enabled: false
         dev:
           enabled: true
-          devRootToken: "root"
       ui:
         enabled: true
         serviceType: "ClusterIP"
@@ -29,7 +26,3 @@ helmCharts:
           # https://tailscale.com/kb/1236/kubernetes-operator/
           tailscale.com/expose: "true"
           tailscale.com/hostname: "vault"
-    releaseName: vault
-    # https://artifacthub.io/packages/helm/hashicorp/vault
-    # https://github.com/hashicorp/vault-helm/releases
-    version: 0.27.0
