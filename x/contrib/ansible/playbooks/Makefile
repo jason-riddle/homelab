@@ -42,6 +42,8 @@ osx-cli-tools:
 
 ## Dependencies
 
+deps: macports-deps osx-cli-tools-deps
+
 macports-deps:
 	devenv shell -- ansible-galaxy install --role-file macports/requirements.yml --force
 

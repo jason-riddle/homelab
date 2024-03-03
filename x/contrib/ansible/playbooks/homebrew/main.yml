@@ -1,0 +1,22 @@
+---
+- name: Ensure homebrew is installed.
+  hosts: localhost
+  become: true
+
+  vars:
+    homebrew_clear_cache: true
+    homebrew_installed_packages:
+      - git
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  roles:
+    - role: geerlingguy.mac.homebrew
+
+  post_tasks:
+    - name: Ensure brew cli tool is installed.
+      command: brew --version
+      changed_when: false

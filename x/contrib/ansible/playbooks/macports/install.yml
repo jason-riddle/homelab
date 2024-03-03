@@ -1,6 +1,6 @@
 ---
 # https://www.macports.org/install.php
-- name: Ensure macports cli tool (port) is installed.
+- name: Ensure macports is installed.
   hosts: localhost
   become: true
 
@@ -20,6 +20,6 @@
     - role: ansiblebit.macports
 
   post_tasks:
-    - name: Ensure macports cli tool (port) is installed.
+    - name: Ensure port cli tool is installed.
       command: port version
       changed_when: false

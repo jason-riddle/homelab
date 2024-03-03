@@ -1,11 +1,11 @@
 ---
-- name: Ensure packages are installed.
+- name: Ensure ports are installed.
   hosts: localhost
   become: true
 
   vars:
-    packages:
-      - asd
+    ports:
+      - git
 
   pre_tasks:
     - name: Ping to validate the initial connection.
@@ -13,6 +13,9 @@
         data: pong
 
   tasks:
-    - name: Ensure packages are installed.
+    - name: Ensure ports are installed.
       community.general.macports:
-        name: packages
+        name: "{{ item.name | default(item) }}"
+        state: "{{ item.state | default('present') }}"
+        version: "{{ item.version | default(omit) }}"
+      loop: "{{ ports }}"

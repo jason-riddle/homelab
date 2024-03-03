@@ -1,7 +1,4 @@
 ---
-collections:
-  - name: geerlingguy.mac
-
 roles:
   - name: ansiblebit.macports
     version: 1.9.18
