@@ -1,0 +1,6 @@
+---
+- name: Ensure osx-command-line-tools is installed.
+  become: true
+
+  roles:
+    - elliotweiser.osx-command-line-tools
