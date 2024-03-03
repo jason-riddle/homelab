@@ -1,21 +1,23 @@
 ---
 # https://www.macports.org/install.php
-
 - name: Ensure macports cli tool (port) is installed.
   hosts: localhost
   become: true
+
+  vars:
+    # https://github.com/macports/macports-base/releases/
+    # https://github.com/macports/macports-base/releases/download/v2.9.1/MacPorts-2.9.1-14-Sonoma.pkg
+    macports_version: 2.9.1
+    macports_selfupdate: false
+    macports_upgrade_outdated: false
 
   pre_tasks:
     - name: Ping to validate the initial connection.
       ansible.builtin.ping:
         data: pong
 
-  # TODO: How to do this???
-  # TODO: See https://www.macports.org/install.php.
-  # tasks:
-  #   - name: Ensure macports cli tool (port) is installed.
-  #     community.general.macports:
-  #       name: packages
+  roles:
+    - role: ansiblebit.macports
 
   post_tasks:
     - name: Ensure macports cli tool (port) is installed.
