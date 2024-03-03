@@ -1,0 +1,23 @@
+---
+# https://www.macports.org/install.php
+
+- name: Ensure macports cli tool (port) is installed.
+  hosts: localhost
+  become: true
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  # TODO: How to do this???
+  # TODO: See https://www.macports.org/install.php.
+  # tasks:
+  #   - name: Ensure macports cli tool (port) is installed.
+  #     community.general.macports:
+  #       name: packages
+
+  post_tasks:
+    - name: Ensure macports cli tool (port) is installed.
+      command: port version
+      changed_when: false

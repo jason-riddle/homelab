@@ -1,0 +1,18 @@
+---
+- name: Ensure packages are installed.
+  hosts: localhost
+  become: true
+
+  vars:
+    packages:
+      - asd
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  tasks:
+    - name: Ensure packages are installed.
+      community.general.macports:
+        name: packages

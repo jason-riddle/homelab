@@ -1,7 +1,6 @@
 ---
-- name: Ensure osx-command-line-tools is installed.
+- name: Ensure osx-command-line-tools are installed.
   hosts: localhost
-  connection: local
   become: true
 
   vars:
