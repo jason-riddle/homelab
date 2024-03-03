@@ -18,5 +18,5 @@
       community.general.macports:
         name: "{{ item.name | default(item) }}"
         state: "{{ item.state | default('present') }}"
-        version: "{{ item.version | default(omit) }}"
+        variant: "{{ item.variant | default(omit) }}"
       loop: "{{ ports }}"
