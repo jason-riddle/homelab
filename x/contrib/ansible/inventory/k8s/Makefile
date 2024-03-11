@@ -12,7 +12,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 graph: k8s-graph
 k8s-graph:
-	ansible-inventory --inventory inventory.k8s.yml --graph
+	devenv shell -- ansible-inventory --inventory inventory.k8s.yml --graph
 
 ## Dependencies
 
