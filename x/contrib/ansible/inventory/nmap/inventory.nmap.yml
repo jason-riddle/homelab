@@ -3,8 +3,5 @@
 
 plugin: community.general.nmap
 
-# address: "192.168.1.0/24"
 address: "192.168.1.1-5"
-
-# port: "U:53,137,T:21-25,139,8080,S:9"
 port: "U:53,T:22,80,8080"
