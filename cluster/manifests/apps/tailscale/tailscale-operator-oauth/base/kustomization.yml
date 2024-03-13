@@ -7,6 +7,9 @@ namespace: tailscale
 generatorOptions:
   disableNameSuffixHash: true
 
+# https://tailscale.com/kb/1236/kubernetes-operator#prerequisites
+# https://login.tailscale.com/admin/settings/oauth
+# Permissions: 'Devices' write scope with tag 'tag:k8s-operator'
 secretGenerator:
   - name: operator-oauth
     envs:
