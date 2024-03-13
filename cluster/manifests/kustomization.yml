@@ -4,6 +4,5 @@ kind: Kustomization
 
 resources:
   - ./namespaces
-  - ./apps/authelia/authelia
   # - ./apps/tailscale/tailscale-operator-oauth
   # - ./apps/tailscale/tailscale-operator
