@@ -92,6 +92,22 @@
     - geerlingguy.node_exporter
 
 
+- name: Disable swap.
+  hosts: cluster
+  become: true
+
+  vars:
+    swap_file_state: absent
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  roles:
+    - geerlingguy.swap
+
+
 - name: Setup tailscale.
   hosts: cluster
   become: true
