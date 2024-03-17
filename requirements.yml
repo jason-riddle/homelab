@@ -3,4 +3,4 @@ roles:
   - name: geerlingguy.node_exporter
   - name: geerlingguy.swap
   - name: jason_riddle.tailscale
-    version: 1.1.18
+    version: 1.1.22
