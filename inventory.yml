@@ -1,4 +1,5 @@
 ---
+# See: https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#connecting-to-hosts-behavioral-inventory-parameters
 all:
   vars:
     ansible_port: 22
