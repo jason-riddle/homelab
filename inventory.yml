@@ -5,12 +5,12 @@ all:
     ansible_port: 22
     ansible_user: pi
   hosts:
-    jasons-cluster-node-001:
+    jasons-node-01:
       ansible_host: 192.168.1.21
 
 control_plane:
   hosts:
-    jasons-cluster-node-001:
+    jasons-node-01:
 
 cluster:
   children:
