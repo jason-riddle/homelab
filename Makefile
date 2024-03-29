@@ -23,6 +23,9 @@ reboot:
 facts:
 	devenv shell -- ansible cluster --module-name ansible.builtin.setup --tree /tmp/ansible-facts --ask-pass -v
 
+serial:
+	devenv shell -- ansible cluster --module-name ansible.builtin.command --args='cat /sys/firmware/devicetree/base/serial-number' --one-line
+
 ### Provisioning
 
 .PHONY: cluster
