@@ -42,6 +42,7 @@
   become: true
   tags:
     - control_plane
+    - nodes
 
   pre_tasks:
     - name: Ping to validate the initial connection.
