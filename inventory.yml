@@ -14,6 +14,8 @@ all:
       ansible_host: 192.168.1.23
     # jasons-node-04:
     #   ansible_host: 192.168.1.24
+    # jasons-node-05:
+    #   ansible_host: 192.168.1.25
 
 control_plane:
   hosts:
