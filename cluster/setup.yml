@@ -126,6 +126,15 @@
   roles:
     - jason_riddle.tailscale
 
+  post_tasks:
+    - name: Verify tailscale is installed.
+      command: tailscale --version
+      changed_when: false
+
+    - name: Set auto-update to true.
+      command: tailscale set --auto-update=true
+      changed_when: false
+
 
 - name: Setup users.
   hosts: cluster
