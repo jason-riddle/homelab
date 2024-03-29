@@ -21,7 +21,7 @@ reboot:
 ### Debug
 
 facts:
-	devenv shell -- ansible cluster --module-name ansible.builtin.setup --tree /tmp/ansible-facts --ask-pass -v
+	devenv shell -- ansible cluster --module-name ansible.builtin.setup --tree /tmp/ansible-facts
 
 serial:
 	devenv shell -- ansible cluster --module-name ansible.builtin.command --args='cat /sys/firmware/devicetree/base/serial-number' --one-line
