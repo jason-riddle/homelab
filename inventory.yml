@@ -6,14 +6,19 @@ all:
     ansible_user: pi
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
   hosts:
+    # Red
     jasons-node-01:
       ansible_host: 192.168.1.21
+    # Orange
     jasons-node-02:
       ansible_host: 192.168.1.22
+    # Yellow
     jasons-node-03:
       ansible_host: 192.168.1.23
+    # Green
     # jasons-node-04:
     #   ansible_host: 192.168.1.24
+    # Blue
     # jasons-node-05:
     #   ansible_host: 192.168.1.25
 
