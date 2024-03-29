@@ -17,9 +17,11 @@
         data: pong
 
   tasks:
+    # TODO /boot/cmdline.txt is no longer used, use instead /boot/firmware/cmdline.txt.
+    # See: https://github.com/RPi-Distro/raspberrypi-sys-mods/commit/c62cf1a12f4e422c855f7e2fcb39e9cadcb5459b
     - name: Ensure cgroups are configured correctly in cmdline.txt.
       ansible.builtin.replace:
-        path: /boot/cmdline.txt
+        path: /boot/firmware/cmdline.txt
         regexp: '^([\w](?!.*\b{{ item }}\b).*)$'
         replace: '\1 {{ item }}'
       with_items:
