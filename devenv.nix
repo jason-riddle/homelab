@@ -13,7 +13,6 @@
     pkgs.kubectl
     pkgs.kubernetes-helm
     pkgs.kustomize
-    pkgs.tio
   ];
 
   enterShell = ''
