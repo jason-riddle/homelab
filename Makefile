@@ -12,27 +12,26 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY := YES
 
 ### Maintenance
 
-cluster-ping:
+ping:
 	devenv shell -- ansible cluster --module-name ansible.builtin.ping --args="data=pong" --ask-pass -v
 
-cluster-reboot:
+reboot:
 	devenv shell -- ansible cluster --module-name ansible.builtin.reboot --args="reboot_timeout=300" --ask-pass
 
 ### Debug
 
-cluster-facts:
+facts:
 	devenv shell -- ansible cluster --module-name ansible.builtin.setup --tree /tmp/ansible-facts --ask-pass -v
 
 ### Provisioning
 
-.PHONY: cluster
-cluster:
+main:
 	devenv shell -- ansible-playbook cluster/main.yml
 
-cluster-setup:
+setup:
 	devenv shell -- ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
 
-cluster-upgrade:
+upgrade:
 	devenv shell -- ansible-playbook cluster/upgrade.yml --ask-pass --ask-become-pass
 
 ### Manifests
