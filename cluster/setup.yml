@@ -74,22 +74,22 @@
       notify: reboot-pi
 
 
-- name: Setup node_exporter.
-  hosts: cluster
-  become: true
+# - name: Setup node_exporter.
+#   hosts: cluster
+#   become: true
 
-  vars:
-    node_exporter_arch: 'arm64'
-    node_exporter_host: '0.0.0.0'
-    node_exporter_port: 9100
+#   vars:
+#     node_exporter_arch: 'arm64'
+#     node_exporter_host: '0.0.0.0'
+#     node_exporter_port: 9100
 
-  pre_tasks:
-    - name: Ping to validate the initial connection.
-      ansible.builtin.ping:
-        data: pong
+#   pre_tasks:
+#     - name: Ping to validate the initial connection.
+#       ansible.builtin.ping:
+#         data: pong
 
-  roles:
-    - geerlingguy.node_exporter
+#   roles:
+#     - geerlingguy.node_exporter
 
 
 - name: Disable swap.
