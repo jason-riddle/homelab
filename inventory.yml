@@ -16,8 +16,8 @@ all:
     jasons-node-03:
       ansible_host: 192.168.1.23
     # Green
-    # jasons-node-04:
-    #   ansible_host: 192.168.1.24
+    jasons-node-04:
+      ansible_host: 192.168.1.24
     # Blue
     # jasons-node-05:
     #   ansible_host: 192.168.1.25
@@ -30,6 +30,8 @@ nodes:
   hosts:
     jasons-node-02:
     jasons-node-03:
+    jasons-node-04:
+    # jasons-node-05:
 
 cluster:
   children:
