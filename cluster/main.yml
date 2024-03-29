@@ -3,6 +3,9 @@
   hosts: cluster
   gather_facts: false
   become: true
+  tags:
+    - control_plane
+    - nodes
 
   handlers:
     - name: reboot-pi
@@ -37,6 +40,8 @@
   hosts: control_plane
   gather_facts: false
   become: true
+  tags:
+    - control_plane
 
   pre_tasks:
     - name: Ping to validate the initial connection.
@@ -65,6 +70,8 @@
   hosts: nodes
   gather_facts: false
   become: true
+  tags:
+    - nodes
 
   pre_tasks:
     - name: Ping to validate the initial connection.

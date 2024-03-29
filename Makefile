@@ -28,6 +28,12 @@ facts:
 main:
 	devenv shell -- ansible-playbook cluster/main.yml
 
+control_plane:
+	devenv shell -- ansible-playbook cluster/main.yml --tags control_plane
+
+nodes:
+	devenv shell -- ansible-playbook cluster/main.yml --tags nodes
+
 setup:
 	devenv shell -- ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
 
