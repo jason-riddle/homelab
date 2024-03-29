@@ -25,7 +25,8 @@ facts:
 
 ### Provisioning
 
-main:
+.PHONY: cluster
+cluster:
 	devenv shell -- ansible-playbook cluster/main.yml
 
 cp: control_plane
