@@ -52,6 +52,8 @@
   tasks:
     - name: Install K3s on control plane (takes a while).
       ansible.builtin.shell: >-
+        K3S_KUBECONFIG_MODE="0644"
+        K3S_KUBECONFIG_OUTPUT="/etc/rancher/k3s/k3s.yaml"
         ~/k3s_install.sh >> ~/k3s_install_log.txt
       args:
         chdir: "~"
