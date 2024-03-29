@@ -35,6 +35,9 @@ control_plane:
 nodes:
 	devenv shell -- ansible-playbook cluster/main.yml --tags nodes
 
+kubeconfig:
+	devenv shell -- ansible-playbook cluster/main.yml --tags kubeconfig
+
 setup:
 	devenv shell -- ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
 
