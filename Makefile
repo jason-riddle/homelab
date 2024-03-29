@@ -28,6 +28,7 @@ facts:
 main:
 	devenv shell -- ansible-playbook cluster/main.yml
 
+cp: control_plane
 control_plane:
 	devenv shell -- ansible-playbook cluster/main.yml --tags control_plane
 
