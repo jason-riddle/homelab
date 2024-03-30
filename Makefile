@@ -28,6 +28,16 @@ serial:
 
 ### Provisioning
 
+## Setup / Upgrade
+
+setup:
+	devenv shell -- ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
+
+upgrade:
+	devenv shell -- ansible-playbook cluster/upgrade.yml --ask-pass --ask-become-pass
+
+## Cluster
+
 .PHONY: cluster
 cluster:
 	devenv shell -- ansible-playbook cluster/main.yml
@@ -39,14 +49,10 @@ control_plane:
 nodes:
 	devenv shell -- ansible-playbook cluster/main.yml --tags nodes
 
+## Kubeconfig
+
 kubeconfig:
 	devenv shell -- ansible-playbook cluster/main.yml --tags kubeconfig
-
-setup:
-	devenv shell -- ansible-playbook cluster/setup.yml --ask-pass --ask-become-pass
-
-upgrade:
-	devenv shell -- ansible-playbook cluster/upgrade.yml --ask-pass --ask-become-pass
 
 ### Manifests
 
