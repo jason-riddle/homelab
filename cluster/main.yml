@@ -92,29 +92,3 @@
       args:
         chdir: "~"
         creates: /var/lib/rancher/k3s/agent/kubelet.kubeconfig
-
-
-- name: Show the kubeconfig file.
-  hosts: control_plane
-  gather_facts: false
-  become: true
-  tags:
-    - kubeconfig
-
-  pre_tasks:
-    - name: Ping to validate the initial connection.
-      ansible.builtin.ping:
-        data: pong
-
-  tasks:
-    - name: Get kubeconfig.
-      command: cat /etc/rancher/k3s/k3s.yaml
-      changed_when: false
-      register: kubeconfig
-
-    - name: Parse kubeconfig into kubeconfig_yaml.
-      set_fact:
-        kubeconfig_yaml: "{{ kubeconfig.stdout | from_yaml }}"
-
-    - name: Print kubeconfig_yaml.
-      debug: var=kubeconfig_yaml
