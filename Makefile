@@ -25,8 +25,11 @@ nodes:
 
 ### Kubeconfig
 
+# kubeconfig:
+# 	devenv shell -- ansible-playbook cluster/kubeconfig.yml
+
 kubeconfig:
-	devenv shell -- ansible-playbook cluster/kubeconfig.yml
+	devenv shell -- ansible-playbook cluster/kubeconfig.v3.yml
 
 ### Deploy
 
