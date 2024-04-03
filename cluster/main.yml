@@ -107,12 +107,6 @@
         data: pong
 
   tasks:
-    - name: Save /etc/rancher/k3s/k3s.yaml to "/tmp/k3s-kubeconfig-{{ inventory_hostname }}".
-      fetch:
-        src: /etc/rancher/k3s/k3s.yaml
-        dest: /tmp/k3s-kubeconfig-{{ inventory_hostname }}
-        flat: true
-
     - name: Get kubeconfig.
       command: cat /etc/rancher/k3s/k3s.yaml
       changed_when: false
