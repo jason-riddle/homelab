@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  # https://devenv.sh/basics/
+  # env.ANSIBLE_LOAD_CALLBACK_PLUGINS = "True";
+  # env.ANSIBLE_STDOUT_CALLBACK = "yaml";
+
   # https://devenv.sh/languages/
   languages.python = {
     enable = true;
