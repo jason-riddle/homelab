@@ -25,11 +25,8 @@ nodes:
 
 ### Kubeconfig
 
-# kubeconfig:
-# 	devenv shell -- ansible-playbook cluster/kubeconfig.yml
-
 kubeconfig:
-	devenv shell -- ansible-playbook cluster/kubeconfig.v3.yml
+	devenv shell -- ansible control_plane --module-name ansible.builtin.fetch --args="flat=true src=/etc/rancher/k3s/k3s.yaml dest=/tmp/k3s-{{ inventory_hostname }}-kubeconfig" --one-line
 
 ### Deploy
 
