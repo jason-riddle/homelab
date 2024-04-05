@@ -54,9 +54,10 @@
   tasks:
     - name: Install K3s on control plane (takes a while).
       ansible.builtin.shell: >-
+        K3S_DEBUG=true
         K3S_KUBECONFIG_MODE="0644"
         K3S_KUBECONFIG_OUTPUT="/etc/rancher/k3s/k3s.yaml"
-        ~/k3s_install.sh >> ~/k3s_install_log.txt
+        ~/k3s_install.sh > ~/k3s_install_log.txt
       args:
         chdir: "~"
         creates: /var/lib/rancher/k3s/server/node-token
@@ -86,9 +87,10 @@
   tasks:
     - name: Install K3s on nodes (takes a while).
       ansible.builtin.shell: >-
-        K3S_URL="https://{{ groups['control_plane'][0] }}:6443"
+        K3S_DEBUG=true
         K3S_TOKEN="{{ hostvars[groups['control_plane'][0]]['node_token'] }}"
-        ~/k3s_install.sh >> ~/k3s_install_log.txt
+        K3S_URL="https://{{ groups['control_plane'][0] }}:6443"
+        ~/k3s_install.sh > ~/k3s_install_log.txt
       args:
         chdir: "~"
         creates: /var/lib/rancher/k3s/agent/kubelet.kubeconfig
