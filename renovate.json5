@@ -9,17 +9,17 @@
   "assignees": [
     "@jason-riddle"
   ],
-  "customManagers": [
-    // See: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture.
-    {
-      "customType": "regex",
-      "datasourceTemplate": "docker",
-      "fileMatch": [
-        "(^|/)kustomization\\.yml$"
-      ],
-      "matchStrings": [
-        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
-      ]
-    }
-  ]
+  // "customManagers": [
+  //   // See: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture.
+  //   {
+  //     "customType": "regex",
+  //     "datasourceTemplate": "docker",
+  //     "fileMatch": [
+  //       "(^|/)kustomization\\.yml$"
+  //     ],
+  //     "matchStrings": [
+  //       "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
+  //     ]
+  //   }
+  // ]
 }
