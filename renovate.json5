@@ -1,11 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  // See https://docs.renovatebot.com/presets-config/#configrecommended.
+  // See: https://docs.renovatebot.com/presets-config/#configrecommended.
   "extends": [
     "config:recommended"
   ],
-  // See https://docs.renovatebot.com/configuration-options/#assignees.
+  // See: https://docs.renovatebot.com/configuration-options/#assignees.
   "assignees": [
     "@jason-riddle"
   ],
+  "customManagers": [
+    // See: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture.
+    {
+      "customType": "regex",
+      "datasourceTemplate": "docker",
+      "fileMatch": [
+        "(^|/)kustomization\\.yml$"
+      ],
+      "matchStrings": [
+        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
+      ]
+    }
+  ]
 }
