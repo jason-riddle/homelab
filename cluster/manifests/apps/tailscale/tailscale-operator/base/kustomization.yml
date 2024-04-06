@@ -16,4 +16,5 @@ helmCharts:
     # Tailscale Releases: https://github.com/tailscale/tailscale/releases
     # Helm Chart Releases: https://pkgs.tailscale.com/helmcharts/index.yaml
     # DOCS: https://tailscale.com/kb/1236/kubernetes-operator
+    # renovate: image=tailscale/k8s-operator
     version: 1.62.1
