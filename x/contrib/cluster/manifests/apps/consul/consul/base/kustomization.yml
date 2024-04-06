@@ -11,7 +11,7 @@ helmCharts:
     releaseName: consul
     # https://artifacthub.io/packages/helm/hashicorp/consul
     # https://github.com/hashicorp/consul-k8s/releases
-    version: 1.4.0
+    version: 1.4.1
     # https://github.com/hashicorp/consul-k8s/blob/main/charts/consul/values.yaml
     valuesInline:
       global:
