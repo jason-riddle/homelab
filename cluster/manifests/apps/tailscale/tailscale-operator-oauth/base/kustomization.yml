@@ -10,6 +10,8 @@ generatorOptions:
 # https://tailscale.com/kb/1236/kubernetes-operator#prerequisites
 # https://login.tailscale.com/admin/settings/oauth
 # Permissions: 'Devices' write scope with tag 'tag:k8s-operator'
+# client_id=?
+# client_secret=?
 secretGenerator:
   - name: operator-oauth
     envs:
