@@ -1,4 +1,4 @@
-// Repository: https://developer.mend.io/github/jason-riddle/homelab
+// See: https://developer.mend.io/github/jason-riddle.
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   // See: https://docs.renovatebot.com/presets-config/#configrecommended.
