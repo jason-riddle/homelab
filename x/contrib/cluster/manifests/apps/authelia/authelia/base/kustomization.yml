@@ -4,6 +4,8 @@ kind: Kustomization
 
 namespace: authelia
 
+# Artifact Hub: N/A
+# Chart Values: https://github.com/authelia/chartrepo/blob/master/charts/authelia/values.yaml
 helmCharts:
   - name: authelia
     repo: https://charts.authelia.com
@@ -13,6 +15,4 @@ helmCharts:
         log:
           level: info
     releaseName: authelia
-    # https://charts.authelia.com/
-    # https://github.com/authelia/chartrepo/tree/master/charts/authelia
     version: 0.8.58

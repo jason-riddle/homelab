@@ -4,7 +4,8 @@ kind: Kustomization
 
 namespace: grafana
 
-# See: https://artifacthub.io/packages/helm/grafana/grafana
+# Artifact Hub: https://artifacthub.io/packages/helm/grafana/grafana
+# Chart Values: https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
 helmCharts:
   - name: grafana
     repo: https://grafana.github.io/helm-charts

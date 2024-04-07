@@ -4,15 +4,14 @@ kind: Kustomization
 
 namespace: consul
 
+# Artifact Hub: https://artifacthub.io/packages/helm/hashicorp/consul
+# Chart Values: https://github.com/hashicorp/consul-k8s/blob/main/charts/consul/values.yaml
 helmCharts:
   - name: consul
     repo: https://helm.releases.hashicorp.com
     includeCRDs: true
     releaseName: consul
-    # https://artifacthub.io/packages/helm/hashicorp/consul
-    # https://github.com/hashicorp/consul-k8s/releases
     version: 1.4.1
-    # https://github.com/hashicorp/consul-k8s/blob/main/charts/consul/values.yaml
     valuesInline:
       global:
         enabled: false

@@ -4,15 +4,14 @@ kind: Kustomization
 
 namespace: vault-secrets-operator
 
+# Artifact Hub: https://artifacthub.io/packages/helm/hashicorp/vault-secrets-operator
+# Chart Values: https://github.com/hashicorp/vault-secrets-operator/blob/main/chart/values.yaml
 helmCharts:
   - name: vault-secrets-operator
     repo: https://helm.releases.hashicorp.com
     includeCRDs: true
     releaseName: vault-secrets-operator
-    # https://artifacthub.io/packages/helm/hashicorp/vault-secrets-operator
-    # https://github.com/hashicorp/vault-secrets-operator/releases
     version: 0.5.2
-    # https://github.com/hashicorp/vault-secrets-operator/blob/main/chart/values.yaml
     valuesInline:
       controller:
         manager:
