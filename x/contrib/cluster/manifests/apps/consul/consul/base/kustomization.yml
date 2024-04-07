@@ -17,8 +17,10 @@ helmCharts:
         enabled: false
         logLevel: "info"
         datacenter: homelab
+      # client:
+      #   enabled: false
       server:
-        enabled: true
+        # enabled: false
         replicas: 1
         bootstrapExpect: 1
         disruptionBudget:
