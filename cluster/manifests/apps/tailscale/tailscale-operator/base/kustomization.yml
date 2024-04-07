@@ -17,4 +17,5 @@ helmCharts:
         hostname: "tailscale-operator"
         logging: "info"
     releaseName: tailscale-operator
-    version: 1.62.1
+    # version: 1.62.1
+    version: 1.62.0
