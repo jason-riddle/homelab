@@ -5,7 +5,7 @@ version: '3'
 
 services:
   hass:
-    image: lscr.io/linuxserver/homeassistant:2023.12.3
+    image: lscr.io/linuxserver/homeassistant:2023.12.4
     container_name: hass
     # Discover devices on the host network.
     # See: https://github.com/linuxserver/docker-homeassistant#host-vs-bridge
