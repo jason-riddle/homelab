@@ -11,7 +11,9 @@ namespace: tailscale
 helmCharts:
   - name: tailscale-operator
     repo: https://pkgs.tailscale.com/helmcharts
-    includeCRDs: true
+    # This doesn't do anything.
+    # See: https://github.com/tailscale/tailscale/blob/b6dfd7443a80eae4c6be5c29c20ad5a5fd5d56ba/cmd/k8s-operator/deploy/chart/values.yaml#L11-L15.
+    # includeCRDs: true
     valuesInline:
       operatorConfig:
         hostname: "tailscale-operator"
