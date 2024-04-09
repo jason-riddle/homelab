@@ -8,5 +8,7 @@
   // See: https://docs.renovatebot.com/configuration-options/#assignees.
   "assignees": [
     "@jason-riddle"
-  ]
+  ],
+  // See: https://docs.renovatebot.com/configuration-options/#ignorepaths.
+  "ignorePaths": ["**/x/**"]
 }
