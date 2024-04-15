@@ -24,6 +24,12 @@
     pip install "esphome==2023.12.9" "pillow==10.1.0"
   '';
 
+  # https://devenv.sh/tests/
+  enterTest = ''
+    echo "Running tests"
+    git --version | grep "2.42.0"
+  '';
+
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks.shellcheck.enable = false;
 
