@@ -1,4 +1,4 @@
-# HOMELAB (Version 2)
+# HOMELAB - Version 2
 
 ## Navigation
 
