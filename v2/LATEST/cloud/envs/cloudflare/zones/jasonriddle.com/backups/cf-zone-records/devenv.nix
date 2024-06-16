@@ -6,10 +6,10 @@
   # env.ANSIBLE_STDOUT_CALLBACK = "yaml";
 
   # https://devenv.sh/languages/
-  # languages.python = {
-  #   enable = true;
-  #   venv.enable = true;
-  # };
+  languages.terraform = {
+    enable  = true;
+    version = "1.8.4";
+  };
 
   # https://devenv.sh/packages/
   # packages = [
