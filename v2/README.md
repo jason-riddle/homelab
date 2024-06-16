@@ -4,7 +4,7 @@
 
 Go [Up][up] a README.
 
-[up]: README.md
+[up]: /README.md
 
 ## Cloud
 
