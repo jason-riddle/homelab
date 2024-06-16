@@ -2,7 +2,7 @@
 
 ## Navigation
 
-Go [Up][up] a README.
+Go [Up][up].
 
 [up]: /README.md
 
