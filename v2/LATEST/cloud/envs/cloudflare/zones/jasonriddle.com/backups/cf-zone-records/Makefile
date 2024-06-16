@@ -7,6 +7,6 @@ init:
 	devenv shell -- terraform init -upgrade
 
 backup:
-	cf-terraforming generate \
+	devenv shell -- cf-terraforming generate \
 		--resource-type "cloudflare_record" \
 		--zone $(ZONE) | tee LATEST/cf-zone-records.tf.backup
