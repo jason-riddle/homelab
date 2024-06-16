@@ -1,11 +1,11 @@
 .DEFAULT_GOAL := backup
 
 backup:
-	curl --fail --silent --show-error --location http://go/.export \
+	devenv shell -- curl --fail --silent --show-error --location http://go/.export \
 		| tee backups/LATEST/golinks.jsonl
 
 deploy:
-	flyctl deploy --ha=false
+	devenv shell -- flyctl deploy --ha=false
 
 # vol-create:
 # 	flyctl volumes create golink_data_machines --region=lax --size=1
