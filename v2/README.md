@@ -1,6 +1,6 @@
 # HOMELAB (Version 2)
 
-## Readme
+## Navigation
 
 Go [Up][up] a README.
 
