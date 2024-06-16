@@ -1,0 +1,349 @@
+---
+# REF: https://esphome.io/guides/configuration-types.html#substitutions
+substitutions:
+  devicename: "jasons-airgradient-diy-pro"
+  upper_devicename: "Jason's AirGradient DIY Pro"
+
+
+# REF: https://esphome.io/components/esphome.html#esphome-core-configuration
+esphome:
+  name: "${devicename}"
+  friendly_name: "${upper_devicename}"
+  platform: ESP8266
+  board: d1_mini
+
+  # REF: https://esphome.io/components/esphome.html#on-boot
+  on_boot:
+    priority: 800
+    then:
+      - lambda: >-
+          ESP_LOGD("main", "ON BOOT!");
+
+  # REF: https://esphome.io/components/esphome.html#on-shutdown
+  on_shutdown:
+    priority: 600
+    then:
+      - lambda: >-
+          ESP_LOGD("main", "ON SHUTDOWN!");
+
+
+# REF: https://esphome.io/components/logger
+logger:
+  level: DEBUG
+  logs:
+    adc: INFO
+    captive_portal: INFO
+    deep_sleep: INFO
+    htu21d: INFO
+    i2c: INFO
+    logger: INFO
+    mqtt.client: INFO
+    mqtt.component: INFO
+    mqtt.sensor: INFO
+    mqtt.switch: INFO
+    mqtt: INFO
+    ota: INFO
+    restart: INFO
+    sensor: INFO
+    switch.gpio: INFO
+    switch: INFO
+    uptime.sensor: INFO
+    web_server: INFO
+    wifi_signal.sensor: INFO
+
+
+# Enable the API.
+# REF: https://esphome.io/components/api
+api:
+  password: ""
+
+
+# Enable OTA updates.
+# REF: https://esphome.io/components/ota
+ota:
+  safe_mode: true
+  password: ""
+
+
+# Connect to WIFI.
+# REF: https://esphome.io/components/wifi
+wifi:
+  networks:
+    - ssid: !secret wifi_ssid
+      password: !secret wifi_password
+  reboot_timeout: 15min
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails.
+  # Defaults to device name with no password.
+  ap: {}
+# REF: https://esphome.io/components/captive_portal
+captive_portal:
+
+
+# Provide a /metrics endpoint for Prometheus.
+# REF: https://esphome.io/components/prometheus
+prometheus:
+# Enable the web server.
+# NOTE: Enabling this component will take up a lot of memory and may decrease stability, especially on ESP8266.
+# REF: https://esphome.io/components/web_server
+web_server:
+  port: 80
+  version: 1
+
+
+# Switches for controlling behavior.
+# REF: https://esphome.io/components/switch
+switch:
+  # Create a switch for safe_mode in order to flash the device.
+  # REF: https://community.home-assistant.io/t/esphome-flashing-over-wifi-does-not-work/357352/1
+  # REF: https://esphome.io/components/switch/safe_mode
+  - platform: safe_mode
+    id: safe_mode_switch
+    name: "Flash Mode (Safe Mode) ON/OFF Switch"
+
+  # Create a switch the turn the pms sensor on and off.
+  # REF: https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
+  - platform: template
+    id: pms5003_switch
+    name: "PMS5003 ON/OFF Switch"
+    optimistic: true
+    turn_on_action:
+      # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L254
+      - uart.write:
+          id: pms5003_uart
+          data: [0x42, 0x4D, 0xE4, 0x00, 0x01, 0x01, 0x74]
+    turn_off_action:
+      # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L247
+      - uart.write:
+          id: pms5003_uart
+          data: [0x42, 0x4D, 0xE4, 0x00, 0x00, 0x01, 0x73]
+
+
+# Buttons for controlling behavior.
+# REF: https://esphome.io/components/button
+button:
+  # Create a button to restart the device.
+  - platform: restart
+    id: restart_button
+    name: "Restart ${upper_devicename} Button"
+
+
+# Configuration for AirGradient DIY v2 device
+# REF: https://www.esphome-devices.com/devices/AirGradient-DIY/
+# SRC: https://github.com/JacobMillward/airgradient_diy_pro_esphome/blob/26287ba87942aa1a6bb6af4a67c9daa54b177839/airgradient_diy_pro.yaml
+
+
+# TODO: Not sure what uart means.
+# REF: https://esphome.io/components/uart
+uart:
+  # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L705
+  - rx_pin: D4
+    tx_pin: D3
+    # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L708
+    baud_rate: 9600
+    id: senseair_s8_uart
+
+  # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L60
+  - rx_pin: D5
+    tx_pin: D6
+    # SRC: https://github.com/airgradienthq/arduino/blob/d5432630feaa7604c30d13d6165a782e531ddf00/AirGradient.cpp#L63
+    baud_rate: 9600
+    id: pms5003_uart
+
+
+# TODO: Not sure what i2c means.
+# REF: https://esphome.io/components/i2c
+i2c:
+  sda: D2
+  scl: D1
+  frequency: 400kHz  # Proposed fix for "Component took a long time for an operation" messages https://github.com/esphome/issues/issues/4717
+
+
+# Sensors read data.
+# REF: https://esphome.io/components/sensor
+sensor:
+  # SENSOR: PMS5003
+  # REF: https://esphome.io/components/sensor/pmsx003.html
+  - platform: pmsx003
+    type: PMSX003
+    pm_2_5:
+      id: pm_2_5um
+      name: "PM <2.5um Concentration"
+      on_value:
+        lambda: |-
+          // Copied from: https://github.com/kylemanna/sniffer/blob/0688b91c0b9d8d5362a944abe697ca703c964ef3/esphome/sniffer_common.yaml#L189-L211
+          // See: https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI
+          if (id(pm_2_5um).state <= 12.0) {
+            // Good
+            id(pm_2_5um_aqi).publish_state((50.0 - 0.0) / (12.0 - 0.0) * (id(pm_2_5um).state - 0.0) + 0.0);
+          } else if (id(pm_2_5um).state <= 35.4) {
+            // Moderate
+            id(pm_2_5um_aqi).publish_state((100.0 - 51.0) / (35.4 - 12.1) * (id(pm_2_5um).state - 12.1) + 51.0);
+          } else if (id(pm_2_5um).state <= 55.4) {
+            // Unhealthy for sensitive groups
+            id(pm_2_5um_aqi).publish_state((150.0 - 101.0) / (55.4 - 35.5) * (id(pm_2_5um).state - 35.5) + 101.0);
+          } else if (id(pm_2_5um).state <= 150.4) {
+            // Unhealthy
+            id(pm_2_5um_aqi).publish_state((200.0 - 151.0) / (150.4 - 55.5) * (id(pm_2_5um).state - 55.5) + 151.0);
+          } else if (id(pm_2_5um).state <= 250.4) {
+            // Very Unhealthy
+            id(pm_2_5um_aqi).publish_state((300.0 - 201.0) / (250.4 - 150.5) * (id(pm_2_5um).state - 150.5) + 201.0);
+          } else if (id(pm_2_5um).state <= 350.4) {
+            // Hazardous
+            id(pm_2_5um_aqi).publish_state((400.0 - 301.0) / (350.4 - 250.5) * (id(pm_2_5um).state - 250.5) + 301.0);
+          } else if (id(pm_2_5um).state <= 500.4) {
+            // Hazardous - 2
+            id(pm_2_5um_aqi).publish_state((500.0 - 401.0) / (500.4 - 350.5) * (id(pm_2_5um).state - 350.5) + 401.0);
+          } else {
+            id(pm_2_5um_aqi).publish_state(500);
+          }
+    pm_1_0:
+      id: pm_1_0um
+      name: "PM <1.0um Concentration"
+    pm_10_0:
+      id: pm_10_0um
+      name: "PM <10.0um Concentration"
+    # pm_0_3um:
+    #   id: pm_0_3um
+    #   name: "PM >0.3um Concentration"
+    uart_id: pms5003_uart
+    update_interval: 30s
+
+  - platform: template
+    id: pm_2_5um_aqi
+    name: "PM <2.5um AQI"
+    unit_of_measurement: "AQI"
+    accuracy_decimals: 0
+
+  # SENSOR: SenseAir S8
+  # REF: https://esphome.io/components/sensor/senseair.html
+  - platform: senseair
+    co2:
+      id: carbon_dioxide
+      name: "Carbon Dioxide"
+    id: senseair_s8
+    uart_id: senseair_s8_uart
+    update_interval: 30s
+
+  # SENSOR: SHT30
+  # REF: https://esphome.io/components/sensor/sht3xd.html
+  - platform: sht3xd  # Change to sht4x for SHT40
+    temperature:
+      id: temp_c
+      name: "Temperature (Celsius)"
+    humidity:
+      id: humidity_p
+      name: "Humidity"
+    address: 0x44
+    update_interval: 30s
+
+  - platform: template
+    id: temp_f
+    name: "Temperature (Fahrenheit)"
+    lambda: return id(temp_c).state * 9/5+32;
+    unit_of_measurement: "°F"
+    update_interval: 5s
+
+  - platform: wifi_signal
+    id: wifi_dbm
+    name: "WiFi Signal"
+    update_interval: 5s
+
+  - platform: uptime
+    id: uptime_s
+    name: "Uptime"
+    update_interval: 5s
+
+
+# REF: https://esphome.io/components/font
+font:
+  # - file:
+  #     type: gfonts
+  #     family: Poppins
+  #     weight: light
+  #   id: poppins_light_14
+  #   size: 14
+  #   glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+
+  # - file:
+  #     type: gfonts
+  #     family: Poppins
+  #     weight: light
+  #   id: poppins_light_12
+  #   size: 12
+  #   glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+
+  - file: "gfonts://Ubuntu Mono"
+    id: ubuntu
+    size: 20
+    glyphs: '!"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/µ³'
+
+
+# REF: https://esphome.io/components/display
+display:
+  # REF: https://esphome.io/components/display/ssd1306.html
+  - platform: ssd1306_i2c
+    model: "SH1106 128x64"
+    id: oled_display
+    reset_pin: D0
+    address: 0x3c
+    # rotation: 180°
+
+    # REF: https://esphome.io/components/display/#display-pages
+    # REF: https://www.tutorialspoint.com/c_standard_library/c_function_printf.htm
+    pages:
+      - id: air_quality
+        lambda: |-
+          it.printf(0, 6, id(ubuntu), "CO2");
+          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f ppm", id(carbon_dioxide).state);
+          it.printf(0, 34, id(ubuntu), "AQI");
+          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.0f    ", id(pm_2_5um_aqi).state);
+      - id: air_temp
+        lambda: |-
+          it.printf(0, 6, id(ubuntu), "TMP");
+          it.printf(128, 6, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f°F", id(temp_f).state);
+          it.printf(0, 34, id(ubuntu), "HUM");
+          it.printf(128, 34, id(ubuntu), TextAlign::TOP_RIGHT, "%.1f %%", id(humidity_p).state);
+
+
+# Time will trigger events at timed intervals.
+# REF: https://esphome.io/components/time/index.html
+time:
+  # Sync time from home assistant.
+  # REF: https://esphome.io/components/time/homeassistant.html
+  - platform: homeassistant
+    id: homeassistant_time
+    # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    # REF: https://en.wikipedia.org/wiki/America/Los_Angeles
+    timezone: "America/Los_Angeles"
+
+
+# TODO: Use SNTP instead?
+# Time will trigger events at timed intervals.
+# REF: https://esphome.io/components/time/index.html
+# time:
+#   # Sync time from using SNTP (Simple Network Time Protocol).
+#   # REF: https://esphome.io/components/time/sntp.html
+#   - platform: platform
+#     id: sntp_time
+#     # REF: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#     # REF: https://en.wikipedia.org/wiki/America/Los_Angeles
+#     timezone: "America/Los_Angeles"
+
+
+# Interval will trigger events at timed intervals.
+# REF: https://esphome.io/guides/automations.html#interval
+interval:
+  # Cycle through page on display.
+  - interval: 5s
+    then:
+      - display.page.show_next: oled_display
+      - component.update: oled_display
+
+  # Turn the PMS5003 sensor on and off at timed intervals in order to extend the life span of the sensor.
+  # REF: https://forum.airgradient.com/t/extending-the-life-span-of-the-pms5003-sensor/114/10
+  - interval: 150s
+    then:
+      - switch.turn_on: pms5003_switch
+      - delay: 45s
+      - switch.turn_off: pms5003_switch

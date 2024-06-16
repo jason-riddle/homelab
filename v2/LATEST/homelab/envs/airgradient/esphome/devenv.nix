@@ -6,10 +6,10 @@
   # env.ANSIBLE_STDOUT_CALLBACK = "yaml";
 
   # https://devenv.sh/languages/
-  # languages.python = {
-  #   enable = true;
-  #   venv.enable = true;
-  # };
+  languages.python = {
+    enable = true;
+    venv.enable = true;
+  };
 
   # https://devenv.sh/packages/
   # packages = [
@@ -20,10 +20,10 @@
   #   pkgs.terraform
   # ];
 
-  # enterShell = ''
-  #   pip install --upgrade pip
-  #   pip install "esphome==2023.12.9" "pillow==10.1.0"
-  # '';
+  enterShell = ''
+    pip install --upgrade pip
+    pip install "esphome==2023.12.9" "pillow==10.1.0"
+  '';
 
   # https://devenv.sh/tests/
   # enterTest = ''
