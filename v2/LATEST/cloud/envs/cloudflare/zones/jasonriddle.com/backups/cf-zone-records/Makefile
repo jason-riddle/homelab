@@ -3,6 +3,9 @@
 # jasonriddle.com
 ZONE := 9f93875a5fa04d2c57407aac00a18ce9
 
+init:
+	terraform init -upgrade
+
 backup:
 	cf-terraforming generate \
 		--resource-type "cloudflare_record" \
