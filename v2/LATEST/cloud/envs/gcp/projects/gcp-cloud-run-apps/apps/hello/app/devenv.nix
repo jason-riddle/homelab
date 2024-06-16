@@ -12,13 +12,9 @@
   # };
 
   # https://devenv.sh/packages/
-  # packages = [
-  #   pkgs.ansible
-  #   pkgs.kubectl
-  #   pkgs.kubernetes-helm
-  #   pkgs.kustomize
-  #   pkgs.terraform
-  # ];
+  packages = [
+    pkgs.google-cloud-sdk
+  ];
 
   # enterShell = ''
   #   pip install --upgrade pip

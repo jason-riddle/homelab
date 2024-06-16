@@ -4,7 +4,6 @@ metadata:
   annotations:
     run.googleapis.com/ingress: all
     run.googleapis.com/ingress-status: all
-    run.googleapis.com/operation-id: 9a05c1b6-28e8-4138-96bc-312c70f8935a
   labels:
     cloud.googleapis.com/location: us-west1
   name: hello
