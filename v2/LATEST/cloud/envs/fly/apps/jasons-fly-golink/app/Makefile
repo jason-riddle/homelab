@@ -1,4 +1,8 @@
-.DEFAULT_GOAL := deploy
+.DEFAULT_GOAL := backup
+
+backup:
+	curl --fail --silent --show-error --location http://go/.export \
+		| tee backups/LATEST/golinks.jsonl
 
 deploy:
 	flyctl deploy --ha=false
