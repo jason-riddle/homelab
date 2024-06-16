@@ -1,0 +1,13 @@
+---
+all:
+  hosts:
+    node1:
+      ansible_connection: local
+
+control_plane:
+  hosts:
+    node1:
+
+cluster:
+  children:
+    control_plane:

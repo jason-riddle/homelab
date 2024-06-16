@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: tailscale
+
+# Documentation: https://tailscale.com/kb/1236/kubernetes-operator
+# Docker Images: https://hub.docker.com/r/tailscale/k8s-operator/tags
+# Artifact Hub: N/A
+# Chart Values: https://github.com/tailscale/tailscale/blob/main/cmd/k8s-operator/deploy/chart/values.yaml
+helmCharts:
+  - name: tailscale-operator
+    repo: https://pkgs.tailscale.com/helmcharts
+    # This doesn't do anything.
+    # See: https://github.com/tailscale/tailscale/blob/b6dfd7443a80eae4c6be5c29c20ad5a5fd5d56ba/cmd/k8s-operator/deploy/chart/values.yaml#L11-L15.
+    # includeCRDs: true
+    valuesInline:
+      operatorConfig:
+        hostname: "tailscale-operator"
+        logging: "info"
+    releaseName: tailscale-operator
+    # version: 1.62.1
+    version: 1.62.1

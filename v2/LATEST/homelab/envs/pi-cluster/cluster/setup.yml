@@ -1,0 +1,198 @@
+---
+# - name: Disable swap.
+#   hosts: cluster
+#   become: true
+
+#   vars:
+#     swap_file_state: absent
+
+#   pre_tasks:
+#     - name: Ping to validate the initial connection.
+#       ansible.builtin.ping:
+#         data: pong
+
+#   roles:
+#     - geerlingguy.swap
+
+
+- name: Setup /boot/config.
+  hosts: cluster
+  gather_facts: false
+  become: true
+  tags:
+    - boot-config
+
+  handlers:
+    - name: reboot-pi
+      ansible.builtin.reboot:
+        reboot_timeout: 300
+
+  vars:
+    raspberry_pi_boot_config_options:
+      # Set the PoE hat fan speeds.
+      # REF: https://web.archive.org/web/20230504043802/https://www.jeffgeerling.com/blog/2021/taking-control-pi-poe-hats-overly-aggressive-fan
+      - regexp: "^#?dtparam=poe_fan_temp0"
+        line: "dtparam=poe_fan_temp0=50000"
+      - regexp: "^#?dtparam=poe_fan_temp1"
+        line: "dtparam=poe_fan_temp1=60000"
+      - regexp: "^#?dtparam=poe_fan_temp2"
+        line: "dtparam=poe_fan_temp2=70000"
+      - regexp: "^#?dtparam=poe_fan_temp3"
+        line: "dtparam=poe_fan_temp3=80000"
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  tasks:
+    - name: Configure options in /boot/config.txt.
+      lineinfile:
+        dest: /boot/config.txt
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        insertafter: EOF
+        state: present
+      with_items: "{{ raspberry_pi_boot_config_options }}"
+      notify: reboot-pi
+
+
+- name: Setup hostname.
+  hosts: cluster
+  gather_facts: false
+  become: true
+  tags:
+    - hostname
+
+  handlers:
+    - name: reboot-pi
+      ansible.builtin.reboot:
+        reboot_timeout: 300
+
+  vars:
+    raspberry_pi_hostname: "{{ inventory_hostname }}"
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  tasks:
+    - name: Assert that raspberry_pi_hostname is not empty.
+      assert:
+        that:
+          - raspberry_pi_hostname | length > 0
+        quiet: true
+
+    - name: Set the hostname.
+      hostname:
+        name: "{{ raspberry_pi_hostname }}"
+      notify: reboot-pi
+
+
+# - name: Setup node_exporter.
+#   hosts: cluster
+#   become: true
+
+#   vars:
+#     node_exporter_arch: 'arm64'
+#     node_exporter_host: '0.0.0.0'
+#     node_exporter_port: 9100
+
+#   pre_tasks:
+#     - name: Ping to validate the initial connection.
+#       ansible.builtin.ping:
+#         data: pong
+
+#   roles:
+#     - geerlingguy.node_exporter
+
+
+- name: Disable swap.
+  hosts: cluster
+  become: true
+
+  vars:
+    swap_file_state: absent
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  roles:
+    - geerlingguy.swap
+
+
+- name: Setup tailscale.
+  hosts: cluster
+  become: true
+
+  # vars:
+  #   tailscale_up_node: true
+  #   tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY', default=undef()) }}"
+  #   tailscale_up_extra_args: "--accept-routes"
+  #   tailscale_up_no_log: false
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  roles:
+    - jason_riddle.tailscale
+
+  post_tasks:
+    - name: Verify tailscale is installed.
+      command: tailscale --version
+      changed_when: false
+
+    - name: Set auto-update to true.
+      command: tailscale set --auto-update=true
+      changed_when: false
+
+
+- name: Setup users.
+  hosts: cluster
+  gather_facts: false
+  become: true
+
+  vars:
+    users:
+      - name: pi
+
+    users_absent: []
+    # users_absent:
+    #   - pi
+
+    users_authorized_keys_exclusive: true
+
+  pre_tasks:
+    - name: Ping to validate the initial connection.
+      ansible.builtin.ping:
+        data: pong
+
+  tasks:
+    - name: Ensure users are present.
+      user:
+        name: "{{ item.name | default(item) }}"
+        shell: /bin/bash
+        createhome: true
+        groups: "{{ item.groups | default(omit) }}"
+        home: "/home/{{ item.name | default(item) }}"
+        state: present
+      with_items: "{{ users }}"
+
+    - name: Ensure authorized_keys for users are present.
+      authorized_key:
+        user: "{{ item.name | default(item) }}"
+        key: "{{ lookup('url', 'https://github.com/jason-riddle.keys', split_lines=False) }}"
+        manage_dir: true
+        exclusive: "{{ users_authorized_keys_exclusive }}"
+      with_items: "{{ users }}"
+
+    - name: Ensure users in users_absent are absent.
+      user:
+        name: "{{ item.name | default(item) }}"
+        state: absent
+      with_items: "{{ users_absent }}"

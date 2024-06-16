@@ -1,0 +1,41 @@
+---
+# See: https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#connecting-to-hosts-behavioral-inventory-parameters
+all:
+  vars:
+    ansible_port: 22
+    ansible_user: pi
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+  hosts:
+    # Red
+    jasons-node-01:
+      ansible_host: 192.168.1.21
+    # Orange
+    jasons-node-02:
+      ansible_host: 192.168.1.22
+    # Yellow
+    jasons-node-03:
+      ansible_host: 192.168.1.23
+    # Green
+    jasons-node-04:
+      ansible_host: 192.168.1.24
+    # Blue
+    # Undergoing Maintenance
+    # jasons-node-05:
+    #   ansible_host: 192.168.1.25
+
+control_plane:
+  hosts:
+    jasons-node-01:
+
+nodes:
+  hosts:
+    jasons-node-02:
+    jasons-node-03:
+    jasons-node-04:
+    # Undergoing Maintenance
+    # jasons-node-05:
+
+cluster:
+  children:
+    control_plane:
+    nodes:
